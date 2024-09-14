@@ -1,0 +1,1 @@
+NOTE: I completely rewrote this project in 2024 September, erasing the entire git history and restarting from scratch. See an archive of the old repo here: https://github.com/Humboldt-Penguin/redplanet_archive-240910
