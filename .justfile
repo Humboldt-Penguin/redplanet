@@ -61,3 +61,10 @@ test-verbose:
 clean:
     find . -type d -name "__pycache__" -exec rm -r {} +
     find . -type f -name "*.pyc" -exec rm -f {} +
+    find . -type d -name ".mypy_cache" -exec rm -r {} +
+    find . -type d -name ".pytest_cache" -exec rm -r {} +
+
+[group('2. Developer tools')]
+[doc('Check static types with `mypy`.')]
+type-check:
+    uvx mypy .
