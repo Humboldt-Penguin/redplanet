@@ -66,5 +66,5 @@ clean:
 
 [group('2. Developer tools')]
 [doc('Check static types with `mypy`.')]
-type-check:
-    uvx mypy .
+type-check target=".":
+    uvx mypy {{target}}
