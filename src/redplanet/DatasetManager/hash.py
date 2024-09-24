@@ -1,31 +1,31 @@
 import hashlib
 from pathlib import Path
-from typing import List
+from typing import List, Dict, Callable, Set
 import requests
 
 import xxhash
 
 
 
-_hashalgs = {
+_hashalgs: Dict[str, Callable] = {
     'xxh3_64': xxhash.xxh3_64,
     'sha256': hashlib.sha256,
 }
-## Note: There's no significant difference for small files (for <1MB, it's on the order of thousandths of a second) -- but it matters for large files (e.g. a 5GB file, sha256 takes 13 seconds, while xxh3 takes 2 seconds).
+## Note: There's no significant difference for small files (for <1MB, it's on the order of thousandths of a second) -- but it DOES matter for large files (e.g. a 5GB file, sha256 takes 13 seconds, while xxh3 takes 2 seconds).
 
 
-def get_hashalgs() -> List[str]:
+def get_available_algorithms() -> Set[str]:
     """
-    Get the list of supported hashing algorithms.
+    Get the set of supported hashing algorithms.
 
     Returns:
-        List[str]: List of supported hashing algorithms.
+        Set[str]: Set of supported hashing algorithms.
     """
-    return list(_hashalgs.keys())
+    return set(_hashalgs.keys())
 
 
 
-def calculate_hash_from_file(fpath: Path, alg: str) -> str:
+def _calculate_hash_from_file(fpath: Path, alg: str) -> str:
     """
     Calculate the hash of a file using the specified algorithm.
 
@@ -40,10 +40,11 @@ def calculate_hash_from_file(fpath: Path, alg: str) -> str:
     """
 
     ## Input validation
+    fpath = fpath.resolve()
     if not fpath.is_file():
         raise FileNotFoundError(f"File not found: {fpath}")
     if alg not in _hashalgs:
-        raise ValueError(f"Unsupported algorithm: '{alg}'. Options are: {', '.join(get_hashalgs())}")
+        raise ValueError(f"Unsupported algorithm: '{alg}'. Options are: {', '.join(get_available_algorithms())}")
 
     ## Calculate hash
     hash_obj = _hashalgs[alg]()
@@ -57,7 +58,7 @@ def calculate_hash_from_file(fpath: Path, alg: str) -> str:
 
 
 
-def calculate_hash_from_url(url: str, alg: str) -> str:
+def _calculate_hash_from_url(url: str, alg: str) -> str:
     """
     Calculate the hash of a file on the internet given its download URL, without actually downloading it.
     This is intended for verifying the integrity of a file.
@@ -74,7 +75,7 @@ def calculate_hash_from_url(url: str, alg: str) -> str:
 
     ## Input validation
     if alg not in _hashalgs:
-        raise ValueError(f"Unsupported algorithm: '{alg}'. Options are: {', '.join(get_hashalgs())}")
+        raise ValueError(f"Unsupported algorithm: '{alg}'. Options are: {', '.join(get_available_algorithms())}")
 
     hash_obj = _hashalgs[alg]()
 

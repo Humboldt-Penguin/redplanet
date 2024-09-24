@@ -28,7 +28,7 @@ def get_dirpath_datacache() -> Path:
     global _dirpath_datacache
     if _dirpath_datacache is None:
         ## Default value is '/home/USERNAME/.cache/redplanet/'
-        _dirpath_datacache = Path(user_cache_dir(appname="redplanet")).resolve()
+        _dirpath_datacache = Path(user_cache_dir(appname='redplanet')).resolve()
 
     return _dirpath_datacache
 
@@ -45,14 +45,14 @@ def set_dirpath_datacache(target_path: str | Path) -> None:
 
     ## Type validation
     if not (isinstance(target_path, str) or isinstance(target_path, Path)):
-        raise TypeError("Path must be a string or a Path object.")
+        raise TypeError('Path must be a string or a Path object.')
 
     ## If given a string, convert to Path object
     if isinstance(target_path, str):
         try:
             target_path = Path(target_path).resolve()
         except Exception as e:
-            raise ValueError(f"Invalid path string provided: {e}")
+            raise ValueError(f'Invalid path string provided: {e}')
 
     ## Proceed
     global _dirpath_datacache

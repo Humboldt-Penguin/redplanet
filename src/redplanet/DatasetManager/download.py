@@ -1,8 +1,9 @@
-import shutil
-import time
-from urllib.error import URLError, HTTPError
+from pathlib import Path
+import requests
+from requests.exceptions import RequestException
+from time import sleep
 
-def download_file_from_url(
+def _download_file_from_url(
     url: str,
     dest_path: Path,
     retries: int = 3,
@@ -10,47 +11,38 @@ def download_file_from_url(
     chunk_size: int = 2**13,
 ) -> None:
     """
-    Downloads a file from a URL and saves it to the destination path.
+    Download a file from a URL to a specified local path.
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     url : str
-        The URL from which to download the file.
+        The URL of the file to download.
     dest_path : Path
-        The destination path where the file will be saved.
-    retries : int
-        The number of times to retry the download in case of failure (default 3).
-    timeout : int
-        The timeout (in seconds) for the request (default 10 seconds).
-    chunk_size : int
-        The size (in bytes) of each chunk to be written to disk (default 2**13 = 8192 bytes).
+        The local file path where the downloaded file will be saved.
+    retries : int, optional
+        The number of times to retry the download in case of failures.
+    timeout : int, optional
+        The timeout in seconds for the download request.
+    chunk_size : int, optional
+        The size of each chunk to read from the response.
 
-    Returns:
-    --------
-    None
-
-    Raises:
-    -------
-    Exception
+    Raises
+    ------
+    RequestException
         If the download fails after the specified number of retries.
     """
-
-    # Ensure the destination directory exists
-    dest_path.parent.mkdir(parents=True, exist_ok=True)
-
     attempt = 0
     while attempt < retries:
         try:
-            with request.urlopen(url, timeout=timeout) as response:
-                # Use shutil.copyfileobj to efficiently copy the stream in chunks
-                with open(dest_path, 'wb') as out_file:
-                    shutil.copyfileobj(response, out_file, chunk_size)
-            break  # Exit loop if download is successful
-
-        except (URLError, HTTPError) as e:
+            with requests.get(url, stream=True, timeout=timeout) as response:
+                response.raise_for_status()
+                with open(dest_path, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=chunk_size):
+                        if chunk:  # Filter out keep-alive new chunks
+                            f.write(chunk)
+                break  # Exit the retry loop if download succeeds
+        except RequestException as e:
             attempt += 1
-            if attempt >= retries:
-                raise Exception(f"Download failed after {retries} attempts. Error: {e}")
-            else:
-                # print(f"Download failed, retrying {attempt}/{retries}... Error: {e}")
-                time.sleep(2)  # Backoff before retrying
+            if attempt == retries:
+                raise e  # Re-raise the exception if max retries exceeded
+            sleep(1)  # Wait before retrying

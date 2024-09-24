@@ -26,7 +26,7 @@ dependencies = {
     ],
 }
 
-def test_import_dependencies():
+def test__import_dependencies():
     for group_name, packages in dependencies.items():
         print(f'\n\t- {group_name}')
         for package in packages:

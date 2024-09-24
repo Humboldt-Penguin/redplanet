@@ -1,6 +1,6 @@
 from typing import Dict
 
-_DATASETS: Dict[str, Dict[str, str]] = {
+_DATASETS = {
     'GRS': {
         'url': 'https://rutgers.box.com/shared/static/i1dy31or67y030yhof3c39ts19emigzd',
         'fname': '2022_Mars_Odyssey_GRS_Element_Concentration_Maps.zip',
@@ -15,12 +15,23 @@ _DATASETS: Dict[str, Dict[str, str]] = {
 }
 
 
-def get_download_info(name: str) -> Dict[str, str]:
-    info = _DATASETS.get(name)
-    if info is None:
+def peek_datasets():
+    """
+    Returns a dictionary of all available datasets -- intended for debugging/exploration purposes, should NOT be called in production code.
+    """
+    return _DATASETS
+
+
+def _get_download_info(name: str) -> Dict[str, Dict[str, str | Dict[str, str]]]:
+    """
+    Returns information to download a dataset as a dictionary with keys 'url', 'fname', 'dirpath' (relative to data cache directory), and 'hash'.
+    """
+    try:
+        info = _DATASETS[name]
+        return info
+    except KeyError:
         error_msg = [
             f"Dataset not found: '{name}'. Options are: {', '.join(_DATASETS.keys())}",
             f"To see all information about the datasets, run `from redplanet.DatasetManager.dataset_info import _DATASETS; print(_DATASETS)`.",
         ]
         raise ValueError('\n'.join(error_msg))
-    return info
