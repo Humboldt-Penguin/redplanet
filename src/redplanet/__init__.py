@@ -9,7 +9,7 @@ __all__.extend([
     'get_dirpath_datacache',
 ])
 
-# from redplanet import DatasetManager
-# __all__.extend([
-#     'DatasetManager'
-# ])
+from redplanet.DatasetManager.dataset_info import peek_datasets
+__all__.extend([
+    'peek_datasets',
+])

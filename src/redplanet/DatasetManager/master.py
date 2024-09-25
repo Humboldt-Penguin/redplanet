@@ -3,12 +3,12 @@ from urllib import request
 
 from redplanet.user_config import get_dirpath_datacache
 from redplanet.DatasetManager.dataset_info import get_download_info
+from redplanet.DatasetManager.download import _download_file_from_url
 from redplanet.DatasetManager.hash import (
     calculate_hash_from_file,
     calculate_hash_from_url,
     get_hashalgs
 )
-from redplanet.DatasetManager.download import download_file_from_url
 
 
 
@@ -37,8 +37,9 @@ def get_fpath_dataset(dataset_name: str) -> Path:
     """
 
     ## Get download info for dataset
-    info = get_download_info(dataset_name)
-    fpath_dataset = get_dirpath_datacache() / info['dirpath'] / info['fname']
+    info: dict = get_download_info(dataset_name)
+    fpath_dataset: Path = get_dirpath_datacache() / info['dirpath'] / info['fname']
+
 
     ## Out of hashes listed in metadata, pick the fastest (assuming `get_hashalgs()` lists them from fastest to slowest)
     known_hash_value = None
@@ -51,8 +52,7 @@ def get_fpath_dataset(dataset_name: str) -> Path:
         raise ValueError(f"[Internal/unexpected error] Hash value not found for dataset '{dataset_name}'. Pester the developer.")
 
 
-
-    ## Case 1: File not downloaded to cache, download it.
+    ## Case 1: File not found in cache, download it.
     if (not fpath_dataset.is_file()):
 
         ## First, verify the integrity of the file at the URL by calculating its hash "on the fly" (i.e. streaming it as opposed to fully downloading it) -- this ensures we don't download malicious/altered files, assuming you trust my intended file/hash
@@ -63,13 +63,13 @@ def get_fpath_dataset(dataset_name: str) -> Path:
                 f"    > [1] Known URL: \t{info['url']}",
                 f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value_fromStream}",
                 f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
-                f"To see all known information about the datasets, run `from redplanet.DatasetManager.dataset_info import _DATASETS; print(_DATASETS)`.",
+                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
                 f"=> DOWNLOAD ABORTED.",
             ]
             raise Exception('\n'.join(error_msg))
 
         ## Second, proceed to download the file to `fpath_dataset`
-        download_file_from_url(info['url'], fpath_dataset)
+        _download_file_from_url(info['url'], fpath_dataset)
 
         ## (Optional) Third, just to be sure, verify integrity of the recently-downloaded file by calculating the hash. I can't think of any realistic case this would fail, but why not.
         calculated_hash_value = calculate_hash_from_file(fpath_dataset, known_hash_alg)
@@ -83,7 +83,7 @@ def get_fpath_dataset(dataset_name: str) -> Path:
                 f"    > [4] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
                 f"    > [5] Known hash: \t{known_hash_alg}-{known_hash_value}",
                 f"**The downloaded file has been deleted for safety.**",
-                f"To see all known information about the datasets, run `from redplanet.DatasetManager.dataset_info import _DATASETS; print(_DATASETS)`.",
+                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
                 f"=> PROCESS ABORTED.",
             ]
             raise Exception('\n'.join(error_msg))
@@ -100,7 +100,8 @@ def get_fpath_dataset(dataset_name: str) -> Path:
                 f"    > [1] File path: \t{fpath_dataset}",
                 f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
                 f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
-                f"To see all known information about the datasets, run `from redplanet.DatasetManager.dataset_info import _DATASETS; print(_DATASETS)`.",
+                f"This may occur because a user/process manually changed the dataset file, or the dataset was updated in `redplanet`. We suggest you delete or move the old dataset file and try again.",
+                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
                 f"=> PROCESS ABORTED.",
             ]
             raise Exception('\n'.join(error_msg))
