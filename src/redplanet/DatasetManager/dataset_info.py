@@ -10,8 +10,14 @@ _DATASETS = {
         },
         # 'post-processing': 'unzip', ## I've opted to unzip the file in memory rather than creating a separate directory, since that makes my hash verification incomplete since you could alter the text files without altering the zip file.
     },
-    # 'Crust/topo': {},
-    # 'Crust/dichotomy': {},
+    'dichotomy_coords': {
+        'url': 'https://rutgers.box.com/shared/static/tekd1w26h9mvfnyw8bpy4ko4v48931ri',
+        'fname': 'dichotomy_coordinates-JAH-0-360.txt',
+        'dirpath': 'Crust/dichotomy/',
+        'hash': {
+            'sha256': '42f2b9f32c9e9100ef4a9977171a54654c3bf25602555945405a93ca45ac6bb2',
+        }
+    },
 }
 
 

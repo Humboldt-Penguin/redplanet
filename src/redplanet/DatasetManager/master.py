@@ -12,7 +12,7 @@ from redplanet.DatasetManager.hash import (
 
 
 
-def get_fpath_dataset(dataset_name: str) -> Path:
+def _get_fpath_dataset(dataset_name: str) -> Path:
     """
     Get the file path of a dataset...
         1. The first time, we download it to a local cache folder (you can see the default location with `import redplanet; redplanet.get_dirpath_datacache()` or change with with `set_dirpath_datacache()`. Since downloading random files from the internet is risky (you're essentially trusting me with unrestricted access to your computer, not to mention a potential man-in-the-middle attack although unlikely) we take the following two safety measures:

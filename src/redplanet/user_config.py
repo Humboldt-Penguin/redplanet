@@ -1,7 +1,8 @@
 from pathlib import Path
 from typing import Optional
 from platformdirs import user_cache_dir    # type: ignore
-##                                           ^ [mypy says] error: Cannot find implementation or library stub for module named "platformdirs"  [import-not-found]
+
+
 
 
 
@@ -23,14 +24,24 @@ def get_dirpath_datacache() -> Path:
         - It's good design to defer initialization of default value until first access in `get_dirpath_datacache()`...
             - This way, we avoid any overhead or side-effects of executing any potentially expensive / unnecessary code (esp related to file system operations) during the module import (i.e. lazy initialization).
     """
-
     ## Lazy load
-    global _dirpath_datacache
     if _dirpath_datacache is None:
-        ## Default value is '/home/USERNAME/.cache/redplanet/'
-        _dirpath_datacache = Path(user_cache_dir(appname='redplanet')).resolve()
-
+        set_dirpath_datacache_default()
     return _dirpath_datacache
+
+
+
+
+
+def set_dirpath_datacache_default() -> None:
+    """
+    Default user cache dir is '/home/USERNAME/.cache/redplanet/'
+    """
+    global _dirpath_datacache
+    _dirpath_datacache = Path(user_cache_dir(appname='redplanet')).resolve()
+    return
+
+
 
 
 
@@ -43,16 +54,21 @@ def set_dirpath_datacache(target_path: str | Path) -> None:
             The file system path to store datasets.
     """
 
-    ## Type validation
-    if not (isinstance(target_path, str) or isinstance(target_path, Path)):
-        raise TypeError('Path must be a string or a Path object.')
+    ## Input type validation && conversion to Path object
+    match target_path:
 
-    ## If given a string, convert to Path object
-    if isinstance(target_path, str):
-        try:
-            target_path = Path(target_path).resolve()
-        except Exception as e:
-            raise ValueError(f'Invalid path string provided: {e}')
+        case Path():
+            target_path = target_path.resolve()
+
+        case str():
+            try:
+                target_path = Path(target_path).resolve()
+            except Exception as e:
+                raise ValueError(f'Invalid path string provided: {target_path}\n{e}')
+
+        case _:
+            raise TypeError('Path must be a string or a Path object.')
+
 
     ## Proceed
     global _dirpath_datacache
