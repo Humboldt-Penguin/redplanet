@@ -31,6 +31,8 @@ def _download_file_from_url(
     RequestException
         If the download fails after the specified number of retries.
     """
+    dest_path.parent.mkdir(parents=True, exist_ok=True)
+
     attempt = 0
     while attempt < retries:
         try:

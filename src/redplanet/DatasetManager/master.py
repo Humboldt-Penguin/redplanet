@@ -2,12 +2,12 @@ from pathlib import Path
 from urllib import request
 
 from redplanet.user_config import get_dirpath_datacache
-from redplanet.DatasetManager.dataset_info import get_download_info
+from redplanet.DatasetManager.dataset_info import _get_download_info
 from redplanet.DatasetManager.download import _download_file_from_url
 from redplanet.DatasetManager.hash import (
-    calculate_hash_from_file,
-    calculate_hash_from_url,
-    get_hashalgs
+    _calculate_hash_from_file,
+    _calculate_hash_from_url,
+    get_available_algorithms,
 )
 
 
@@ -37,13 +37,13 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     """
 
     ## Get download info for dataset
-    info: dict = get_download_info(dataset_name)
+    info: dict = _get_download_info(dataset_name)
     fpath_dataset: Path = get_dirpath_datacache() / info['dirpath'] / info['fname']
 
 
-    ## Out of hashes listed in metadata, pick the fastest (assuming `get_hashalgs()` lists them from fastest to slowest)
+    ## Out of hashes listed in metadata, pick the fastest (assuming `get_available_algorithms()` lists them from fastest to slowest)
     known_hash_value = None
-    for hashalg in get_hashalgs():
+    for hashalg in get_available_algorithms():
         known_hash_alg = hashalg
         known_hash_value = info['hash'].get(known_hash_alg)
         if known_hash_value is not None:
@@ -56,7 +56,7 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     if (not fpath_dataset.is_file()):
 
         ## First, verify the integrity of the file at the URL by calculating its hash "on the fly" (i.e. streaming it as opposed to fully downloading it) -- this ensures we don't download malicious/altered files, assuming you trust my intended file/hash
-        calculated_hash_value_fromStream = calculate_hash_from_url(info['url'], known_hash_alg)
+        calculated_hash_value_fromStream = _calculate_hash_from_url(info['url'], known_hash_alg)
         if (calculated_hash_value_fromStream != known_hash_value):
             error_msg = [
                 f"We need to download the dataset from the known URL [1], but the calculated hash of the file at that URL [2] doesn't match the known hash [3]:",
@@ -72,7 +72,7 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
         _download_file_from_url(info['url'], fpath_dataset)
 
         ## (Optional) Third, just to be sure, verify integrity of the recently-downloaded file by calculating the hash. I can't think of any realistic case this would fail, but why not.
-        calculated_hash_value = calculate_hash_from_file(fpath_dataset, known_hash_alg)
+        calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
         if (calculated_hash_value != known_hash_value):
             fpath_dataset.unlink()  # Deletes the recently-downloaded file for safety
             error_msg = [
@@ -93,7 +93,7 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     else:
 
         ## Error case: calculated hash of file on disk does not match the known hash.
-        calculated_hash_value = calculate_hash_from_file(fpath_dataset, known_hash_alg)
+        calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
         if (calculated_hash_value != known_hash_value):
             error_msg = [
                 f"Dataset already exists in cache folder [1], but the calculated hash [2] doesn't match the known hash [3]:",
