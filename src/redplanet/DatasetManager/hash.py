@@ -11,7 +11,7 @@ _hashalgs: Dict[str, Callable] = {
     'xxh3_64': xxhash.xxh3_64,
     'sha256': hashlib.sha256,
 }
-## Note: There's no significant difference for small files (for <1MB, it's on the order of thousandths of a second) -- but it DOES matter for large files (e.g. a 5GB file, sha256 takes 13 seconds, while xxh3 takes 2 seconds).
+## Note: There's no significant difference between algorithms for time it takes to hash small files (for <1MB, it's on the order of thousandths of a second) -- but it DOES matter for large files (e.g. a 5GB file, sha256 takes 13 seconds, while xxh3 takes 2 seconds).
 
 
 def get_available_algorithms() -> Set[str]:

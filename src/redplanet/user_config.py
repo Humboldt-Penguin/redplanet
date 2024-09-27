@@ -31,17 +31,14 @@ def get_dirpath_datacache() -> Path:
 
 
 
-
-
 def set_dirpath_datacache_default() -> None:
     """
     Default user cache dir is '/home/USERNAME/.cache/redplanet/'
     """
-    global _dirpath_datacache
-    _dirpath_datacache = Path(user_cache_dir(appname='redplanet')).resolve()
+    set_dirpath_datacache(
+        Path(user_cache_dir(appname='redplanet')).resolve()
+    )
     return
-
-
 
 
 
@@ -73,4 +70,24 @@ def set_dirpath_datacache(target_path: str | Path) -> None:
     ## Proceed
     global _dirpath_datacache
     _dirpath_datacache = target_path
+    return
+
+
+
+
+
+_enable_stream_hash_check: bool = True
+
+def is_enabled_stream_hash_check() -> bool:
+    """
+    Get the current value of the flag that determines whether we verify the hash of a file at URL by streaming before fully downloading it.
+    """
+    return _enable_stream_hash_check
+
+def enable_stream_hash_check(value: bool) -> None:
+    """
+    Set the flag that determines whether we verify the hash of a file at URL by streaming before fully downloading it.
+    """
+    global _enable_stream_hash_check
+    _enable_stream_hash_check = value
     return

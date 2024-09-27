@@ -1,7 +1,7 @@
 from pathlib import Path
 from urllib import request
 
-from redplanet.user_config import get_dirpath_datacache
+from redplanet.user_config import get_dirpath_datacache, is_enabled_stream_hash_check
 from redplanet.DatasetManager.dataset_info import _get_download_info
 from redplanet.DatasetManager.download import _download_file_from_url
 from redplanet.DatasetManager.hash import (
@@ -56,17 +56,19 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     if (not fpath_dataset.is_file()):
 
         ## First, verify the integrity of the file at the URL by calculating its hash "on the fly" (i.e. streaming it as opposed to fully downloading it) -- this ensures we don't download malicious/altered files, assuming you trust my intended file/hash
-        calculated_hash_value_fromStream = _calculate_hash_from_url(info['url'], known_hash_alg)
-        if (calculated_hash_value_fromStream != known_hash_value):
-            error_msg = [
-                f"We need to download the dataset from the known URL [1], but the calculated hash of the file at that URL [2] doesn't match the known hash [3]:",
-                f"    > [1] Known URL: \t{info['url']}",
-                f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value_fromStream}",
-                f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
-                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
-                f"=> DOWNLOAD ABORTED.",
-            ]
-            raise Exception('\n'.join(error_msg))
+        ## (Users can skip this with `redplanet.enable_stream_hash_check(False)`)
+        if is_enabled_stream_hash_check():
+            calculated_hash_value_fromStream = _calculate_hash_from_url(info['url'], known_hash_alg)
+            if (calculated_hash_value_fromStream != known_hash_value):
+                error_msg = [
+                    f"We need to download the dataset from the known URL [1], but the calculated hash of the file at that URL [2] doesn't match the known hash [3]:",
+                    f"    > [1] Known URL: \t{info['url']}",
+                    f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value_fromStream}",
+                    f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
+                    f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
+                    f"=> DOWNLOAD ABORTED.",
+                ]
+                raise Exception('\n'.join(error_msg))
 
         ## Second, proceed to download the file to `fpath_dataset`
         _download_file_from_url(info['url'], fpath_dataset)
