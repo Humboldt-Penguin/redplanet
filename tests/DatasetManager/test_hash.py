@@ -34,18 +34,16 @@ class Test__hashalgs:
 class Test__calculate_hash_from_file:
 
     ## Valid input
-    def test__calculate_hash_from_file__valid(self):
+    def test__calculate_hash_from_file__valid(self, tmp_path):
         # create temp file to hash
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            temp_file.write(b'Test content for hashing')
-            temp_file_path = Path(temp_file.name)
+        temp_file_path = tmp_path / "testfile"
+        temp_file_path.write_bytes(b'Test content for hashing')
+
         expected_sha256 = sha256(b'Test content for hashing').hexdigest()
         expected_xxh3_64 = xxhash.xxh3_64(b'Test content for hashing').hexdigest()
 
         assert _calculate_hash_from_file(fpath=temp_file_path, alg='sha256') == expected_sha256
         assert _calculate_hash_from_file(fpath=temp_file_path, alg='xxh3_64') == expected_xxh3_64
-
-        temp_file_path.unlink()  # clean up temp file
 
 
     ## Invalid input: `fpath` does not exist
@@ -57,16 +55,13 @@ class Test__calculate_hash_from_file:
 
 
     ## Invalid input: `alg` not available
-    def test__calculate_hash_from_file__invalid_alg(self):
+    def test__calculate_hash_from_file__invalid_alg(self, tmp_path):
         # create temp file to hash
-        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-            temp_file.write(b'Test content for hashing')
-            temp_file_path = Path(temp_file.name)
+        temp_file_path = tmp_path / "testfile"
+        temp_file_path.write_bytes(b'Test content for hashing')
 
         with pytest.raises(ValueError, match="Unsupported algorithm"):
             _calculate_hash_from_file(fpath=temp_file_path, alg='nonexistent_algorithm')
-
-        temp_file_path.unlink()  # clean up temp file
 
 
 
