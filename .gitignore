@@ -1,6 +1,7 @@
 ## Custom
 
 scrap/
+.vscode/
 
 
 ## Python-specific stuff -- source: https://github.com/github/gitignore/blob/main/Python.gitignore
