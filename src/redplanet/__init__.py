@@ -3,7 +3,12 @@ __all__ = []
 
 
 
-from redplanet.user_config import set_dirpath_datacache, get_dirpath_datacache
+from redplanet.user_config import (
+    set_dirpath_datacache,
+    get_dirpath_datacache,
+    is_enabled_stream_hash_check,
+    enable_stream_hash_check,
+)
 __all__.extend([
     'set_dirpath_datacache',
     'get_dirpath_datacache',
