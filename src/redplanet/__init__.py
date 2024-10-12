@@ -13,7 +13,7 @@ __all__.extend([
     'set_dirpath_datacache',
     'get_dirpath_datacache',
     'is_enabled_stream_hash_check',
-    'enable_stream_hash_check'
+    'enable_stream_hash_check',
 ])
 
 from redplanet.DatasetManager.dataset_info import peek_datasets

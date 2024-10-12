@@ -11,9 +11,10 @@ _dat_grs: xr.Dataset = None
 
 
 
-def _initialize() -> None:
+def _get_dataset() -> xr.Dataset:
     if _dat_grs is None:
         _load_data()
+    return _dat_grs
 
 
 
@@ -49,7 +50,7 @@ def _load_data() -> None:
                 scale_factor = 0.01      # convert "weight percent" to concentration out of 1
             df[['concentration','sigma']] *= scale_factor
 
-            ## convert to `xarray.DataSet`, append to existing
+            ## convert to `pandas.DataFrame` to `xarray.DataSet`, and append to existing
             df['element'] = element_name    # adds 'element' column
             df = df.set_index(['element', 'lat', 'lon'])    # multi-indexing to allow for conversion to xarray, looks like this: https://files.catbox.moe/b2wpsp.png
             ds = xr.Dataset.from_dataframe(df)
