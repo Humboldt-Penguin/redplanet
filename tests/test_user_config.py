@@ -3,7 +3,7 @@ from platformdirs import user_cache_dir
 
 import pytest
 
-from redplanet.user_config import (
+from redplanet import (
 	get_dirpath_datacache,
 	set_dirpath_datacache,
 )

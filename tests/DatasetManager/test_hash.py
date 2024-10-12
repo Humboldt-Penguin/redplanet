@@ -2,8 +2,8 @@ import tempfile
 from pathlib import Path
 from hashlib import sha256
 
-import xxhash
 import pytest
+import xxhash
 
 from redplanet.DatasetManager.hash import (
     _hashalgs,
