@@ -1,12 +1,11 @@
 _DATASETS = {
     'GRS': {
-        'url': 'https://rutgers.box.com/shared/static/i1dy31or67y030yhof3c39ts19emigzd',
+        'url': 'https://rutgers.box.com/shared/static/3u8cokpvnbpl8k7uuka7qtz1atj9pxu5',
         'fname': '2022_Mars_Odyssey_GRS_Element_Concentration_Maps.zip',
         'dirpath': 'GRS/',
         'hash' : {
-            'sha256': '45e047a645ae8d1bbd8e43062adab16a22786786ecb17d8e44bfc95f471ff9b7',
+            'sha256': 'ba2b5cc62b18302b1da0c111101d0d2318e69421877c4f9c145116b41502777b',
         },
-        # 'post-processing': 'unzip', ## I've opted to unzip the file in memory rather than creating a separate directory, since that makes my hash verification incomplete since you could alter the text files without altering the zip file.
     },
     'dichotomy_coords': {
         'url': 'https://rutgers.box.com/shared/static/tekd1w26h9mvfnyw8bpy4ko4v48931ri',
