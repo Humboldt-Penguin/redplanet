@@ -1,27 +1,25 @@
 import hashlib
 from pathlib import Path
-from typing import List, Dict, Callable, Set
+from collections.abc import Callable
 import requests
 
 import xxhash
 
 
 
-_hashalgs: Dict[str, Callable] = {
+_hashalgs: dict[str, Callable] = {
     'xxh3_64': xxhash.xxh3_64,
-    'sha256': hashlib.sha256,
+    'md5'    : hashlib.md5,
+    'sha256' : hashlib.sha256,
 }
 ## Note: There's no significant difference between algorithms for time it takes to hash small files (for <1MB, it's on the order of thousandths of a second) -- but it DOES matter for large files (e.g. a 5GB file, sha256 takes 13 seconds, while xxh3 takes 2 seconds).
 
 
-def get_available_algorithms() -> Set[str]:
+def get_available_algorithms() -> list[str]:
     """
-    Get the set of supported hashing algorithms.
-
-    Returns:
-        Set[str]: Set of supported hashing algorithms.
+    Get a list of supported hashing algorithms.
     """
-    return set(_hashalgs.keys())
+    return list(_hashalgs.keys())
 
 
 
@@ -33,7 +31,7 @@ def _calculate_hash_from_file(fpath: Path, alg: str) -> str:
         fpath: Path
             Path to the file.
         alg: str
-            Hashing algorithm to use (for options, call `from redplanet.DatasetManager.hash import get_hashalgs(); print(get_hashalgs())`).
+            Hashing algorithm to use (for options, call `from redplanet.DatasetManager.hash import get_available_algorithms(); print(get_available_algorithms())`).
 
     Returns:
         str: The hexadecimal hash of the file.
@@ -67,7 +65,7 @@ def _calculate_hash_from_url(url: str, alg: str) -> str:
         url: str
             URL of the file.
         alg: str
-            Hashing algorithm to use (for options, call `from redplanet.DatasetManager.hash import get_hashalgs(); print(get_hashalgs())`).
+            Hashing algorithm to use (for options, call `from redplanet.DatasetManager.hash import get_available_algorithms(); print(get_available_algorithms())`).
 
     Returns:
         str: The hexadecimal hash of the file.

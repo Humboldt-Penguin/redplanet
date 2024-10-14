@@ -1,12 +1,11 @@
 from pathlib import Path
-from typing import Optional
 from platformdirs import user_cache_dir    # type: ignore
 
 
 
 
 
-_dirpath_datacache: Optional[Path] = None
+_dirpath_datacache: Path | None = None
 # _lock_thread = Lock() ## not sure if necessary... (use like: `with _lock_thread: ...`)
 
 

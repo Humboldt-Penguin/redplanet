@@ -1,5 +1,3 @@
-from typing import Dict
-
 _DATASETS = {
     'GRS': {
         'url': 'https://rutgers.box.com/shared/static/i1dy31or67y030yhof3c39ts19emigzd',
@@ -28,7 +26,7 @@ def peek_datasets():
     return _DATASETS
 
 
-def _get_download_info(name: str) -> Dict[str, Dict[str, str | Dict[str, str]]]:
+def _get_download_info(name: str) -> dict[str, dict[str, str | dict[str, str]]]:
     """
     Returns information to download a dataset as a dictionary with keys 'url', 'fname', 'dirpath' (relative to data cache directory), and 'hash'.
     """
