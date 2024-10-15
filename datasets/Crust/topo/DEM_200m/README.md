@@ -1,0 +1,7 @@
+- [DATA SOURCE]
+    - Download link:
+        - https://astrogeology.usgs.gov/search/map/mars_mgs_mola_mex_hrsc_blended_dem_global_200m
+    - Hashes:
+        - sha256: e8bfe4c3b9dee9d5fdb8c4d49798869654e552e7b154712c9e12d6d117464419
+        - xxh3_64: dafb191af5826c66
+        - md5: e98092a06bea74d5ec9a704dcd1fe318
