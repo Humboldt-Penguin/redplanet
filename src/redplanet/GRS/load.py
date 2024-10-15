@@ -7,7 +7,7 @@ from redplanet.DatasetManager.master import _get_fpath_dataset
 
 
 
-_dat_grs: xr.Dataset = None
+_dat_grs: xr.Dataset | None = None
 
 
 

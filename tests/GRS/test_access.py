@@ -65,7 +65,7 @@ class Test__GRS_get:
                     GRS.get(element, 2.5, -7.5, normalize=True)
 
             ## out-of-range coordinates
-            with pytest.raises(ValueError, match="Input coordinate"):
+            with pytest.raises(ValueError, match="One or more of input coordinates"):
                 GRS.get('th', 361, 0)
-            with pytest.raises(ValueError, match="Input coordinate"):
+            with pytest.raises(ValueError, match="One or more of input coordinates"):
                 GRS.get('th', 0, 91)
