@@ -13,7 +13,7 @@ def get(
     quantity : str  = 'concentration',
     normalize: bool = False,
     as_xarray: bool = False,
-) -> np.ndarray | xr.Dataset:
+) -> float | np.ndarray | xr.Dataset:
 
     dat_grs = _get_dataset()
 
@@ -50,7 +50,6 @@ def get(
     if not as_xarray:
         data = data.values
         ## convert singleton numpy array to scalar
-        if data.shape == ():
-            data = data.item()
+        if data.shape == (): data = data.item()
 
     return data
