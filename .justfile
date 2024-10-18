@@ -44,6 +44,12 @@ activate-devshell:
 
 
 [group('2. Developer tools')]
+[doc('Update dependencies and environment.')]
+update:
+    uv lock --upgrade
+    uv sync --all-extras
+
+[group('2. Developer tools')]
 [doc('Run tests.')]
 test:
     @# Note that we use `uv run` as opposed to `uv tool run` since the tool in question (pytest) should NOT be isolated from the project...
