@@ -1,6 +1,10 @@
 import pytest
 
-from redplanet.DatasetManager.dataset_info import _get_download_info
+from redplanet.DatasetManager.dataset_info import (
+    _get_download_info,
+    DatasetNotFoundError,
+    MohoDatasetNotFoundError,
+)
 
 
 
@@ -14,5 +18,5 @@ class Test__get_download_info:
 
     ## Invalid input: `name` not available
     def test__get_download_info__invalid_dataset(self):
-        with pytest.raises(ValueError, match='Dataset not found:'):
+        with pytest.raises( DatasetNotFoundError ):
             _get_download_info(name='https://fauux.neocities.org/')

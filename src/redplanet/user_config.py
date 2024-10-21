@@ -75,7 +75,7 @@ def set_dirpath_datacache(target_path: str | Path) -> None:
 
 
 
-_enable_stream_hash_check: bool = True
+_enable_stream_hash_check: bool = False
 
 def is_enabled_stream_hash_check() -> bool:
     """

@@ -1,8 +1,10 @@
 from pathlib import Path
-from urllib import request
 
 from redplanet.user_config import get_dirpath_datacache, is_enabled_stream_hash_check
-from redplanet.DatasetManager.dataset_info import _get_download_info
+from redplanet.DatasetManager.dataset_info import (
+    _get_download_info,
+    _get_download_info_moho,
+)
 from redplanet.DatasetManager.download import _download_file_from_url
 from redplanet.DatasetManager.hash import (
     _calculate_hash_from_file,
@@ -37,7 +39,14 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     """
 
     ## Get download info for dataset
-    info: dict = _get_download_info(dataset_name)
+    if dataset_name.startswith('Moho-Mars-'):
+        info: dict = _get_download_info_moho(
+            model_name          = dataset_name[len('Moho-Mars-'):],
+            fpath_moho_registry = _get_fpath_dataset('moho_registry'),
+        )
+    else:
+        info: dict = _get_download_info(dataset_name)
+
     fpath_dataset: Path = get_dirpath_datacache() / info['dirpath'] / info['fname']
 
 
