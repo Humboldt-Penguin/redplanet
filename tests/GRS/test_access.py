@@ -2,6 +2,7 @@ import pytest
 import numpy as np
 
 from redplanet import GRS
+from redplanet.helper_functions import CoordinateError
 
 ## `get` (public function) -- get GRS data
 class Test__GRS_get:
@@ -65,7 +66,7 @@ class Test__GRS_get:
                     GRS.get(element, 2.5, -7.5, normalize=True)
 
             ## out-of-range coordinates
-            with pytest.raises(ValueError, match="One or more of input coordinates"):
+            with pytest.raises(CoordinateError, match="One or more of input coordinates"):
                 GRS.get('th', 361, 0)
-            with pytest.raises(ValueError, match="One or more of input coordinates"):
+            with pytest.raises(CoordinateError, match="One or more of input coordinates"):
                 GRS.get('th', 0, 91)

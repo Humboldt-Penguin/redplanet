@@ -25,6 +25,22 @@ def _plon2slon(
         return convert( np.array(plon) ).tolist()
 
 
+def _slon2plon(
+    slon: float | list | np.ndarray
+) -> float | list | np.ndarray:
+    """
+    See `_plon2slon` for details.
+    """
+    def convert(slon):
+        return slon % 360
+
+    if isinstance(slon, (float, np.ndarray)):
+        return convert(slon)
+    else:
+        return convert( np.array(slon) ).tolist()
+
+
+
 
 def _verify_coords(
     lon: float | list | np.ndarray,
@@ -35,6 +51,10 @@ def _verify_coords(
     lat = np.array(lat)
 
     if np.any(lon < -180) or np.any(lon > 360):
-        raise ValueError(f'One or more of input coordinates ({lon = }) is out of range [-180, 360].')
+        raise CoordinateError(f'One or more of input coordinates ({lon = }) is out of range [-180, 360].')
     if np.any(lat < -90) or np.any(lat > 90):
-        raise ValueError(f'One or more of input coordinates ({lat = }) is out of range [-90, 90].')
+        raise CoordinateError(f'One or more of input coordinates ({lat = }) is out of range [-90, 90].')
+
+
+class CoordinateError(Exception):
+    pass

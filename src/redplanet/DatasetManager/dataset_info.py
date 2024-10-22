@@ -48,7 +48,7 @@ _DATASETS = {
 
 
 
-def peek_datasets():
+def peek_datasets() -> dict:
     """
     Returns a dictionary of all available datasets -- intended for debugging/exploration purposes, should NOT be called in production code.
     """
