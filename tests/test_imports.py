@@ -9,20 +9,16 @@ dependencies = {
         'numpy',
         'pandas',
         'pyshtools',
+        'rioxarray',
         'scipy',
         'xarray',
         'xxhash',
         'zarr',
     ],
-    'Dependencies: "crs" (optional)': [
-        'rioxarray',
-    ],
-    'Dependencies: "plot" (optional)': [
+    'Dependencies: "interactive" (optional)': [
+        'jupyter',
         'matplotlib',
         'plotly',
-    ],
-    'Dependencies: "dev" (optional)': [
-        'jupyter',
     ],
 }
 

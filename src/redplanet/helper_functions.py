@@ -1,6 +1,43 @@
 import numpy as np
 
 
+
+class CoordinateError(Exception):
+    pass
+
+
+
+def _verify_coords(
+    lon: float | list | np.ndarray,
+    lat: float | list | np.ndarray,
+) -> None:
+
+    lon = np.atleast_1d(lon)
+    lat = np.atleast_1d(lat)
+
+    invalid_lon = np.where((lon < -180) | (lon > 360))[0]
+    invalid_lat = np.where((lat < -90) | (lat > 90))[0]
+
+    if invalid_lon.size > 0:
+        invalid_lon_values = lon[invalid_lon]
+        error_msg = [
+            f"Longitude coordinates must be in range [-180, 360].",
+            f"The following input values were outside of this range:\n\t- {invalid_lon_values.tolist()}.",
+            f"Corresponding input array indices:\n\t- {invalid_lon.tolist()}.",
+        ]
+        raise CoordinateError("\n".join(error_msg))
+
+    if invalid_lat.size > 0:
+        invalid_lat_values = lat[invalid_lat]
+        error_msg = [
+            f"Latitude coordinates must be in range [-90, 90].",
+            f"The following input values were outside of this range:\n\t- {invalid_lat_values.tolist()}.",
+            f"Corresponding input array indices:\n\t- {invalid_lat.tolist()}.",
+        ]
+        raise CoordinateError("\n".join(error_msg))
+
+
+
 def _plon2slon(
     plon: float | list | np.ndarray
 ) -> float | list | np.ndarray:
@@ -38,23 +75,3 @@ def _slon2plon(
         return convert(slon)
     else:
         return convert( np.array(slon) ).tolist()
-
-
-
-
-def _verify_coords(
-    lon: float | list | np.ndarray,
-    lat: float | list | np.ndarray,
-) -> None:
-
-    lon = np.array(lon)
-    lat = np.array(lat)
-
-    if np.any(lon < -180) or np.any(lon > 360):
-        raise CoordinateError(f'One or more of input coordinates ({lon = }) is out of range [-180, 360].')
-    if np.any(lat < -90) or np.any(lat > 90):
-        raise CoordinateError(f'One or more of input coordinates ({lat = }) is out of range [-90, 90].')
-
-
-class CoordinateError(Exception):
-    pass
