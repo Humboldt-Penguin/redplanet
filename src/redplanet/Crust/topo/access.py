@@ -1,7 +1,7 @@
 import numpy as np
 import xarray as xr
 
-from redplanet.helper_functions import _plon2slon, _verify_coords
+from redplanet.helper_functions import _verify_coords, _plon2slon
 from redplanet.Crust.topo.load import _get_dataset
 
 

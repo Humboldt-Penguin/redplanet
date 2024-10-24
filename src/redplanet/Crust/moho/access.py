@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
-from redplanet.helper_functions import _slon2plon, _verify_coords
+from redplanet.helper_functions import _verify_coords, _slon2plon
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.Crust.moho.load import _get_dataset, _model_info
 
