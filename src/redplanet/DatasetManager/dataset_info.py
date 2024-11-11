@@ -21,19 +21,25 @@ _DATASETS = {
         },
     },
     'DEM_200m': {
-        'url'    : 'https://rutgers.box.com/shared/static/jam5e2dbt5pqfgj7xrxaac0q33mebk3a',
-        'fname'  : 'Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2.zarr.zip',
+        'url'    : 'https://rutgers.box.com/shared/static/8xfyuf8qw6sbyqgzjjx0g2twehui9595',
+        'fname'  : 'Mars_HRSC_MOLA_BlendDEM_Global_200mp_v2.memmap',
         'dirpath': 'Crust/topo/',
         'hash'   : {
-            'xxh3_64': '591d09f97c971546',
+            'xxh3_64': 'e8cc649a36ea4fab',
+            'md5'    : '74cedd82aaf200b62ebb64affffe0e7e',
+            'sha1'   : '0c7704155a3e9fb6bef284980fdb37aa559457c5',
+            'sha256' : '691b6ce6a1cacc5fcea4b95ef1832fac50e421e1ec8f7fb33e5c791396aa4a4f',
         },
     },
     'DEM_463m': {
-        'url'    : 'https://rutgers.box.com/shared/static/sld3fbetbx4va4p0qqg8shyc7rg80hyu',
-        'fname'  : 'Mars_MGS_MOLA_DEM_mosaic_global_463m_reproj.zarr.zip',
+        'url'    : 'https://rutgers.box.com/shared/static/s2iu6egz4og7ht310ctebgrloinf81dq',
+        'fname'  : 'Mars_MGS_MOLA_DEM_mosaic_global_463m.memmap',
         'dirpath': 'Crust/topo/',
         'hash'   : {
-            'xxh3_64': '07b987982f52b471',
+            'xxh3_64': '6eed1a19495d736f',
+            'md5'    : '0f2378e55a01c217b2662b7ba07a3f27',
+            'sha1'   : 'f3547e5423bd447179e5126e37b262e4136adcac',
+            'sha256' : '7788fa9287c633456fbf2de8b0e674a7e375014d2b58731b45f991be284879c4',
         },
     },
     'moho_registry': {

@@ -1,7 +1,0 @@
-- [DATA SOURCE]
-    - Download link:
-        - https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m
-    - Hashes:
-        - sha256: 38a4eb0b4452855b8dabfac40a367b458555ab4c01b31235807ad0a53c031f4c
-        - xxh3_64: a0dc027e687f855f
-        - md5: e7920a303f46707d57fe72eab5f6b1aa
