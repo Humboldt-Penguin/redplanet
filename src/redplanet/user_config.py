@@ -90,3 +90,16 @@ def enable_stream_hash_check(value: bool) -> None:
     global _enable_stream_hash_check
     _enable_stream_hash_check = value
     return
+
+
+
+_max_size_to_calculate_hash_GiB: float = 1.0
+## TODO: maybe initially make this `999` | `None` | `-1` so all hashes are calculated by default, and the user can decide if they want to disable the security feature.
+
+def get_max_size_to_calculate_hash_GiB() -> float:
+    return _max_size_to_calculate_hash_GiB
+
+def set_max_size_to_calculate_hash_GiB(value: float) -> None:
+    global _max_size_to_calculate_hash_GiB
+    _max_size_to_calculate_hash_GiB = value
+    return
