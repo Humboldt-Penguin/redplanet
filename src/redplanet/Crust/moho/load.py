@@ -12,17 +12,17 @@ _model_info: dict[ str, str|int ] | None = None
 
 def _get_dataset() -> xr.DataArray:
     if _dat_moho is None:
-        raise ValueError('Moho model not loaded. Use `load` method to load the dataset.')
+        raise ValueError('Moho dataset not loaded. Use `redplanet.Crust.moho.load(<model_params>)`.')
     return _dat_moho
 
 
 
 def load(
-    interior_model: str,
-    insight_thickness: int,
-    rho_south: int,
-    rho_north: int,
-    fail_silently: bool = False,
+    interior_model    : str,
+    insight_thickness : int,
+    rho_south         : int,
+    rho_north         : int,
+    fail_silently     : bool = False,
 ) -> bool:
 
     if interior_model not in _interior_models:

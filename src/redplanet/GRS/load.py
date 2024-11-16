@@ -13,12 +13,17 @@ _dat_grs: xr.Dataset | None = None
 
 def _get_dataset() -> xr.Dataset:
     if _dat_grs is None:
-        _load_data()
+        _load()
     return _dat_grs
 
 
 
-def _load_data() -> None:
+def _load() -> None:
+    """
+    NOTE:
+        - This is private because there's only one GRS dataset so lazy loading upon the first access is fine.
+            - To contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of the different models available and which one they are choosing to use.
+    """
 
     global _dat_grs
 

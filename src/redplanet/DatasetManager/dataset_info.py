@@ -93,7 +93,7 @@ def _get_download_info_moho(
     result = df[ df['model_name'] == model_name ]
 
     if result.empty:
-        raise MohoDatasetNotFoundError(f"Moho model '{model_name}' not found in the registry.")
+        raise MohoDatasetNotFoundError(f"Moho model '{model_name}' not found in the registry. To see options, run `redplanet.Crust.moho.get_registry()`.")
 
     box_download_code, sha1 = result.values.tolist()[0][1:]
     result = {
