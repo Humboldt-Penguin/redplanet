@@ -28,8 +28,7 @@ def is_above_dichotomy(
     lat = np.atleast_1d(lat)
 
     ## load dataset
-    fpath = _get_fpath_dataset('dichotomy_coords')
-    dat_dichotomy_coords = np.loadtxt(fpath)
+    dat_dichotomy_coords = get_dichotomy_coords()
 
     ## for each input longitude, find nearest dichotomy coordinates
     i_lons = np.searchsorted(dat_dichotomy_coords[:,0], lon, side='right') - 1
