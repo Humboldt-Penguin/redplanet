@@ -7,9 +7,9 @@ from redplanet.GRS.load import _get_dataset
 
 
 def get(
-    element : str,
-    lon     : float | np.ndarray,  ## TODO: test array inputs!!!
-    lat     : float | np.ndarray,
+    element            : str,
+    lon                : float | np.ndarray,  ## TODO: test array inputs!!!
+    lat                : float | np.ndarray,
     quantity           : str  = 'concentration',
     normalize          : bool = False,
     as_xarray          : bool = False,

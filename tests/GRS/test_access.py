@@ -15,18 +15,49 @@ class Test__GRS_get:
             0.572947204e-6
         )
 
+
         ## plain sigma
         assert np.isclose(
             GRS.get('th', 2.5, -7.5, quantity='sigma'),
             0.047707241e-6
         )
 
-        ## TODO: array inputs/outputs
+
         ## nearest value (i.e. no interpolation)
         assert np.isclose(
             GRS.get('th', 2.5, -7.5),
             GRS.get('th', 2.51, -7.51),
         )
+
+
+        ## array inputs
+        expected_dat = np.array([
+            [6.24730945e-07, 6.15593433e-07, 6.23700500e-07, 6.23700500e-07],
+            [5.72947204e-07, 5.93936563e-07, 6.16395473e-07, 6.16395473e-07],
+            [5.63852787e-07, 6.22758865e-07, 6.61521018e-07, 6.61521018e-07],
+            [5.63852787e-07, 6.22758865e-07, 6.61521018e-07, 6.61521018e-07]
+        ])
+        expected_lons = np.array([  2.5,  7.5,  12.5,  12.5])
+        expected_lats = np.array([ -2.5, -7.5, -12.5, -12.5])
+
+        #### array input: list
+        lons = [  4,  8,  12,  12.1 ]
+        lats = [ -4, -8, -12, -12.1 ]
+        actual_dat = GRS.get('th', lons, lats)
+        assert np.allclose(actual_dat, expected_dat)
+
+        #### array input: np.ndarray
+        lons = np.array(lons)
+        lats = np.array(lats)
+        actual_dat = GRS.get('th', lons, lats)
+        assert np.allclose(actual_dat, expected_dat)
+
+        #### array input: `return_exact_coords`
+        actual_dat, actual_lons, actual_lats = GRS.get('th', lons, lats, return_exact_coords=True)
+        assert np.allclose(actual_dat, expected_dat)
+        assert np.allclose(actual_lons, expected_lons)
+        assert np.allclose(actual_lats, expected_lats)
+
 
         ## wraparound / slon<->plon conversion
         assert np.isclose(
@@ -42,6 +73,7 @@ class Test__GRS_get:
             GRS.get('th', 270, 2.5),
         )
 
+
         ## normalize
         assert np.isclose(
             GRS.get('th', 2.5, -7.5, normalize=True),
@@ -54,6 +86,7 @@ class Test__GRS_get:
         )
 
 
+
     def test__GRS_get__invalid(self):
 
             ## invalid element
@@ -64,6 +97,10 @@ class Test__GRS_get:
             for element in ['cl', 'h2o', 's']:
                 with pytest.raises(ValueError, match="Can't normalize a volatile element"):
                     GRS.get(element, 2.5, -7.5, normalize=True)
+
+            ## can't return both xarray and exact coordinates
+            with pytest.raises(ValueError, match="Choose one"):
+                GRS.get('th', 0, 0, as_xarray=True, return_exact_coords=True)
 
             ## out-of-range coordinates
             with pytest.raises(CoordinateError, match="Longitude"):
