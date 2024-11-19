@@ -2,7 +2,7 @@ from pathlib import Path
 
 from redplanet.user_config import (
     get_dirpath_datacache,
-    is_enabled_stream_hash_check,
+    get_enable_stream_hash_check,
     get_max_size_to_calculate_hash_GiB,
 )
 from redplanet.DatasetManager.dataset_info import (
@@ -69,8 +69,8 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     if (not fpath_dataset.is_file()):
 
         ## First, verify the integrity of the file at the URL by calculating its hash "on the fly" (i.e. streaming it as opposed to fully downloading it) -- this ensures we don't download malicious/altered files, assuming you trust my intended file/hash
-        ## (Users can skip this with `redplanet.enable_stream_hash_check(False)`)
-        if is_enabled_stream_hash_check():
+        ## (Users can skip this with `redplanet.set_enable_stream_hash_check(False)`)
+        if get_enable_stream_hash_check():
             calculated_hash_value_fromStream = _calculate_hash_from_url(info['url'], known_hash_alg)
             if (calculated_hash_value_fromStream != known_hash_value):
                 error_msg = [
@@ -90,7 +90,7 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
         max_size_to_calculate_hash_GiB = get_max_size_to_calculate_hash_GiB()
         file_size_GiB = fpath_dataset.stat().st_size / (2**30)
 
-        if (file_size_GiB <= max_size_to_calculate_hash_GiB):
+        if (max_size_to_calculate_hash_GiB == None) or (file_size_GiB <= max_size_to_calculate_hash_GiB):  ## calculate hash if either of these are true
             calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
             if (calculated_hash_value != known_hash_value):
                 fpath_dataset.unlink()  # Deletes the recently-downloaded file for safety
@@ -117,7 +117,7 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
         max_size_to_calculate_hash_GiB = get_max_size_to_calculate_hash_GiB()
         file_size_GiB = fpath_dataset.stat().st_size / (2**30)
 
-        if (file_size_GiB <= max_size_to_calculate_hash_GiB):
+        if (max_size_to_calculate_hash_GiB == None) or (file_size_GiB <= max_size_to_calculate_hash_GiB):  ## calculate hash if either of these are true
             calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
             if (calculated_hash_value != known_hash_value):
                 error_msg = [

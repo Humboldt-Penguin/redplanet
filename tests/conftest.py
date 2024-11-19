@@ -1,11 +1,12 @@
 import pytest
 
-import redplanet.user_config as uc
+import redplanet.user_config as rpcfg
 
 @pytest.fixture(autouse=True)
-def reset_datacache_dir():
+def reset_user_config():
     """
-    Reset values in `redplanet/user_config.py` before every test.
+    Reset values in `redplanet.user_config` before every test.
     """
-    uc._dirpath_datacache = None
-    uc._enable_stream_hash_check = True
+    rpcfg.datacache._dirpath_datacache                  = None
+    rpcfg.max_hash_size._max_size_to_calculate_hash_GiB = None
+    rpcfg.stream_hash_check._enable_stream_hash_check   = True
