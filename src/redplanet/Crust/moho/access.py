@@ -30,8 +30,8 @@ def get_model_info() -> dict[ str, str|int ] | None:
 
 
 def get(
-    lon : float | list | np.ndarray,
-    lat : float | list | np.ndarray,
+    lon                 : float | list | np.ndarray,
+    lat                 : float | list | np.ndarray,
     interpolate         : bool = False,
     as_xarray           : bool = False,
     return_exact_coords : bool = False,
