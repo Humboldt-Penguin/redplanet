@@ -40,7 +40,7 @@ activate-devshell:
     nix develop
 
 [group('1. Nix tools')]
-[doc('Update flake. (check for `uv` updates in nixpkgs here: https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/uv/uv/package.nix)')]
+[doc('Update flake. (check for `uv` updates in nixpkgs here: https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/uv/uv/package.nix )')]
 update-flake:
     nix flake update
 
