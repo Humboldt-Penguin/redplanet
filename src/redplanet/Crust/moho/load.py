@@ -22,8 +22,8 @@ def load(
     insight_thickness : int,
     rho_south         : int,
     rho_north         : int,
-    fail_silently     : bool = False,
-) -> bool:
+    fail_silently     : bool = False,    ##  False [default] -> return None,    True -> return type(bool)
+) -> None | bool:
 
     if interior_model not in _interior_models:
         raise ValueError(f'Unknown interior model: \"{interior_model}\".\nOptions are: \"{"\", \"".join(_interior_models)}\".')    # (lol)
@@ -44,7 +44,10 @@ def load(
 
     global _dat_moho
     _dat_moho = pysh.SHCoeffs.from_file(fpath_moho).expand().to_xarray().sortby('lat')
-    return True
+
+    if fail_silently:
+        return True
+    return
 
 
 
