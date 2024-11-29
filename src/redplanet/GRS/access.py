@@ -2,7 +2,7 @@ import numpy as np
 import xarray as xr
 
 from redplanet.helper_functions import _verify_coords, _plon2slon
-from redplanet.GRS.load import _get_dataset
+from redplanet.GRS.load import get_dataset
 
 
 
@@ -34,7 +34,7 @@ def get(
 
 
     ## get data
-    dat_grs = _get_dataset()
+    dat_grs = get_dataset()
     data = (
         dat_grs
             .sel(element=element)

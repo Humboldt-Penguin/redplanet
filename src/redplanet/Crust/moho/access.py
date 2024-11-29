@@ -6,7 +6,7 @@ import xarray as xr
 
 from redplanet.helper_functions import _verify_coords, _slon2plon
 from redplanet.DatasetManager.master import _get_fpath_dataset
-from redplanet.Crust.moho.load import _get_dataset, _model_info
+from redplanet.Crust.moho.load import get_dataset, _model_info
 
 
 
@@ -48,7 +48,7 @@ def get(
 
 
     ## get data
-    dat_moho = _get_dataset()
+    dat_moho = get_dataset()
     if interpolate:
         data = dat_moho.interp(
             lon = lon,
