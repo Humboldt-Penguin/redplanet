@@ -50,6 +50,17 @@ _DATASETS = {
             'sha256': '0be4a1ff14df2ee552034487e91ae358dd2e8a907bc37123bbfa5235d1f98dba',
         },
     },
+    'crater_db': {
+        'url'    : 'https://rutgers.box.com/shared/static/imou5t0f2inyvx8ldcxfk234oeit7z3q',
+        'fname'  : 'craters_with_names_and_ages_50km.csv',
+        'dirpath': 'Craters/',
+        'hash'   : {
+            'xxh3_64': 'ea14d77f25f090c4',
+            'md5'    : '4e63fd2a7f1367d131ee606edcdfb5f7',
+            'sha1'   : '79113d236836e1d8bb53e517ab3cfc4afad2cac2',
+            'sha256' : 'e48808ef670e39e812149e4731634d59964b7b3465b1be38eda920f890125bdc',
+        },
+    },
 }
 
 
