@@ -4,11 +4,11 @@ from requests.exceptions import RequestException
 from time import sleep
 
 def _download_file_from_url(
-    url: str,
-    dest_path: Path,
-    retries: int = 3,
-    timeout: int = 10,
-    chunk_size: int = 2**13,
+    url       : str,
+    dest_path : Path,
+    retries   : int = 3,
+    timeout   : int = 10,
+    chunk_size: int = 512 * 1024,  # 512KB
 ) -> None:
     """
     Download a file from a URL to a specified local path.

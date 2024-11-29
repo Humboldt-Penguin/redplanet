@@ -19,8 +19,8 @@ shlvl := env('SHLVL', '-1')
 ## ^ We have to access the user's SHLVL like this because entering a justfile increments SHLVL
 
 
-[group('1. Access UV Development Environment')]
-[doc('Activate interactive development shell (remember to `exit` when done!) -- we recommend getting in the habit of using this to avoid accidentally entering multi-nested devshells.')]
+[group('1. Nix tools')]
+[doc('Activate interactive development shell with uv (remember to `exit` when done) -- we recommend getting into the habit of using this recipe over plain `nix develop` since it incorporates guard rails against entering multi-nested devshells.')]
 activate-devshell:
     #!/usr/bin/env bash
     set -euo pipefail
@@ -39,11 +39,22 @@ activate-devshell:
     # Activate environment
     nix develop
 
+[group('1. Nix tools')]
+[doc('Update flake. (check for `uv` updates in nixpkgs here: https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/uv/uv/package.nix )')]
+update-flake:
+    nix flake update
 
 
 
 
-[group('2. Developer tools')]
+
+[group('2. uv tools')]
+[doc('Update dependencies and environment.')]
+update-dependencies:
+    uv lock --upgrade
+    uv sync --all-extras
+
+[group('2. uv tools')]
 [doc('Run tests.')]
 test:
     @# Note that we use `uv run` as opposed to `uv tool run` since the tool in question (pytest) should NOT be isolated from the project...
@@ -51,12 +62,12 @@ test:
     @# For more info, search the docs for 'pytest': https://docs.astral.sh/uv/guides/tools/#running-tools
     uv run pytest
 
-[group('2. Developer tools')]
+[group('2. uv tools')]
 [doc('Run tests, do not suppress print statements.')]
 test-verbose:
     uv run pytest -s
 
-[group('2. Developer tools')]
+[group('2. uv tools')]
 [doc('Clean up Python bytecode artifacts.')]
 clean:
     find . -type d -name "__pycache__" -exec rm -r {} +
@@ -64,7 +75,7 @@ clean:
     find . -type d -name ".mypy_cache" -exec rm -r {} +
     find . -type d -name ".pytest_cache" -exec rm -r {} +
 
-[group('2. Developer tools')]
+[group('2. uv tools')]
 [doc('Check static types with `mypy`.')]
 type-check target=".":
     uvx mypy {{target}}

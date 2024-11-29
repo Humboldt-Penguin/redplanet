@@ -1,8 +1,14 @@
 from pathlib import Path
-from urllib import request
 
-from redplanet.user_config import get_dirpath_datacache, is_enabled_stream_hash_check
-from redplanet.DatasetManager.dataset_info import _get_download_info
+from redplanet.user_config import (
+    get_dirpath_datacache,
+    get_enable_stream_hash_check,
+    get_max_size_to_calculate_hash_GiB,
+)
+from redplanet.DatasetManager.dataset_info import (
+    _get_download_info,
+    _get_download_info_moho,
+)
 from redplanet.DatasetManager.download import _download_file_from_url
 from redplanet.DatasetManager.hash import (
     _calculate_hash_from_file,
@@ -37,7 +43,14 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     """
 
     ## Get download info for dataset
-    info: dict = _get_download_info(dataset_name)
+    if dataset_name.startswith('Moho-Mars-'):
+        info: dict = _get_download_info_moho(
+            model_name          = dataset_name[len('Moho-Mars-'):],
+            fpath_moho_registry = _get_fpath_dataset('moho_registry'),
+        )
+    else:
+        info: dict = _get_download_info(dataset_name)
+
     fpath_dataset: Path = get_dirpath_datacache() / info['dirpath'] / info['fname']
 
 
@@ -56,8 +69,8 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
     if (not fpath_dataset.is_file()):
 
         ## First, verify the integrity of the file at the URL by calculating its hash "on the fly" (i.e. streaming it as opposed to fully downloading it) -- this ensures we don't download malicious/altered files, assuming you trust my intended file/hash
-        ## (Users can skip this with `redplanet.enable_stream_hash_check(False)`)
-        if is_enabled_stream_hash_check():
+        ## (Users can skip this with `redplanet.set_enable_stream_hash_check(False)`)
+        if get_enable_stream_hash_check():
             calculated_hash_value_fromStream = _calculate_hash_from_url(info['url'], known_hash_alg)
             if (calculated_hash_value_fromStream != known_hash_value):
                 error_msg = [
@@ -74,40 +87,51 @@ def _get_fpath_dataset(dataset_name: str) -> Path:
         _download_file_from_url(info['url'], fpath_dataset)
 
         ## (Optional) Third, just to be sure, verify integrity of the recently-downloaded file by calculating the hash. I can't think of any realistic case this would fail, but why not.
-        calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
-        if (calculated_hash_value != known_hash_value):
-            fpath_dataset.unlink()  # Deletes the recently-downloaded file for safety
-            error_msg = [
-                f"We already verified the integrity of the file at the URL [1] from its hash [2] -- however, after downloading it to disk [3] and recalculating the hash for safety [4], it doesn't match the known hash [5] for some unknown reason:",
-                f"    > [1] Known URL: \t{info['url']}",
-                f"    > [2] Calculated hash at URL: \t{known_hash_alg}-{calculated_hash_value_fromStream}",
-                f"    > [3] File path (now deleted): \t{fpath_dataset}",
-                f"    > [4] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
-                f"    > [5] Known hash: \t{known_hash_alg}-{known_hash_value}",
-                f"**The downloaded file has been deleted for safety.**",
-                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
-                f"=> PROCESS ABORTED.",
-            ]
-            raise Exception('\n'.join(error_msg))
+        max_size_to_calculate_hash_GiB = get_max_size_to_calculate_hash_GiB()
+        file_size_GiB = fpath_dataset.stat().st_size / (2**30)
+
+        if (max_size_to_calculate_hash_GiB == None) or (file_size_GiB <= max_size_to_calculate_hash_GiB):  ## calculate hash if either of these are true
+            calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
+            if (calculated_hash_value != known_hash_value):
+                fpath_dataset.unlink()  # Deletes the recently-downloaded file for safety
+                error_msg = [
+                    f"We already verified the integrity of the file at the URL [1] from its hash [2] -- however, after downloading it to disk [3] and recalculating the hash for safety [4], it doesn't match the known hash [5] for some unknown reason:",
+                    f"    > [1] Known URL: \t{info['url']}",
+                    f"    > [2] Calculated hash at URL: \t{known_hash_alg}-{calculated_hash_value_fromStream}",
+                    f"    > [3] File path (now deleted): \t{fpath_dataset}",
+                    f"    > [4] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
+                    f"    > [5] Known hash: \t{known_hash_alg}-{known_hash_value}",
+                    f"**The downloaded file has been deleted for safety.**",
+                    f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
+                    f"=> PROCESS ABORTED.",
+                ]
+                raise Exception('\n'.join(error_msg))
+        else:
+            print(f'TEMP DEBUG: Skipped calculating hash for file since actual size ({file_size_GiB:.2f} GiB) exceeds the maximum size ({max_size_to_calculate_hash_GiB:.2f} GiB) in user config.')
 
 
     # Case 2: File already exists in cache, verify the hash
     else:
 
         ## Error case: calculated hash of file on disk does not match the known hash.
-        calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
-        if (calculated_hash_value != known_hash_value):
-            error_msg = [
-                f"Dataset already exists in cache folder [1], but the calculated hash [2] doesn't match the known hash [3]:",
-                f"    > [1] File path: \t{fpath_dataset}",
-                f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
-                f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
-                f"This may occur because a user/process manually changed the dataset file, or the dataset was updated in `redplanet`. We suggest you delete or move the old dataset file and try again.",
-                f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
-                f"=> PROCESS ABORTED.",
-            ]
-            raise Exception('\n'.join(error_msg))
+        max_size_to_calculate_hash_GiB = get_max_size_to_calculate_hash_GiB()
+        file_size_GiB = fpath_dataset.stat().st_size / (2**30)
 
+        if (max_size_to_calculate_hash_GiB == None) or (file_size_GiB <= max_size_to_calculate_hash_GiB):  ## calculate hash if either of these are true
+            calculated_hash_value = _calculate_hash_from_file(fpath_dataset, known_hash_alg)
+            if (calculated_hash_value != known_hash_value):
+                error_msg = [
+                    f"Dataset already exists in cache folder [1], but the calculated hash [2] doesn't match the known hash [3]:",
+                    f"    > [1] File path: \t{fpath_dataset}",
+                    f"    > [2] Calculated hash: \t{known_hash_alg}-{calculated_hash_value}",
+                    f"    > [3] Known hash: \t{known_hash_alg}-{known_hash_value}",
+                    f"This may occur because a user/process manually changed the dataset file, or the dataset was updated in `redplanet`. We suggest you delete or move the old dataset file and try again.",
+                    f"To see all known information about the datasets, run `import redplanet; from pprint import pprint; pprint(redplanet.peek_datasets())`.",
+                    f"=> PROCESS ABORTED.",
+                ]
+                raise Exception('\n'.join(error_msg))
+        else:
+            print(f'TEMP DEBUG: Skipped calculating hash for file since actual size ({file_size_GiB:.2f} GiB) exceeds the maximum size ({max_size_to_calculate_hash_GiB:.2f} GiB) in user config.')
 
 
 
