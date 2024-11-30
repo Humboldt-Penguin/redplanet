@@ -11,7 +11,7 @@ _dat_grs: xr.Dataset | None = None
 
 
 
-def _get_dataset() -> xr.Dataset:
+def get_dataset() -> xr.Dataset:
     if _dat_grs is None:
         _load()
     return _dat_grs

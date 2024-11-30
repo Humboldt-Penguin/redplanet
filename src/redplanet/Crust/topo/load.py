@@ -11,7 +11,7 @@ from redplanet.DatasetManager.master import _get_fpath_dataset
 _dat_dem:    np.memmap  | None = None
 _model_info: dict       | None = None
 
-def _get_dataset() -> list[ np.memmap, dict ]:
+def get_dataset() -> list[ np.memmap, dict ]:
     if _dat_dem is None:
         raise ValueError('Topo dataset not loaded. Use `redplanet.Crust.topo.load(<model_params>)`.')
     return [_dat_dem, _model_info]

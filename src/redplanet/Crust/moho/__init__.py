@@ -2,9 +2,10 @@ __all__ = []
 
 
 
-from redplanet.Crust.moho.load import load
+from redplanet.Crust.moho.load import load, get_dataset
 __all__.extend([
     'load',
+    'get_dataset',
 ])
 
 from redplanet.Crust.moho.access import (

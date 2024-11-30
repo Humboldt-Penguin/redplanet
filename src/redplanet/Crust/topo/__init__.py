@@ -4,9 +4,11 @@ __all__ = []
 
 from redplanet.Crust.topo.load import (
     load,
+    get_dataset,
 )
 __all__.extend([
     'load',
+    'get_dataset',
 ])
 
 from redplanet.Crust.topo.access import (

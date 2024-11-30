@@ -2,12 +2,12 @@ import numpy as np
 import xarray as xr
 
 from redplanet.helper_functions import _verify_coords, _plon2slon
-from redplanet.Crust.topo.load import _get_dataset
+from redplanet.Crust.topo.load import get_dataset
 
 
 
 def get_model_info() -> dict:
-    return _get_dataset()[1]
+    return get_dataset()[1]
 
 
 
@@ -32,7 +32,7 @@ def get(
     lon = np.atleast_1d(lon)
     lat = np.atleast_1d(lat)
 
-    dat_dem, model_info = _get_dataset()
+    dat_dem, model_info = get_dataset()
     dat_lon = model_info['lons_approx']
     dat_lat = model_info['lats_approx']
 

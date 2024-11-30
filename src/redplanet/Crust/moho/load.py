@@ -10,7 +10,7 @@ _dat_moho: xr.DataArray | None = None
 
 _model_info: dict[ str, str|int ] | None = None
 
-def _get_dataset() -> xr.DataArray:
+def get_dataset() -> xr.DataArray:
     if _dat_moho is None:
         raise ValueError('Moho dataset not loaded. Use `redplanet.Crust.moho.load(<model_params>)`.')
     return _dat_moho
