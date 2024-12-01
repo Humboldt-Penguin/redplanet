@@ -1696,18 +1696,20 @@ name = "redplanet"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "dask" },
     { name = "numpy" },
     { name = "pandas" },
     { name = "pyshtools" },
-    { name = "rioxarray" },
     { name = "scipy" },
     { name = "xarray" },
     { name = "xxhash" },
-    { name = "zarr" },
 ]
 
 [package.optional-dependencies]
+generate-datasets = [
+    { name = "dask" },
+    { name = "rioxarray" },
+    { name = "zarr" },
+]
 interactive = [
     { name = "jupyter" },
     { name = "matplotlib" },
@@ -1721,18 +1723,18 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "dask", specifier = ">=2024.9.0" },
+    { name = "dask", marker = "extra == 'generate-datasets'", specifier = ">=2024.9.0" },
     { name = "jupyter", marker = "extra == 'interactive'", specifier = ">=1.1.1" },
     { name = "matplotlib", marker = "extra == 'interactive'", specifier = ">=3.9.2" },
     { name = "numpy", specifier = ">=2.1.1" },
     { name = "pandas", specifier = ">=2.2.2" },
     { name = "plotly", marker = "extra == 'interactive'", specifier = ">=5.24.1" },
     { name = "pyshtools", specifier = ">=4.13.1" },
-    { name = "rioxarray", specifier = ">=0.17.0" },
+    { name = "rioxarray", marker = "extra == 'generate-datasets'", specifier = ">=0.17.0" },
     { name = "scipy", specifier = ">=1.14.1" },
     { name = "xarray", specifier = ">=2024.9.0" },
     { name = "xxhash", specifier = ">=3.5.0" },
-    { name = "zarr", specifier = ">=2.18.3" },
+    { name = "zarr", marker = "extra == 'generate-datasets'", specifier = ">=2.18.3" },
 ]
 
 [package.metadata.requires-dev]
