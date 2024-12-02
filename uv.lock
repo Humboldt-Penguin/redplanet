@@ -115,11 +115,11 @@ wheels = [
 
 [[package]]
 name = "astropy-iers-data"
-version = "0.2024.11.25.0.34.48"
+version = "0.2024.12.2.0.35.34"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/e4/bb/9a4a3cd20da411f801726ece7cce08ea49bc32f37c1211c2ac79ba3185da/astropy_iers_data-0.2024.11.25.0.34.48.tar.gz", hash = "sha256:690702c30886e7a3509c4dc39e076c8f94a5cf923c1a49c26455e6d0a5aa5356", size = 1884954 }
+sdist = { url = "https://files.pythonhosted.org/packages/67/51/9d70e9b075bb29a804a97e09f39a3af81e7005ecfb78e8d281c0860862af/astropy_iers_data-0.2024.12.2.0.35.34.tar.gz", hash = "sha256:31bfc67c12e0c477632547f9271eafec813227de0b84b89128a1c8b92a637a3d", size = 1885456 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/66/54/3d8811f5c877054eca944dcd9bd926318eb07edce97947dfd73e9978d350/astropy_iers_data-0.2024.11.25.0.34.48-py3-none-any.whl", hash = "sha256:dd8f1c3e72719a896b86a62b921c464bef2675ad02c6f0f0b8e6bec38eb41456", size = 1937247 },
+    { url = "https://files.pythonhosted.org/packages/64/cc/62cd212fa9884b5551d6866291ffb7e9a6abb5dc5bf13f34412e767c3d3b/astropy_iers_data-0.2024.12.2.0.35.34-py3-none-any.whl", hash = "sha256:372ad3e07df0553ce50debc50b16307ba49e9defa69696b6adedf2777b40048e", size = 1937840 },
 ]
 
 [[package]]
@@ -1529,7 +1529,7 @@ wheels = [
 
 [[package]]
 name = "pytest"
-version = "8.3.3"
+version = "8.3.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -1537,9 +1537,9 @@ dependencies = [
     { name = "packaging" },
     { name = "pluggy" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8b/6c/62bbd536103af674e227c41a8f3dcd022d591f6eed5facb5a0f31ee33bbc/pytest-8.3.3.tar.gz", hash = "sha256:70b98107bd648308a7952b06e6ca9a50bc660be218d53c257cc1fc94fda10181", size = 1442487 }
+sdist = { url = "https://files.pythonhosted.org/packages/05/35/30e0d83068951d90a01852cb1cef56e5d8a09d20c7f511634cc2f7e0372a/pytest-8.3.4.tar.gz", hash = "sha256:965370d062bce11e73868e0335abac31b4d3de0e82f4007408d242b4f8610761", size = 1445919 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6b/77/7440a06a8ead44c7757a64362dd22df5760f9b12dc5f11b6188cd2fc27a0/pytest-8.3.3-py3-none-any.whl", hash = "sha256:a6853c7375b2663155079443d2e45de913a911a11d669df02a50814944db57b2", size = 342341 },
+    { url = "https://files.pythonhosted.org/packages/11/92/76a1c94d3afee238333bc0a42b82935dd8f9cf8ce9e336ff87ee14d9e1cf/pytest-8.3.4-py3-none-any.whl", hash = "sha256:50e16d954148559c9a74109af1eaf0c945ba2d8f30f0a3d3335edde19788b6f6", size = 343083 },
 ]
 
 [[package]]
