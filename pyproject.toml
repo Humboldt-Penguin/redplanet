@@ -5,6 +5,7 @@ description = "User-friendly accessors/calculations/plotting for various Mars da
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "cartopy>=0.24.1",
     "numpy>=2.1.1",
     "pandas>=2.2.2",
     "pyshtools>=4.13.1",
