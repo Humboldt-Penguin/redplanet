@@ -25,14 +25,20 @@ def _load() -> None:
 
 
 def get(
-    name    : str | list[str]     = None,
-    lon     : tuple[float, float] = None,
-    lat     : tuple[float, float] = None,
-    diameter: tuple[float, float] = None,
-    has_age : bool                = None,
+    crater_id : str | list[str]     = None,
+    name      : str | list[str]     = None,
+    lon       : tuple[float, float] = None,
+    lat       : tuple[float, float] = None,
+    diameter  : tuple[float, float] = None,
+    has_age   : bool                = None,
 ) -> pd.DataFrame:
 
     df = get_dataset()
+
+    if crater_id:
+        if isinstance(crater_id, str):
+            crater_id = [crater_id]
+        df = df[ df['id'].isin(crater_id) ]
 
     if name:
         if isinstance(name, str):
