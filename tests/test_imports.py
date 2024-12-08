@@ -5,6 +5,7 @@ import pytest
 # Dictionary declaring all dependency groups and their packages
 dependencies = {
     'Dependencies: required': [
+        'cartopy',
         'numpy',
         'pandas',
         'pyshtools',
