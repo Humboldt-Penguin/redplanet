@@ -1,8 +1,11 @@
 import numpy as np
 import xarray as xr
 
-from redplanet.helper_functions import _verify_coords, _plon2slon
 from redplanet.GRS.load import get_dataset
+from redplanet.helper_functions.coordinates import (
+    _verify_coords,
+    _plon2slon,
+)
 
 
 

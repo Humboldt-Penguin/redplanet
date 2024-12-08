@@ -2,8 +2,7 @@ import numpy as np
 
 
 
-class CoordinateError(Exception):
-    pass
+class CoordinateError(Exception): pass
 
 
 
@@ -60,6 +59,7 @@ def _plon2slon(
         return convert(plon)
     else:
         return convert( np.array(plon) ).tolist()
+
 
 
 def _slon2plon(

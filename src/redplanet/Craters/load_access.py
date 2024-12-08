@@ -1,7 +1,11 @@
 import pandas as pd
 
 from redplanet.DatasetManager.master import _get_fpath_dataset
-from redplanet.helper_functions import _verify_coords, _plon2slon, _slon2plon
+from redplanet.helper_functions.coordinates import (
+    _verify_coords,
+    # _plon2slon,
+    _slon2plon,
+)
 
 
 

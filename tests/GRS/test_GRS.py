@@ -2,7 +2,7 @@ import pytest
 import numpy as np
 
 from redplanet import GRS
-from redplanet.helper_functions import CoordinateError
+from redplanet.helper_functions.coordinates import CoordinateError
 
 ## `get` (public function) -- get GRS data
 class Test__GRS_get:
