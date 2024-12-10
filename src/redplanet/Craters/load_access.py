@@ -35,6 +35,7 @@ def get(
     lat       : tuple[float, float] = None,
     diameter  : tuple[float, float] = None,
     has_age   : bool                = None,
+    as_dict   : bool                = False,
 ) -> pd.DataFrame:
 
     df = get_dataset()
@@ -71,5 +72,8 @@ def get(
             pd.notna(df['Hartmann Isochron Age']) &
             pd.notna(df['Neukum Isochron Age'])
         ]
+
+    if as_dict:
+        df = df.to_dict(orient='records')
 
     return df

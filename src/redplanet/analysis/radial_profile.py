@@ -61,7 +61,7 @@ def get_concentric_ring_coords(
 
 def get_topo_profile(
     ring_coords__per_ring : list[np.ndarray],
-    model       : str = 'DEM_463m',
+    model                 : str = 'DEM_463m',
 ) -> np.ndarray:
     """
     This function computes a one-dimensional radial profile of a given dataset by averaging values along multiple radial slices from a specified center coordinate out to a given radius.
