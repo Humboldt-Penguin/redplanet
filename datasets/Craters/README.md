@@ -9,7 +9,7 @@
 
 - Intermediate/Requisite Datasets:
 
-    [1] IAU Crater Names
+    - [1] IAU Crater Names
         - Description:
             - Official IAU Crater Nomenclature as of 2024-11-26 (most recent being Melosh on 2024-10-23) totalling 1218 craters.
         - Source:
@@ -21,7 +21,7 @@
                 - link: https://rutgers.box.com/s/xjljza4gw9743dutlpez8m8ccgmkzfnd
                 - sha256: 4c08fe5c2477d20ffdd088d45275fb1469fd2970900aa5b9aeff66160285a5ea
 
-    [2] Crater Ages
+    - [2] Crater Ages
         - Description:
             - "Summary table of results for remaining 73 large craters, plus additional locations and sizes of unmappable craters D ⩾ 150 km."
         - Source:
@@ -35,7 +35,7 @@
                 - link: https://rutgers.box.com/s/fdk83g5g5pn2kltrqodvwnvmvjbmggzh
                 - sha256: f81bf35ba76f0f2e9939d7a338084451145cdc8d9771124ac4e8ec71802ea236
 
-    [3] Crater Database (v2020)
+    - [3] Crater Database (v2020)
         - Description:
             - Global database of Martian impact craters (2020 version).
         - Source:

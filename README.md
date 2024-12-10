@@ -15,3 +15,10 @@ NOTE: I completely rewrote this project in 2024 September, erasing the entire gi
 
 1. What kind of science can I do with `redplanet`. [TODO: add link to docs]
 1. In-depth documentation for `redplanet`. [TODO: add link to docs]
+
+---
+# SELF NOTE / TODO:
+
+- Make a list of all modules/functions and "internal"/"public" annotation like the "Submodules" section on this package's doc website: https://mrjean1.github.io/PyGeodesy/
+- I REALLY like how these docs allow you to jump straight to source code for each function: https://scitools.org.uk/cartopy/docs/latest/reference/generated/cartopy.geodesic.Geodesic.html
+- consider cleaning up dependencies like axing scipy (nvm pyshtools needs it lols) & pandas (does anyone else need it? check!) since it's bloated!!! use `rclone ncdu .` to explore venv folder to see what's bloated, and use `uv tree` to see if it'd even help to remove the dep.

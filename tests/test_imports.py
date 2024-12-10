@@ -5,20 +5,23 @@ import pytest
 # Dictionary declaring all dependency groups and their packages
 dependencies = {
     'Dependencies: required': [
-        'dask',
+        'cartopy',
         'numpy',
         'pandas',
         'pyshtools',
-        'rioxarray',
         'scipy',
         'xarray',
         'xxhash',
-        'zarr',
     ],
-    'Dependencies: "interactive" (optional)': [
+    'Dependencies (optional): "interactive"': [
         'jupyter',
         'matplotlib',
         'plotly',
+    ],
+    'Dependencies (optional): "generate-datasets"': [
+        'dask',
+        'rioxarray',
+        'zarr',
     ],
 }
 

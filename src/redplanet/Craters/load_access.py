@@ -1,7 +1,11 @@
 import pandas as pd
 
 from redplanet.DatasetManager.master import _get_fpath_dataset
-from redplanet.helper_functions import _verify_coords, _plon2slon, _slon2plon
+from redplanet.helper_functions.coordinates import (
+    _verify_coords,
+    # _plon2slon,
+    _slon2plon,
+)
 
 
 
@@ -25,14 +29,21 @@ def _load() -> None:
 
 
 def get(
-    name    : str | list[str]     = None,
-    lon     : tuple[float, float] = None,
-    lat     : tuple[float, float] = None,
-    diameter: tuple[float, float] = None,
-    has_age : bool                = None,
+    crater_id : str | list[str]     = None,
+    name      : str | list[str]     = None,
+    lon       : tuple[float, float] = None,
+    lat       : tuple[float, float] = None,
+    diameter  : tuple[float, float] = None,
+    has_age   : bool                = None,
+    as_dict   : bool                = False,
 ) -> pd.DataFrame:
 
     df = get_dataset()
+
+    if crater_id:
+        if isinstance(crater_id, str):
+            crater_id = [crater_id]
+        df = df[ df['id'].isin(crater_id) ]
 
     if name:
         if isinstance(name, str):
@@ -61,5 +72,8 @@ def get(
             pd.notna(df['Hartmann Isochron Age']) &
             pd.notna(df['Neukum Isochron Age'])
         ]
+
+    if as_dict:
+        df = df.to_dict(orient='records')
 
     return df

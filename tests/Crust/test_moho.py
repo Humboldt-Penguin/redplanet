@@ -3,7 +3,7 @@ import numpy as np
 
 from redplanet import Crust
 from redplanet.DatasetManager.dataset_info import MohoDatasetNotFoundError
-from redplanet.helper_functions import CoordinateError
+from redplanet.helper_functions.coordinates import CoordinateError
 
 
 def test_invalid_interior_model():

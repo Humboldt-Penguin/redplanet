@@ -1,0 +1,43 @@
+To generate share links for files in a Google Drive folder (as opposed to Box like the other code), follow instructions below.
+
+Although Google Drive is much more easy/fast for this task compared to Box, download speeds are a bit slower.
+
+---
+
+[1] Make a new Google Spreadsheet.
+[2] In the top bar, "Extensions > Apps Scripts".
+[3] In the side bar (of Apps Scripts page), "Services > Drive API > v3 > Add".
+[4] Paste this code into editor:
+
+```
+function myFunction() {
+
+  // https://drive.google.com/drive/folders/10jyVNkjZri-4LL8K18pBFIofSIorfm82
+  var folderId = "10jyVNkjZri-4LL8K18pBFIofSIorfm82";
+  var fldr = DriveApp.getFolderById(folderId);
+  var files = fldr.getFiles();
+  var data = [];
+
+  while (files.hasNext()) {
+    var f = files.next();
+    var fileId = f.getId();
+    var filename = f.getName();
+    var shareLink = f.getUrl();
+
+    // use Drive API to get md5
+    var fileMetadata = Drive.Files.get(fileId);
+    var md5Checksum = fileMetadata.md5Checksum || "No MD5";  // files like google docs don't have md5 (not expected though)
+
+    data.push([filename, shareLink, md5Checksum]);
+  }
+
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var s = ss.getActiveSheet();
+  var c = s.getActiveCell();
+  s.getRange(c.getRow(), c.getColumn(), data.length, data[0].length).setValues(data);
+
+}
+```
+
+[5] "Run" (NOT "Deploy") — authorize as necessary, none of the code is modifying the contents of your Drive so no risk.

@@ -46,3 +46,19 @@ def test_get_aged():
 def test_get_named():
     df = Craters.get(name=['Copernicus', 'Henry'])
     assert df.shape[0] == 2
+
+def test_get_asdict():
+    d = Craters.get(
+        name    = 'Henry',
+        as_dict = True,
+    )
+    assert len(d) == 1
+    assert d[0].get('id') == '10-0-003901'
+
+    d = Craters.get(
+        name    = ['Copernicus', 'Henry'],
+        as_dict = True,
+    )
+    assert len(d) == 2
+    assert d[0].get('id') == '04-1-001446'
+    assert d[1].get('id') == '10-0-003901'
