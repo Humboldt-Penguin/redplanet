@@ -70,6 +70,16 @@ _DATASETS = {
             'sha256' : '3cad9e268f0673be1702f1df504a4cbcb8dba4480c7b3f629921911488fe247b',
         },
     },
+    'Genova2016': {
+        ## directly downloaded from here (also see associated lbl file): https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/rsdmap/
+        'url'    : 'https://rutgers.box.com/shared/static/cw5ijchyxi021iwmj6qyw2i07hyt24wq',
+        'fname'  : 'ggmro_120_bouguer_90.img',
+        'dirpath': 'Crust/boug/',
+        'hash'   : {
+            'md5'    : '95423874e702b8a55f3a4b17b3ef744a',
+            'sha256' : 'd3657c9bd80bf5e452ad0d0216078e9295065b5d1e0a04d0fab7bf22e3b50438',
+        },
+    },
 }
 
 
