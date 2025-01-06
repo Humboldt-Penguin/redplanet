@@ -61,6 +61,15 @@ _DATASETS = {
             'sha256' : 'e48808ef670e39e812149e4731634d59964b7b3465b1be38eda920f890125bdc',
         },
     },
+    'Langlais2019': {
+        'url'    : 'https://zenodo.org/records/3876714/files/Langlais2019.sh.gz?download=1',
+        'fname'  : 'Langlais2019.sh.gz',
+        'dirpath': 'Mag/sh/',
+        'hash'   : {
+            'md5'    : '39245feef66555366108aecb6d5c0f67',
+            'sha256' : '3cad9e268f0673be1702f1df504a4cbcb8dba4480c7b3f629921911488fe247b',
+        },
+    },
 }
 
 
