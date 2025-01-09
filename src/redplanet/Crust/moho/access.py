@@ -1,11 +1,11 @@
-import copy
-
 import numpy as np
-import pandas as pd
 import xarray as xr
+import pyshtools as pysh
 
-from redplanet.Crust.moho.load import get_dataset, _model_info
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.Crust.moho.load import (
+    get_dataset,
+    _get_shape,
+)
 from redplanet.helper_functions.coordinates import (
     _verify_coords,
     _slon2plon,
@@ -13,28 +13,12 @@ from redplanet.helper_functions.coordinates import (
 
 
 
-def get_registry() -> pd.DataFrame:
-    registry = pd.read_csv(
-        _get_fpath_dataset('moho_registry'),
-        usecols = ['model_name'],
-    )
-    registry = registry['model_name'].str.split('-', expand=True)
-    registry.columns = ['interior_model', 'insight_thickness', 'rho_south', 'rho_north']
-    registry.iloc[:,1:] = registry.iloc[:,1:].astype(int)
-    return registry
-
-
-
-def get_model_info() -> dict[ str, str|int ] | None:
-    if _model_info is not None:
-        return copy.deepcopy(_model_info)
-    return None
-
 
 
 def get(
     lon                 : float | list | np.ndarray,
     lat                 : float | list | np.ndarray,
+    as_crthick          : bool = False,
     interpolate         : bool = False,
     as_xarray           : bool = False,
     return_exact_coords : bool = False,
@@ -51,16 +35,24 @@ def get(
 
 
     ## get data
-    dat_moho = get_dataset()
+    dat_moho, _ = get_dataset()
+
+    if as_crthick:
+        dat_shape = _get_shape()
+        dat_full = dat_shape - dat_moho
+    else:
+        dat_full = dat_moho
+
+
     if interpolate:
-        data = dat_moho.interp(
+        data = dat_full.interp(
             lon = lon,
             lat = lat,
             method = 'linear',
             assume_sorted = True
         )
     else:
-        data = dat_moho.sel(
+        data = dat_full.sel(
             lon = lon,
             lat = lat,
             method = 'nearest'

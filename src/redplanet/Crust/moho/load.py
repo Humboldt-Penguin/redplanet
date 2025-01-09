@@ -1,19 +1,39 @@
-import pyshtools as pysh
+import copy
+
+import pandas as pd
 import xarray as xr
+import pyshtools as pysh
 
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.DatasetManager.dataset_info import MohoDatasetNotFoundError
 
 
 
-_dat_moho: xr.DataArray | None = None
 
+
+def get_registry() -> pd.DataFrame:
+    registry = pd.read_csv(
+        _get_fpath_dataset('moho_registry'),
+        usecols = ['model_name'],
+    )
+    registry = registry['model_name'].str.split('-', expand=True)
+    registry.columns = ['interior_model', 'insight_thickness', 'rho_south', 'rho_north']
+    registry.iloc[:,1:] = registry.iloc[:,1:].astype(int)
+    return registry
+
+
+
+
+
+_dat_moho  : xr.DataArray         | None = None
 _model_info: dict[ str, str|int ] | None = None
 
-def get_dataset() -> xr.DataArray:
+def get_dataset() -> list[ xr.DataArray, dict[str, str|int] ]:
     if _dat_moho is None:
         raise ValueError('Moho dataset not loaded. Use `redplanet.Crust.moho.load(<model_params>)`.')
-    return _dat_moho
+    return [_dat_moho, copy.deepcopy(_model_info)]
+
+
 
 
 
@@ -43,7 +63,12 @@ def load(
     }
 
     global _dat_moho
-    _dat_moho = pysh.SHCoeffs.from_file(fpath_moho).expand().to_xarray().sortby('lat')
+    _dat_moho = (
+        pysh.SHCoeffs.from_file(fpath_moho)
+        .expand()
+        .to_xarray()
+        .sortby('lat')
+    )
 
     if fail_silently:
         return True
@@ -71,3 +96,28 @@ _interior_models: list[str] = (
     'YOTHotRc1810kmDc40km',
     'ZG_DW',
 )
+
+
+
+
+
+_dat_shape: xr.DataArray | None = None
+
+def _get_shape() -> xr.DataArray:
+    global _dat_shape
+    if _dat_shape is None:
+
+        fpath_shape = _get_fpath_dataset('MOLA_shape_719')
+
+        _dat_shape = (
+            pysh.SHCoeffs.from_file(
+                fpath_shape,
+                lmax   = 90,
+                format = 'bshc'
+            )
+            .expand()
+            .to_xarray()
+            .sortby('lat')
+        )
+
+    return _dat_shape

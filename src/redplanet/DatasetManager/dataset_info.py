@@ -80,6 +80,14 @@ _DATASETS = {
             'sha256' : 'd3657c9bd80bf5e452ad0d0216078e9295065b5d1e0a04d0fab7bf22e3b50438',
         },
     },
+    'MOLA_shape_719': {
+        'url'    : 'https://zenodo.org/records/10820719/files/Mars_MOLA_shape_719.bshc.gz?download=1',
+        'fname'  : 'Mars_MOLA_shape_719.bshc.gz',
+        'dirpath': 'Crust/moho/shape/',
+        'hash'   : {
+            'md5'    : '77c213978e7403c722e38b78e0202d7c',
+        },
+    }
 }
 
 
