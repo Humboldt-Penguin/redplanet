@@ -1,3 +1,5 @@
+NOTE: this dataset only has craters >50km diameter
+
 - Derived/Final Dataset:
     - Hashes:
         - xxh3_64 : 'ea14d77f25f090c4',

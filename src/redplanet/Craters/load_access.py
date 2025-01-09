@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 
 from redplanet.DatasetManager.master import _get_fpath_dataset
@@ -25,6 +26,9 @@ def _load() -> None:
     global _df_craters
     _df_craters = pd.read_csv(fpath_df)
     _df_craters['plon'] = _slon2plon(_df_craters['lon'])
+    _df_craters = _df_craters.replace(np.nan, None)
+    return
+
 
 
 
