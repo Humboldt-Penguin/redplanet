@@ -8,7 +8,7 @@ __all__.extend([
     'get_dataset',
 ])
 
-from redplanet.Mag.sh.load import get
+from redplanet.Mag.sh.access import get
 __all__.extend([
     'get',
 ])

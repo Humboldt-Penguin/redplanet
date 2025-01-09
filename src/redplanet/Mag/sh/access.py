@@ -21,16 +21,17 @@ def get(
     if as_xarray and return_exact_coords:
         raise ValueError("Can't return both xarray and exact coordinates. Choose one.")
 
-    quantities = list(_dat_mag.data_vars)
-    if quantity not in quantities:
-        raise ValueError(f'Unknown quantity: \"{quantity}\".\nOptions are: \"{"\", \"".join(quantities)}\".')
-
     _verify_coords(lon, lat)
     lon = _slon2plon(lon)
 
 
     ## get data
     dat_mag = get_dataset()
+
+    quantities = list(dat_mag.data_vars)
+    if quantity not in quantities:
+        raise ValueError(f'Unknown quantity: \"{quantity}\".\nOptions are: \"{"\", \"".join(quantities)}\".')
+
     data = dat_mag[quantity].sel(
         lon = lon,
         lat = lat,
