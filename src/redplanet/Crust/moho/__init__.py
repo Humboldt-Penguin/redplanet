@@ -1,21 +1,10 @@
-__all__ = []
+from redplanet.Crust.moho.loader import load, get_dataset
+from redplanet.Crust.moho.getter import get
+from redplanet.Crust.moho.consts import get_registry
 
-
-
-from redplanet.Crust.moho.load import (
-    get_registry,
-    load,
-    get_dataset,
-)
-__all__.extend([
-    'get_registry',
+__all__ = [
     'load',
     'get_dataset',
-])
-
-from redplanet.Crust.moho.access import (
-    get,
-)
-__all__.extend([
     'get',
-])
+    'get_registry',
+]

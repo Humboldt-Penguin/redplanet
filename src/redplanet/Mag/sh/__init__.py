@@ -1,14 +1,8 @@
-__all__ = []
+from redplanet.Mag.sh.loader import load, get_dataset
+from redplanet.Mag.sh.getter import get
 
-
-
-from redplanet.Mag.sh.load import load, get_dataset
-__all__.extend([
+__all__ = [
     'load',
     'get_dataset',
-])
-
-from redplanet.Mag.sh.access import get
-__all__.extend([
     'get',
-])
+]

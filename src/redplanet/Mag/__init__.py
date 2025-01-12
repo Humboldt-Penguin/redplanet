@@ -1,8 +1,8 @@
-__all__ = []
-
-
-
-import redplanet.Mag.sh    # namespace
-__all__.extend([
+from redplanet.Mag import (
+    sh,
+    # depth,
+)
+__all__ = [
     'sh',
-])
+    # 'depth',
+]
