@@ -1,8 +1,8 @@
 from redplanet.Mag import (
     sh,
-    # depth,
+    depth,
 )
 __all__ = [
     'sh',
-    # 'depth',
+    'depth',
 ]

@@ -87,7 +87,15 @@ _DATASETS = {
         'hash'   : {
             'md5'    : '77c213978e7403c722e38b78e0202d7c',
         },
-    }
+    },
+    'Gong & Weiczorek, 2021': {
+        'url'    : 'https://zenodo.org/records/4686358/files/MarsMagnetizationDepth.zip?download=1',
+        'fname'  : 'MarsMagnetizationDepth.zip',
+        'dirpath': 'Mag/depth/',
+        'hash'   : {
+            'md5'    : '16780170ee3e0dccaaf719fc201e4281',
+        },
+    },
 }
 
 
