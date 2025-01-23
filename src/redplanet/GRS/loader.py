@@ -23,7 +23,9 @@ def get_dataset() -> GriddedData:
 
 def _load():
     """
-    NOTE: This is private & less modular because there's only one GRS dataset, so lazy loading upon the first access is fine. In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of the different models available and which one they are choosing to use.
+    NOTE:
+        - This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine.
+        - In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
     """
 
     fpath = _get_fpath_dataset('GRS')

@@ -20,6 +20,7 @@ def get_dataset() -> GriddedData:
 
 def load(model: str = None):
 
+    ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility.
     info = {
         'Genova2016': {
             'shape'          : (2880, 5760),

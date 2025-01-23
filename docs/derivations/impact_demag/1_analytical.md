@@ -144,7 +144,7 @@ $$
 $$
 
 where:
-- $r$ — Distance from point of impact.
+- $r$ — Distance from the center of the isobaric core.
 - $R_{IC}$ — Radius of the IC.
     - As previously explained, we assume $R_{IC} \approx r_{\text{proj}}$ (for reference, some works say $R_{IC} \approx 0.7 \cdot r_{\text{proj}}$; we assume they're the same size, it doesn't make a huge difference).
 - $u_{IC}$ — Particle velocity in the isobaric core.
@@ -174,7 +174,7 @@ Many works approximate *pressure* decay using a power law (i.e., replacing $u_{I
 
 #### [2.2.3] Putting it all Together
 
-Substitute these $u_p(r)$ into equation 6 to find pressure from the initial shock wave as a function of distance from the point of impact. This is denoted $P_{\text{direct}}(r)$, since we apply some corrections for reflected waves in the next section.
+Substitute these $u_p(r)$ into equation 6 to find pressure from the initial shock wave as a function of distance from the center of the isobaric core. This is denoted $P_{\text{direct}}(r)$, since we apply some corrections for reflected waves in the next section.
 
 For convenience, here's the full equation in terms of known values, although it may not render correctly based on where you're viewing this.
 

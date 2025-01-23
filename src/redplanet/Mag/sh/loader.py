@@ -24,7 +24,7 @@ def load(
     lmax : int = 134,
 ):
 
-    ## I expect to add more later, maybe when Mittelholz publishes hers?
+    ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility. Mittelholz might be publishing hers soon.
     info = {
         'Langlais2019': {
             'metadata': {

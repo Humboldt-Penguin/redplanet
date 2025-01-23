@@ -36,6 +36,7 @@ NOTE: this dataset only has craters >50km diameter
             - 'Table 3.tex'
                 - link: https://rutgers.box.com/s/fdk83g5g5pn2kltrqodvwnvmvjbmggzh
                 - sha256: f81bf35ba76f0f2e9939d7a338084451145cdc8d9771124ac4e8ec71802ea236
+            - PDF for convenience: https://files.catbox.moe/fanjm8.pdf
 
     - [3] Crater Database (v2020)
         - Description:
