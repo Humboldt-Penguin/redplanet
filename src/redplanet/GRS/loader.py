@@ -17,6 +17,9 @@ def get_dataset() -> GriddedData:
         _load()
     return _dat_grs
 
+def get_metadata() -> dict:
+    return dict(get_dataset().metadata)
+
 
 
 

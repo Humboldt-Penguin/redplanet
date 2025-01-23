@@ -19,6 +19,9 @@ def get_dataset() -> GriddedData:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Crust.moho.load(<model_params>)`.')
     return _dat_moho
 
+def get_metadata() -> dict:
+    return dict(get_dataset().metadata)
+
 
 
 

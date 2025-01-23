@@ -14,6 +14,9 @@ def get_dataset() -> GriddedData:
         raise ValueError('Topography dataset not loaded. Use `redplanet.Crust.topo.load(<model_params>)`.')
     return _dat_topo
 
+def get_metadata() -> dict:
+    return dict(get_dataset().metadata)
+
 
 
 

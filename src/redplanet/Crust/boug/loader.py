@@ -14,6 +14,9 @@ def get_dataset() -> GriddedData:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Crust.boug.load(<model_params>)`.')
     return _dat_boug
 
+def get_metadata() -> dict:
+    return dict(get_dataset().metadata)
+
 
 
 

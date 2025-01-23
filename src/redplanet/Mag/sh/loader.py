@@ -15,6 +15,9 @@ def get_dataset() -> GriddedData:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Mag.sh.load(<model_params>)`.')
     return _dat_mag
 
+def get_metadata() -> dict:
+    return dict(get_dataset().metadata)
+
 
 
 
