@@ -64,6 +64,7 @@ def get_concentric_ring_coords(
 def get_profile(
     ring_coords__per_ring : list[np.ndarray],
     accessor              : Callable,
+    return_stats          : bool = False,
 ) -> np.ndarray:
     """
     This function computes a one-dimensional radial profile of a given dataset by averaging values along multiple radial slices from a specified center coordinate out to a given radius.
@@ -81,4 +82,13 @@ def get_profile(
 
     avg_vals__per_ring = np.array([np.mean(vals) for vals in vals__per_ring])
 
-    return avg_vals__per_ring
+    if not return_stats:
+        return avg_vals__per_ring
+
+    sigma__per_ring = np.array([np.std(vals) for vals in vals__per_ring])
+
+    return [
+        avg_vals__per_ring,
+        sigma__per_ring,
+        vals__per_ring,
+    ]

@@ -31,9 +31,6 @@ class GriddedData:
     def data_vars(self) -> list[str]:
         return list(self.data_dict.keys())
 
-    def get_dataset(self, var) -> np.ndarray:
-        return self.data_dict[var]
-
 
 
 
@@ -106,7 +103,7 @@ class GriddedData:
         idx_lon = find_closest_indices(self.lon, lon)
         idx_lat = find_closest_indices(self.lat, lat)
 
-        dat_full = self.get_dataset(var)
+        dat_full = self.data_dict[var]
         dat = dat_full[np.ix_(idx_lat, idx_lon)]
 
 
