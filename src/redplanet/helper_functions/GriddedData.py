@@ -120,7 +120,8 @@ class GriddedData:
                 coords = {
                     'lat': lat,
                     'lon': lon,
-                }
+                },
+                attrs = self.metadata,
             )
             return dat
 
