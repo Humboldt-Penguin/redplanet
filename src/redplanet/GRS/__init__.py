@@ -1,13 +1,8 @@
-__all__ = []
+from redplanet.GRS.loader import get_dataset, get_metadata
+from redplanet.GRS.getter import get
 
-
-
-from redplanet.GRS.load import get_dataset
-__all__.extend([
+__all__ = [
     'get_dataset',
-])
-
-from redplanet.GRS.access import get
-__all__.extend([
+    'get_metadata',
     'get',
-])
+]

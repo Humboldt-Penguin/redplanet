@@ -61,6 +61,41 @@ _DATASETS = {
             'sha256' : 'e48808ef670e39e812149e4731634d59964b7b3465b1be38eda920f890125bdc',
         },
     },
+    'Langlais2019': {
+        'url'    : 'https://zenodo.org/records/3876714/files/Langlais2019.sh.gz?download=1',
+        'fname'  : 'Langlais2019.sh.gz',
+        'dirpath': 'Mag/sh/',
+        'hash'   : {
+            'md5'    : '39245feef66555366108aecb6d5c0f67',
+            'sha256' : '3cad9e268f0673be1702f1df504a4cbcb8dba4480c7b3f629921911488fe247b',
+        },
+    },
+    'Genova2016': {
+        ## directly downloaded from here (also see associated lbl file): https://pds-geosciences.wustl.edu/mro/mro-m-rss-5-sdp-v1/mrors_1xxx/data/rsdmap/
+        'url'    : 'https://rutgers.box.com/shared/static/cw5ijchyxi021iwmj6qyw2i07hyt24wq',
+        'fname'  : 'ggmro_120_bouguer_90.img',
+        'dirpath': 'Crust/boug/',
+        'hash'   : {
+            'md5'    : '95423874e702b8a55f3a4b17b3ef744a',
+            'sha256' : 'd3657c9bd80bf5e452ad0d0216078e9295065b5d1e0a04d0fab7bf22e3b50438',
+        },
+    },
+    'MOLA_shape_719': {
+        'url'    : 'https://zenodo.org/records/10820719/files/Mars_MOLA_shape_719.bshc.gz?download=1',
+        'fname'  : 'Mars_MOLA_shape_719.bshc.gz',
+        'dirpath': 'Crust/moho/shape/',
+        'hash'   : {
+            'md5'    : '77c213978e7403c722e38b78e0202d7c',
+        },
+    },
+    'Gong & Weiczorek, 2021': {
+        'url'    : 'https://zenodo.org/records/4686358/files/MarsMagnetizationDepth.zip?download=1',
+        'fname'  : 'MarsMagnetizationDepth.zip',
+        'dirpath': 'Mag/depth/',
+        'hash'   : {
+            'md5'    : '16780170ee3e0dccaaf719fc201e4281',
+        },
+    },
 }
 
 
@@ -104,7 +139,11 @@ def _get_download_info_moho(
     result = df[ df['model_name'] == model_name ]
 
     if result.empty:
-        raise MohoDatasetNotFoundError(f"Moho model '{model_name}' not found in the registry. To see options, run `redplanet.Crust.moho.get_registry()`.")
+        interior_model, insight_thickness, rho_south, rho_north = model_name.split('-')
+        raise MohoDatasetNotFoundError(
+            f'Moho model not found for the given parameters: {interior_model=}, {insight_thickness=}, {rho_south=}, {rho_north=}\n'
+            f'To see available models: `redplanet.Crust.moho.get_registry()`'
+        )
 
     box_download_code, sha1 = result.values.tolist()[0][1:]
     result = {

@@ -130,6 +130,13 @@ def make_circle(
     return geodesic.circle(lon, lat, radius, n_samples, endpoint)
 
 
+def get_distance(start, end) -> np.ndarray:
+    geodesic = __get_mars_geodesic()
+    return geodesic.inverse(start, end)
+
+
+def move_forward(start, azimuth, distance) -> np.ndarray:
+    geodesic = __get_mars_geodesic()
+    return geodesic.direct(start, azimuth, distance)[:,:2]
+
 ## https://scitools.org.uk/cartopy/docs/latest/reference/generated/cartopy.geodesic.Geodesic.html
-# def move_forward(...)
-# def get_distance(...)

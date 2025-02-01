@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import numpy as np
 import xarray as xr
 
@@ -11,7 +9,7 @@ from redplanet.helper_functions.coordinates import (
 
 
 
-def is_above_dichotomy(
+def is_above(
     lon       : float | list | np.ndarray,
     lat       : float | list | np.ndarray,
     as_xarray : bool = False,
@@ -31,7 +29,7 @@ def is_above_dichotomy(
     lat = np.atleast_1d(lat)
 
     ## load dataset
-    dat_dichotomy_coords = get_dichotomy_coords()
+    dat_dichotomy_coords = get_coords()
 
     ## for each input longitude, find nearest dichotomy coordinates
     i_lons = np.searchsorted(dat_dichotomy_coords[:,0], lon, side='right') - 1
@@ -59,7 +57,7 @@ def is_above_dichotomy(
 
 
 
-def get_dichotomy_coords() -> np.ndarray:
+def get_coords() -> np.ndarray:
     fpath = _get_fpath_dataset('dichotomy_coords')
     dat_dichotomy_coords = np.loadtxt(fpath)
     return dat_dichotomy_coords

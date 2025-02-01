@@ -2,14 +2,28 @@
 __all__ = []
 
 
-import redplanet.user_config
-__all__.extend([
-    'user_config',    ## module
-])
-## TODO: not sure if importing `user_config` here is necessary...?
 
+from redplanet import (
+    ## meta package management
+    user_config,
 
-from redplanet.DatasetManager.dataset_info import peek_datasets
+    ## load/access datasets
+    Craters,
+    Crust,
+    GRS,
+    Mag,
+
+    ## high-level analysis
+    analysis,
+)
+
 __all__.extend([
-    'peek_datasets',    ## function
+    'user_config',
+
+    'Craters',
+    'Crust',
+    'GRS',
+    'Mag',
+
+    'analysis',
 ])

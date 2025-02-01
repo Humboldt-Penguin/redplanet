@@ -1,7 +1,6 @@
-import numpy as np
+from collections.abc import Callable
 
-from redplanet import Crust
-from redplanet import Craters
+import numpy as np
 
 from redplanet.helper_functions import geodesy
 
@@ -17,6 +16,9 @@ def get_concentric_ring_coords(
     num_rings           : int   = None,
     dist_btwn_points_km : float = 5,
 ) -> list[ np.ndarray, list[np.ndarray] ]:
+    """
+    I keep this separate from `get_profile` in case I want to calculate extra things along the rings without having to access a dataset, or I want to use a nonstandard accessor function.
+    """
 
     '''Type checking'''
     if not (bool(dist_btwn_rings_km) ^ bool(num_rings)):  ## XOR
@@ -59,23 +61,34 @@ def get_concentric_ring_coords(
 
 
 
-def get_topo_profile(
+def get_profile(
     ring_coords__per_ring : list[np.ndarray],
-    model                 : str = 'DEM_463m',
+    accessor              : Callable,
+    return_stats          : bool = False,
 ) -> np.ndarray:
     """
     This function computes a one-dimensional radial profile of a given dataset by averaging values along multiple radial slices from a specified center coordinate out to a given radius.
     """
 
-    Crust.topo.load(model=model)
-
-    elevations_km__per_ring = []
+    vals__per_ring = []
     for ring_coords in ring_coords__per_ring:
-        elevations_km = []
+
+        vals = []
         for (lon,lat) in ring_coords:
-            elevations_km.append(Crust.topo.get(lon,lat) / 1e3)
-        elevations_km__per_ring.append(elevations_km)
+            vals.append(
+                accessor(lon,lat)
+            )
+        vals__per_ring.append(vals)
 
-    avg_elevation_km__per_ring = np.array([np.mean(elevations_km) for elevations_km in elevations_km__per_ring])
+    avg_vals__per_ring = np.array([np.mean(vals) for vals in vals__per_ring])
 
-    return avg_elevation_km__per_ring
+    if not return_stats:
+        return avg_vals__per_ring
+
+    sigma__per_ring = np.array([np.std(vals) for vals in vals__per_ring])
+
+    return [
+        avg_vals__per_ring,
+        sigma__per_ring,
+        vals__per_ring,
+    ]
