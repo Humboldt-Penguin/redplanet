@@ -52,7 +52,7 @@ update-flake:
 [doc('Update dependencies and environment.')]
 update-dependencies:
     uv lock --upgrade
-    uv sync --all-extras
+    uv sync --all-extras --all-groups
 
 [group('2. uv tools')]
 [doc('Run tests.')]
