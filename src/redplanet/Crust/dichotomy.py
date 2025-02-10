@@ -42,7 +42,8 @@ def is_above(
     ## compare shape(y,1) with shape(x), which broadcasts to shape(y,x) with element-wise comparison
     result = lat[:, None] >= tlats
 
-    ## convert singleton arrays to scalars (i.e. both inputs were scalars)
+    ## remove singleton arrays/dimensions (i.e. one or both inputs were scalars)
+    result = np.squeeze(result)
     if result.size == 1:
         return result.item()
 
