@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 from types import MappingProxyType
+from pprint import pformat
+from textwrap import dedent, indent
 
 import numpy as np
 import xarray as xr
@@ -57,6 +59,26 @@ class GriddedData:
 
         return
 
+    def __str__(self) -> str:
+        l = []
+        l.append(dedent(
+            f'''\
+            GriddedData object:
+
+            - Data variables:
+                - {self.data_vars}
+
+            - Data shape:
+                - num_lons = {len(self.lon)}  (spacing = {self.lon[1] - self.lon[0]})
+                - num_lats = {len(self.lat)}  (spacing = {self.lat[1] - self.lat[0]})
+
+            - Metadata:\
+            '''
+        ))
+        l.append(indent(pformat(dict(self.metadata)), prefix='    '))
+        l = '\n'.join(l)
+        return l
+
 
 
 
@@ -68,6 +90,23 @@ class GriddedData:
             'dat': self.data_dict,
             'metadata': self.metadata,
         }
+
+    def to_xarray(self) -> xr.Dataset:
+        dat_vars = {
+            key: xr.DataArray(
+                data = array,
+                dims = ['lat', 'lon'],
+                coords = {
+                    'lat': self.lat,
+                    'lon': self.lon,
+                },
+                attrs = {
+                    'long_name': key,
+                },
+            )
+            for key, array in self.data_dict.items()
+        }
+        return xr.Dataset(dat_vars, attrs=self.metadata)
 
 
 
@@ -81,7 +120,6 @@ class GriddedData:
         return_exact_coords : bool = False,
         as_xarray           : bool = False
     ) -> float | np.ndarray | dict[str, np.ndarray] | xr.Dataset:
-
 
         ## input validation
         if var not in self.data_vars:
@@ -98,7 +136,6 @@ class GriddedData:
         lat = np.atleast_1d(lat)
 
 
-
         ## get data
         idx_lon = find_closest_indices(self.lon, lon)
         idx_lat = find_closest_indices(self.lat, lat)
@@ -106,9 +143,10 @@ class GriddedData:
         dat_full = self.data_dict[var]
         dat = dat_full[np.ix_(idx_lat, idx_lon)]
 
+        dat = np.squeeze(dat)  ## remove singleton dimensions
+        if dat.ndim == 0: dat = dat.item()
 
 
-        ## return
         ## TODO: test these return types more, I barely use them and I'm not sure if they fully work as intended... (for swaths, also add a `unique_coords` option)
         if as_xarray:
             if return_exact_coords:
