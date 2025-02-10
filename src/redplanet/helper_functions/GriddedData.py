@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from types import MappingProxyType
 from pprint import pformat
 from textwrap import dedent, indent
@@ -12,6 +12,7 @@ from redplanet.helper_functions.coordinates import (
     _plon2slon,
     _slon2plon,
 )
+from redplanet.helper_functions.docstrings import substitute_docstrings
 
 
 
@@ -24,13 +25,16 @@ class GriddedData:
 
     ## PUBLIC INSTANCE VARIALES -- The dataclass is frozen, meaning the attributes are immutable, so we can safely access `myobject.lon` directly.
     lon       : np.ndarray
-    is_slon   : bool
+    is_slon   : bool  ## True if the longitudes are "signed" (i.e. in the range [-180, 180]), False if they are "positive" (i.e. in the range [0, 360]).
     lat       : np.ndarray
     data_dict : dict[str, np.ndarray]  ## datasets (2D numpy arrays) must be indexed by `[lat, lon]`, corresponding to the order in `self.lat` and `self.lon` respectively.
     metadata  : dict
 
     @property
     def data_vars(self) -> list[str]:
+        """
+        Get the names/keys of the data variables in the dataset. These are potential values for the `var` parameter in the `get_values` method.
+        """
         return list(self.data_dict.keys())
 
 
@@ -92,6 +96,9 @@ class GriddedData:
         }
 
     def to_xarray(self) -> xr.Dataset:
+        """
+        Convert the GriddedData object to an xarray Dataset with coordinates `(lat, lon)`, one or more data variables, and information/metadata about the dataset in the attributes.
+        """
         ## TODO: return dask array if data is too large...? for now, don't expose this method for stuff like topo.
         dat_vars = {
             key: xr.DataArray(
@@ -112,7 +119,7 @@ class GriddedData:
 
 
 
-
+    @substitute_docstrings
     def get_values(
         self,
         lon                 : float | np.ndarray,
@@ -120,6 +127,32 @@ class GriddedData:
         var                 : str,
         as_xarray           : bool = False
     ) -> float | np.ndarray | xr.DataArray:
+        """
+        Get specified dataset values at the specified coordinates.
+
+        Parameters
+        ----------
+        {param_lon}
+        {param_lat}
+        var : str
+            The name of the data variable to extract (i.e. one value from `self.data_vars`).
+        {param_as_xarray}
+
+        Returns
+        -------
+        {return_GriddedData}
+
+        Raises
+        ------
+        ValueError
+            If `var` is not one of the available data variables in the dataset (i.e. one value from `self.data_vars`).
+
+        Notes
+        -----
+        This indexing/accessing approach is a full order of magnitude (sometimes more) faster than accessing an xarray DataArray/Dataset when it comes to random point-like accesses (namely the coordinates in concentric rings when doing radial cross-sectioning averages).
+
+        `GriddedDataset` is used in the following modules: `Crust.boug`, `Crust.moho`, `Crust.topo`, `GRS`, `Mag.sh`.
+        """
 
         ## input validation
         if var not in self.data_vars:

@@ -57,9 +57,9 @@ def _load():
 
             ## convert units
             if element_name == 'th':
-                scale_factor = 0.000001  # convert "ppm"            to concentration out of 1
+                scale_factor = 0.000001  # convert "ppm" to mass fraction (out of 1)
             else:
-                scale_factor = 0.01      # convert "weight percent" to concentration out of 1
+                scale_factor = 0.01      # convert "weight percent" (0-100) to mass fraction (out of 1)
             df[['concentration','sigma']] *= scale_factor
 
 
@@ -99,7 +99,7 @@ def _load():
         data_dict = data_dict,
         metadata  = {
             'description' : '2001 Mars Odyssey Gamma Ray Spectrometer Element Concentration Maps',
-            'units'       : 'concentration out of 1',
+            'units'       : 'mass fraction (out of 1)',
             'elements'    : list(ds.element.values),
             'grid_spacing': 5,
             'links': {

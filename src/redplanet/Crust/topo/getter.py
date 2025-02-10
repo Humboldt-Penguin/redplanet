@@ -3,13 +3,31 @@ import xarray as xr
 
 from redplanet.Crust.topo.loader import get_dataset
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
 
 
+
+@substitute_docstrings
 def get(
     lon                 : float | np.ndarray,
     lat                 : float | np.ndarray,
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
+    """
+    Get topography values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Crust.topo.load(...)`.
+
+    Parameters
+    ----------
+    {param_lon}
+    {param_lat}
+    {param_as_xarray}
+
+    Returns
+    -------
+    {return_GriddedData}
+
+        Units are meters [m].
+    """
 
     dat_topo = get_dataset()
 

@@ -3,8 +3,11 @@ import xarray as xr
 
 from redplanet.Mag.sh.loader import get_dataset
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
 
 
+
+@substitute_docstrings
 def get(
     lon                 : float | np.ndarray,
     lat                 : float | np.ndarray,
@@ -12,8 +15,31 @@ def get(
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
-    Quantity options are: ['radial', 'theta', 'phi', 'total', 'potential'].
+    Get magnetic field values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Mag.sh.load(...)`.
+
+    Parameters
+    ----------
+    {param_lon}
+    {param_lat}
+    quantity : str, optional
+        Options are: ['radial', 'theta', 'phi', 'total', 'potential'], by default 'total'.
+    {param_as_xarray}
+
+    Returns
+    -------
+    {return_GriddedData}
+
+        Units are nanotesla [nT].
+
+    Raises
+    ------
+    ValueError
+        If `quantity` is not one of ['radial', 'theta', 'phi', 'total', 'potential.
     """
+
+    q = ['radial', 'theta', 'phi', 'total', 'potential']
+    if quantity not in q:
+        raise ValueError(f"Quantity {quantity} is not in list of supported quantities: {q}.")
 
     dat_mag = get_dataset()
 

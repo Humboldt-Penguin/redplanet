@@ -3,25 +3,40 @@ import xarray as xr
 
 from redplanet.Crust.moho.loader import get_dataset
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
 
 
+
+@substitute_docstrings
 def get(
     lon                 : float | np.ndarray,
     lat                 : float | np.ndarray,
     crthick             : bool = False,
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
+    """
+    Get Mohorovičić discontinuity depth (or derived crustal thickness) values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Crust.moho.load(...)`.
 
-    if crthick:
-        var = 'crthick'
-    else:
-        var = 'moho'
+    Parameters
+    ----------
+    {param_lon}
+    {param_lat}
+    crthick : bool, optional
+        If True, return crustal thickness values, which is just the difference between the plain moho and a spherical harmonic model of topography evaluated to the same degree. Default is False.
+    {param_as_xarray}
+
+    Returns
+    -------
+    {return_GriddedData}
+
+        Units are meters [m].
+    """
 
     dat_moho = get_dataset()
 
     return dat_moho.get_values(
         lon = lon,
         lat = lat,
-        var = var,
+        var = 'crthick' if crthick else 'moho',
         as_xarray = as_xarray,
     )
