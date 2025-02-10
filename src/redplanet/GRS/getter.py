@@ -11,9 +11,8 @@ def get(
     lat                 : float | np.ndarray,
     quantity            : str  = 'concentration',
     normalize           : bool = False,
-    # return_exact_coords : bool = False,  ## TODO: need to account for this when normalizing -- when implemented, comment out lines in `test_GRS.py`
     as_xarray           : bool = False
-) -> float | np.ndarray | dict[str, np.ndarray] | xr.Dataset:
+) -> float | np.ndarray | xr.DataArray:
 
     ## input validation
     e = ['al','ca','cl','fe','h2o','k','si','s','th']
@@ -37,7 +36,6 @@ def get(
         lon = lon,
         lat = lat,
         var = f'{element}_{quantity}',
-        return_exact_coords = False,
         as_xarray = as_xarray,
     )
 
@@ -46,7 +44,6 @@ def get(
             lon = lon,
             lat = lat,
             var = f'cl+h2o+s_{quantity}',
-            return_exact_coords = False,
             as_xarray = as_xarray,
         )
         dat = dat / (1 - volatiles)

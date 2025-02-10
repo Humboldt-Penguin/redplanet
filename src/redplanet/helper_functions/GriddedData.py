@@ -92,6 +92,7 @@ class GriddedData:
         }
 
     def to_xarray(self) -> xr.Dataset:
+        ## TODO: return dask array if data is too large...? for now, don't expose this method for stuff like topo.
         dat_vars = {
             key: xr.DataArray(
                 data = array,
@@ -106,7 +107,7 @@ class GriddedData:
             )
             for key, array in self.data_dict.items()
         }
-        return xr.Dataset(dat_vars, attrs=self.metadata)
+        return xr.Dataset(dat_vars, attrs=dict(self.metadata))
 
 
 
@@ -117,9 +118,8 @@ class GriddedData:
         lon                 : float | np.ndarray,
         lat                 : float | np.ndarray,
         var                 : str,
-        return_exact_coords : bool = False,
         as_xarray           : bool = False
-    ) -> float | np.ndarray | dict[str, np.ndarray] | xr.Dataset:
+    ) -> float | np.ndarray | xr.DataArray:
 
         ## input validation
         if var not in self.data_vars:
@@ -147,11 +147,7 @@ class GriddedData:
         if dat.ndim == 0: dat = dat.item()
 
 
-        ## TODO: test these return types more, I barely use them and I'm not sure if they fully work as intended... (for swaths, also add a `unique_coords` option)
         if as_xarray:
-            if return_exact_coords:
-                lon = self.lon[idx_lon]
-                lat = self.lat[idx_lat]
             dat = xr.DataArray(
                 data = dat,
                 dims = ['lat', 'lon'],
@@ -159,15 +155,7 @@ class GriddedData:
                     'lat': lat,
                     'lon': lon,
                 },
-                attrs = self.metadata,
+                attrs = dict(self.metadata),
             )
-            return dat
-
-        if return_exact_coords:
-            return {
-                "lon": self.lon[idx_lon],
-                "lat": self.lat[idx_lat],
-                "values": dat
-            }
 
         return dat

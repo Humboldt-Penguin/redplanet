@@ -9,9 +9,8 @@ def get(
     lon                 : float | np.ndarray,
     lat                 : float | np.ndarray,
     quantity            : str  = 'total',
-    return_exact_coords : bool = False,
     as_xarray           : bool = False
-) -> float | np.ndarray | dict[str, np.ndarray] | xr.Dataset:
+) -> float | np.ndarray | xr.DataArray:
     """
     Quantity options are: ['radial', 'theta', 'phi', 'total', 'potential'].
     """
@@ -22,6 +21,5 @@ def get(
         lon = lon,
         lat = lat,
         var = quantity,
-        return_exact_coords = return_exact_coords,
         as_xarray = as_xarray,
     )
