@@ -6,21 +6,31 @@ from redplanet.helper_functions.coordinates import (
     _verify_coords,
     _slon2plon,
 )
+from redplanet.helper_functions.docstrings import substitute_docstrings
 
 
 
+@substitute_docstrings
 def is_above(
-    lon       : float | list | np.ndarray,
-    lat       : float | list | np.ndarray,
+    lon       : float | np.ndarray,
+    lat       : float | np.ndarray,
     as_xarray : bool = False,
 ) -> bool | np.ndarray | xr.DataArray:
     """
-    Denote:
-        - len(lons) = x
-        - len(lats) = y
+    Determine if the given point(s) are above the dichotomy boundary.
 
-    Returns shape(y, x) boolean array.
+    Parameters
+    ----------
+    {param_lon}
+    {param_lat}
+    {param_as_xarray}
+
+    Returns
+    -------
+    bool | np.ndarray | xr.DataArray
+        Boolean array indicating whether the input coordinates are above the dichotomy boundary. If both inputs are 1D numpy arrays then it returns a 2D numpy array with shape `(len(lat), len(lon))`.
     """
+
     ## input validation
     _verify_coords(lon, lat)
     lon = _slon2plon(lon)
@@ -59,6 +69,13 @@ def is_above(
 
 
 def get_coords() -> np.ndarray:
+    """
+    Get a list of dichotomy boundary coordinates. Returns a numpy array of shape (n, 2) where n is the number of coordinates, and the columns are longitude (0 to 360) and latitude respectively.
+
+    Notes
+    -----
+    TODO: insert Wieczorek reference
+    """
     fpath = _get_fpath_dataset('dichotomy_coords')
     dat_dichotomy_coords = np.loadtxt(fpath)
     return dat_dichotomy_coords

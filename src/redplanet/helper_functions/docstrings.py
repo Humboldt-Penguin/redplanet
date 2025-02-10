@@ -26,7 +26,7 @@ def substitute_docstrings(func):
         'return_GriddedData':
             '''
             float | np.ndarray | xr.DataArray
-                Data value(s) at the the input coordinates. The return type is determined as follows:
+                Data values at the the input coordinates. The return type is determined as follows:
 
                 - float: if both `lon` and `lat` are floats.
                 - numpy.ndarray (1D): if one of `lon` or `lat` is a numpy 1D array and the other is a float.

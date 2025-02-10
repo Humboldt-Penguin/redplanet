@@ -15,6 +15,9 @@ _df_craters: pd.DataFrame | None = None
 
 
 def get_dataset() -> pd.DataFrame:
+    """
+    Returns the full crater dataset.
+    """
     if _df_craters is None:
         _load()
     return _df_craters
@@ -56,7 +59,36 @@ def get(
     diameter  : tuple[float, float] = None,
     has_age   : bool                = None,
     as_dict   : bool                = False,
-) -> pd.DataFrame:
+) -> pd.DataFrame | dict:
+    """
+    Filter/query a dataset of craters >50km diameter, with ages/names when available. Calling this with no arguments will return the full dataset.
+
+    Parameters
+    ----------
+    crater_id : str | list[str], optional
+        Unique crater identifier formatted ##-######, where the first two numbers indicate the Mars subquad and the last six number the craters in that subquad from largest to smallest diameter.
+    name : str | list[str], optional
+        Crater name according to official IAU nomenclature (as of 2024-11-26).
+    lon : tuple[float, float], optional
+        Filter craters whose center falls within this range of longitudes. The given range must be a subset of either [-180,180] or [0,360] -- e.g. `lon=[-170,350]` is not allowed (it doesn't make sense).
+    lat : tuple[float, float], optional
+        Filter craters whose center falls within this range of latitudes.
+    diameter : tuple[float, float], optional
+        Filter craters whose diameter falls within this range, in kilometers.
+    has_age : bool, optional
+        Filter craters that have age data available according to... TODO INSERT ROBBINS REF HERE
+    as_dict : bool, optional
+        If True, return the crater dataset as a list of dictionaries instead of a pandas DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame | dict
+        Filtered dataset of craters.
+
+    Notes
+    -----
+    TODO: insert Robbins citation... or link to `dataset/Craters/README.md` in my github repo...? probably both, but rely on the README for the full citation/information and only provide cursory info here.
+    """
 
     df = get_dataset()
 
