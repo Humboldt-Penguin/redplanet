@@ -1,8 +1,22 @@
+from collections.abc import Callable
 import re
 from textwrap import dedent, indent
 
 
-def substitute_docstrings(func):
+def substitute_docstrings(func: Callable) -> Callable:
+    """
+    Substitute common docstrings into a function's docstring.
+
+    Parameters
+    ----------
+    func : callable
+        The function to modify.
+
+    Returns
+    -------
+    callable
+        The modified function with common docstrings substituted.
+    """
 
     if not func.__doc__:
         return func
