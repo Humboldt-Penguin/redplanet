@@ -2,8 +2,8 @@ import numpy as np
 
 def compute_pressure(
     diameter_km            : float,
-    x_vals_km              : float,
-    y_vals_km              : float,
+    x_vals_km              : float | np.ndarray,
+    y_vals_km              : float | np.ndarray,
     v_proj_km_s            : float = 10,
     rho_proj_kg_m3         : float = 2900,
     rho_crust_kg_m3        : float = 2900,
@@ -12,9 +12,57 @@ def compute_pressure(
     bulk_sound_speed_km_s  : float = 3.5,
     pressure_decay_const   : float = 1.87,
     return_params          : bool  = False,
-):
+) -> np.ndarray | tuple[np.ndarray, dict]:
     """
-    `transition_diameter_km` is transition diameter from simple to complex crater.
+    Compute the maximum subusrface shock pressures from an impact using the Rankine-Hugoniot relations.
+
+    Parameters
+    ----------
+    diameter_km : float
+        Observed crater diameter in kilometers. This is the primary crater-dependent input.
+    x_vals_km : float | np.ndarray
+        Horizontal (parallel to surface) point(s) in kilometers where the pressure is to be computed.
+    y_vals_km : float | np.ndarray
+        Vertical (perpendicular to surface) point(s) in kilometers where the pressure is to be computed.
+    v_proj_km_s : float, optional
+        Projectile velocity in kilometers per second. Default is 10 km/s.
+    rho_proj_kg_m3 : float, optional
+        Projectile density in kilograms per cubic meter. Default is 2900 kg/m^3.
+    rho_crust_kg_m3 : float, optional
+        Target (crust) density in kilograms per cubic meter. Default is 2900 kg/m^3.
+    transition_diameter_km : float, optional
+        Transition diameter (in kilometers) from simple to complex crater morphology. Default is 7 km.
+    compressibility : float, optional
+        Compressibility coefficient of the target material (dimensionless). Default is 1.5.
+    bulk_sound_speed_km_s : float, optional
+        Bulk sound speed in the target material in kilometers per second. Default is 3.5 km/s.
+    pressure_decay_const : float, optional
+        Exponential decay constant for the pressure (or particle velocity) outside the isobaric core. Default is 1.87.
+    return_params : bool, optional
+        If True, the function will also return a dictionary of intermediate parameters. Default is False.
+
+    Returns
+    -------
+    np.ndarray or tuple
+        - If `return_params` is False, returns a numpy array with shape `(len(y_vals_km), len(x_vals_km))` of shock pressures in GPa at the specified point(s).
+        - If `return_params` is True, returns a tuple `(P_eff, params)`, where `P_eff` is the shock pressure array as described above, and `params` is a dictionary with the following keys:
+            - `v_proj_km_s`: Projectile velocity (km/s).
+            - `rho_proj_kg_m3`: Projectile density (kg/m^3).
+            - `rho_crust_kg_m3`: Crust density (kg/m^3).
+            - `transition_diameter_km`: Transition crater diameter (km).
+            - `compressibility`: Compressibility coefficient.
+            - `bulk_sound_speed_km_s`: Bulk sound speed (km/s).
+            - `pressure_decay_const`: Pressure decay exponent.
+            - `transient_diameter_km`: Transient crater diameter (km).
+            - `E_proj_J`: Projectile kinetic energy (Joules).
+            - `proj_radius_km`: Projectile radius (km).
+            - `isobaric_radius_km`: Isobaric core radius (km).
+            - `u_ic_km_s`: Particle velocity in the isobaric core (km/s).
+            - `rise_time`: Shock pressure rise time (s).
+
+    Notes
+    -----
+    For a full explanation/derivation of methods and equations, see "Supplemental > Impact Demagnetization" in the RedPlanet documentation website.
     """
 
     ## Convert inputs to SI and shorthands
@@ -67,6 +115,7 @@ def compute_pressure(
     )
 
     P_eff = P_eff * 1e-9
+    P_eff = np.squeeze(P_eff)
 
     if return_params:
         return(
