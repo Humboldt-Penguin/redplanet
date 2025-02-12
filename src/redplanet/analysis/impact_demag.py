@@ -16,6 +16,7 @@ def compute_pressure(
     """
     Compute the maximum subusrface shock pressures from an impact using the Rankine-Hugoniot relations.
 
+
     Parameters
     ----------
     diameter_km : float
@@ -41,24 +42,31 @@ def compute_pressure(
     return_params : bool, optional
         If True, the function will also return a dictionary of intermediate parameters. Default is False.
 
+
     Returns
     -------
-    np.ndarray or tuple
-        - If `return_params` is False, returns a numpy array with shape `(len(y_vals_km), len(x_vals_km))` of shock pressures in GPa at the specified point(s).
-        - If `return_params` is True, returns a tuple `(P_eff, params)`, where `P_eff` is the shock pressure array as described above, and `params` is a dictionary with the following keys:
-            - `v_proj_km_s`: Projectile velocity (km/s).
-            - `rho_proj_kg_m3`: Projectile density (kg/m^3).
-            - `rho_crust_kg_m3`: Crust density (kg/m^3).
-            - `transition_diameter_km`: Transition crater diameter (km).
-            - `compressibility`: Compressibility coefficient.
-            - `bulk_sound_speed_km_s`: Bulk sound speed (km/s).
-            - `pressure_decay_const`: Pressure decay exponent.
-            - `transient_diameter_km`: Transient crater diameter (km).
-            - `E_proj_J`: Projectile kinetic energy (Joules).
-            - `proj_radius_km`: Projectile radius (km).
-            - `isobaric_radius_km`: Isobaric core radius (km).
-            - `u_ic_km_s`: Particle velocity in the isobaric core (km/s).
-            - `rise_time`: Shock pressure rise time (s).
+    P_eff : np.ndarray
+        Shock pressures in GPa at the specified point(s), with shape `(len(y_vals_km), len(x_vals_km))`.
+
+    params : dict
+        Only returned if `return_params` is True.
+
+        A dictionary with the following keys:
+
+        - `v_proj_km_s`: Projectile velocity (km/s).
+        - `rho_proj_kg_m3`: Projectile density (kg/m^3).
+        - `rho_crust_kg_m3`: Crust density (kg/m^3).
+        - `transition_diameter_km`: Transition crater diameter (km).
+        - `compressibility`: Compressibility coefficient.
+        - `bulk_sound_speed_km_s`: Bulk sound speed (km/s).
+        - `pressure_decay_const`: Pressure decay exponent.
+        - `transient_diameter_km`: Transient crater diameter (km).
+        - `E_proj_J`: Projectile kinetic energy (Joules).
+        - `proj_radius_km`: Projectile radius (km).
+        - `isobaric_radius_km`: Isobaric core radius (km).
+        - `u_ic_km_s`: Particle velocity in the isobaric core (km/s).
+        - `rise_time`: Shock pressure rise time (s).
+
 
     Notes
     -----
@@ -118,7 +126,7 @@ def compute_pressure(
     P_eff = np.squeeze(P_eff)
 
     if return_params:
-        return(
+        return (
             P_eff,
             {
                 'v_proj_km_s'            : v_proj_km_s,
