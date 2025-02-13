@@ -1,53 +1,8 @@
-import numpy as np
 import pandas as pd
 
-from redplanet.DatasetManager.master import _get_fpath_dataset
-from redplanet.helper_functions.coordinates import (
-    _verify_coords,
-    # _plon2slon,
-    _slon2plon,
-)
+from redplanet.Craters.loader import _get_dataset
 
-
-
-_df_craters: pd.DataFrame | None = None
-
-
-
-def get_dataset() -> pd.DataFrame:
-    """
-    Returns the full crater dataset.
-    """
-    if _df_craters is None:
-        _load()
-    return _df_craters
-
-
-
-def _load() -> None:
-    fpath_df = _get_fpath_dataset('crater_db')
-    global _df_craters
-    _df_craters = pd.read_csv(fpath_df)
-
-    _df_craters['plon'] = _slon2plon(_df_craters['lon'])
-    _df_craters = _df_craters.replace(np.nan, None)
-
-    ## convert ages (e.g. '4.00;-0.08;0.05') to a list of floats
-    columns_to_convert = [col for col in _df_craters.columns if col.startswith('N_') or col.endswith('Age')]
-    def convert(val):
-        if isinstance(val, str):
-            parts = val.split(';')
-            if len(parts) == 3:
-                try:
-                    return [float(part) for part in parts]
-                except ValueError:
-                    return None
-        return None
-    for col in columns_to_convert:
-        _df_craters[col] = _df_craters[col].apply(convert)
-
-    return
-
+from redplanet.helper_functions.coordinates import _verify_coords
 
 
 
@@ -59,7 +14,7 @@ def get(
     diameter  : tuple[float, float] = None,
     has_age   : bool                = None,
     as_dict   : bool                = False,
-) -> pd.DataFrame | dict:
+) -> pd.DataFrame | list[dict]:
     """
     Filter/query a dataset of craters >50km diameter, with ages/names when available. Calling this with no arguments will return the full dataset.
 
@@ -76,21 +31,39 @@ def get(
     diameter : tuple[float, float], optional
         Filter craters whose diameter falls within this range, in kilometers.
     has_age : bool, optional
-        Filter craters that have age data available according to... TODO INSERT ROBBINS REF HERE
+        If True, only return craters with both Hartmann/Neukum isochron ages available. Default is False.
     as_dict : bool, optional
-        If True, return the crater dataset as a list of dictionaries instead of a pandas DataFrame.
+        If True, return the crater dataset as a list of dictionaries instead of a pandas DataFrame. Default is False.
 
     Returns
     -------
-    pd.DataFrame | dict
-        Filtered dataset of craters.
+    pd.DataFrame | list[dict]
+        Filtered list of craters with columns:
+
+        - `id` : str
+            - Unique crater identifier formatted ##-######, where the first two numbers indicate the Mars subquad and the last six number the craters in that subquad from largest to smallest diameter.
+        - `name` : str
+            - Crater name according to official IAU nomenclature (as of 2024-11-26).
+        - `lat` : float
+            - Latitude of the crater center.
+        - `lon` : float
+            - Longitude of the crater center, in range [-180,180].
+        - 'plon' : float
+            - Longitude of the crater center, in range [0,360].
+        - `diam` : float
+            - Diameter of the crater, in km.
+        - `['diam_sd', 'diam_elli_major', 'diam_elli_minor', 'diam_elli_angle', 'diam_elli_major_sd', 'diam_elli_minor_sd']` : float
+            - For more info, see Appendix A of https://doi.org/10.1029/2011JE003966 .
+        - `['N_H(10)', 'N_N(10)', 'N_H(25)', 'N_N(25)', 'N_H(50)', 'N_N(50)', 'Hartmann Isochron Age', 'Neukum Isochron Age', 'Hartmann Turn-Off Diameter', 'Neukum Turn-Off Diameter']` : None | list[float, float, float]
+            - When available, the ages are given in a list where the first value is the estimated age and second/third are uncertainties (they will always be negative/positive respectively). All values are in billions of years (aka "giga-annums"/"Ga").
+            - For more info, see Supplementary Table 3 of https://doi.org/10.1016/j.icarus.2013.03.019 .
 
     Notes
     -----
     TODO: insert Robbins citation... or link to `dataset/Craters/README.md` in my github repo...? probably both, but rely on the README for the full citation/information and only provide cursory info here.
     """
 
-    df = get_dataset()
+    df = _get_dataset()
 
     if crater_id:
         if isinstance(crater_id, str):
