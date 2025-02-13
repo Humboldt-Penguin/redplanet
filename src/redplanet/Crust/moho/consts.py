@@ -11,7 +11,7 @@ def get_registry() -> pd.DataFrame:
     Returns
     -------
     pd.DataFrame
-        DataFrame with the following columns: ['interior_model', 'insight_thickness', 'rho_south', 'rho_north'].
+        DataFrame with the following columns: ['interior_model', 'insight_thickness', 'rho_south', 'rho_north']. For an explanation of these columns, see parameters of `redplanet.Crust.moho.load()`.
     """
     registry = pd.read_csv(
         _get_fpath_dataset('moho_registry'),

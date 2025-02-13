@@ -32,13 +32,20 @@ def get_nearest(
     pd.DataFrame | list[dict]
         Information about 412 dipoles provided by Gong & Wieczorek 2021, sorted from closest to furthest from the given point. Columns are:
 
-        - lon: float
-        - lat: float
-        - chi_reduced: float, "reduced chi^2 value of the best fitting model"
-        - cap_radius_km: list[float], "angular radii of the magnetized caps (best-fit, and 1-sigma lower/upper limits)"
-        - depth_km: list[float], "magnetization depth (best-fit, and 1-sigma lower/upper limits)"
-        - dipole_mment_Am2: list[float], "square root of the metric N<M^2>V^2 [in A m^2] (best-fit, and 1-sigma lower/upper limits)"
-        - distance_km: float, "distance from the given point to the dipole in km"
+        - `lon` : float
+            - Longitude in range [-180, 180].
+        - `lat` : float
+            - Latitude in range [-90, 90].
+        - `chi_reduced` : float
+            - "reduced chi^2 value of the best fitting model"
+        - `cap_radius_km` : list[float]
+            - "angular radii of the magnetized caps (best-fit, and 1-sigma lower/upper limits)"
+        - `depth_km` : list[float]
+            - "magnetization depth (best-fit, and 1-sigma lower/upper limits)"
+        - `dipole_mment_Am2` : list[float]
+            - "square root of the metric N<M^2>V^2 [in A m^2] (best-fit, and 1-sigma lower/upper limits)"
+        - `distance_km` : float
+            - "distance from the given point to the dipole in km"
 
         Note that the 1-sigma lower/upper values are NaN when the minimum reduced chi^2 value of the best fitting model is outside the 1-sigma confidence level of the reduced chi^2 that were obtained from Monte Carlo simulations.
     """

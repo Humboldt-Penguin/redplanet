@@ -31,7 +31,7 @@ def get_metadata() -> dict:
 
 
 
-def load(model: str = None):
+def load(model: str = None) -> None:
     """
     Load Bouguer gravity anomaly dataset.
 
@@ -98,3 +98,5 @@ def load(model: str = None):
 
     else:
         raise ValueError(f"THE DEVELOPER MESSED UP. THIS SHOULD NOT HAPPEN.")
+
+    return

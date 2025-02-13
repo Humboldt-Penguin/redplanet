@@ -35,7 +35,7 @@ def get_metadata() -> dict:
 def load(
     model: str = None,
     lmax : int = 134,
-):
+) -> None:
     """
     Load a magnetic field model for Mars.
 
@@ -118,3 +118,5 @@ def load(
 
     else:
         raise ValueError(f"THE DEVELOPER MESSED UP. THIS SHOULD NOT HAPPEN.")
+
+    return

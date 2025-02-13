@@ -53,19 +53,19 @@ def compute_pressure(
 
         A dictionary with the following keys:
 
-        - `v_proj_km_s`: Projectile velocity (km/s).
-        - `rho_proj_kg_m3`: Projectile density (kg/m^3).
-        - `rho_crust_kg_m3`: Crust density (kg/m^3).
-        - `transition_diameter_km`: Transition crater diameter (km).
-        - `compressibility`: Compressibility coefficient.
-        - `bulk_sound_speed_km_s`: Bulk sound speed (km/s).
-        - `pressure_decay_const`: Pressure decay exponent.
-        - `transient_diameter_km`: Transient crater diameter (km).
-        - `E_proj_J`: Projectile kinetic energy (Joules).
-        - `proj_radius_km`: Projectile radius (km).
-        - `isobaric_radius_km`: Isobaric core radius (km).
-        - `u_ic_km_s`: Particle velocity in the isobaric core (km/s).
-        - `rise_time`: Shock pressure rise time (s).
+        - `v_proj_km_s` — Projectile velocity (km/s).
+        - `rho_proj_kg_m3` — Projectile density (kg/m^3).
+        - `rho_crust_kg_m3` — Crust density (kg/m^3).
+        - `transition_diameter_km` — Transition crater diameter (km).
+        - `compressibility` — Compressibility coefficient.
+        - `bulk_sound_speed_km_s` — Bulk sound speed (km/s).
+        - `pressure_decay_const` — Pressure decay exponent.
+        - `transient_diameter_km` — Transient crater diameter (km).
+        - `E_proj_J` — Projectile kinetic energy (Joules).
+        - `proj_radius_km` — Projectile radius (km).
+        - `isobaric_radius_km` — Isobaric core radius (km).
+        - `u_ic_km_s` — Particle velocity in the isobaric core (km/s).
+        - `rise_time` — Shock pressure rise time (s).
 
 
     Notes

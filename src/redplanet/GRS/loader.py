@@ -34,7 +34,7 @@ def get_metadata() -> dict:
 
 
 
-def _load():
+def _load() -> None:
     """
     NOTE:
         - This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine.
@@ -119,3 +119,5 @@ def _load():
             'fpath'       : fpath,
         },
     )
+
+    return
