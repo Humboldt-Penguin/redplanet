@@ -3,18 +3,28 @@ import numpy as np
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
+
 
 
 
 
 _dat_topo: GriddedData | None = None
 
+@substitute_docstrings
 def get_dataset() -> GriddedData:
+    """
+    {full_get_dataset_GriddedData}
+    """
     if _dat_topo is None:
         raise ValueError('Topography dataset not loaded. Use `redplanet.Crust.topo.load(<model_params>)`.')
     return _dat_topo
 
+@substitute_docstrings
 def get_metadata() -> dict:
+    """
+    {full_get_metadata}
+    """
     return dict(get_dataset().metadata)
 
 
@@ -22,6 +32,19 @@ def get_metadata() -> dict:
 
 
 def load(model: str = None):
+    """
+    Load a topography model.
+
+    Parameters
+    ----------
+    model : str
+        Name of the topography model to load. Options are: ['DEM_463m', 'DEM_200m'].
+
+    Raises
+    ------
+    ValueError
+        If an invalid model name is provided.
+    """
 
     info = {
         'DEM_463m': {

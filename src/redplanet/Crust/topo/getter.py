@@ -14,7 +14,7 @@ def get(
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
-    Get topography values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Crust.topo.load(...)`.
+    Get topography values at the specified coordinates. Dataset must be loaded first, see `redplanet.Crust.topo.load(...)`.
 
     Parameters
     ----------

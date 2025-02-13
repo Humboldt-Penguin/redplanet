@@ -4,18 +4,28 @@ import pyshtools as pysh
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
+
 
 
 
 
 _dat_mag: GriddedData | None = None
 
+@substitute_docstrings
 def get_dataset() -> GriddedData:
+    """
+    {full_get_dataset_GriddedData}
+    """
     if _dat_mag is None:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Mag.sh.load(<model_params>)`.')
     return _dat_mag
 
+@substitute_docstrings
 def get_metadata() -> dict:
+    """
+    {full_get_metadata}
+    """
     return dict(get_dataset().metadata)
 
 
@@ -26,6 +36,21 @@ def load(
     model: str = None,
     lmax : int = 134,
 ):
+    """
+    Load a magnetic field model for Mars.
+
+    Parameters
+    ----------
+    model : str
+        Name of the magnetic field model to load. Options are: ['Langlais2019'].
+    lmax : int, optional
+        The maximum spherical harmonic degree of the coefficients to load. Default is 134 (maximum for 'Langlais2019').
+
+    Raises
+    ------
+    ValueError
+        If an invalid model name is provided.
+    """
 
     ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility. Mittelholz might be publishing hers soon.
     info = {

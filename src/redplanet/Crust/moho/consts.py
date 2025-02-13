@@ -5,6 +5,14 @@ from redplanet.DatasetManager.master import _get_fpath_dataset
 
 
 def get_registry() -> pd.DataFrame:
+    """
+    Get a list of all available Moho models.
+
+    Returns
+    -------
+    pd.DataFrame
+        DataFrame with the following columns: ['interior_model', 'insight_thickness', 'rho_south', 'rho_north'].
+    """
     registry = pd.read_csv(
         _get_fpath_dataset('moho_registry'),
         usecols = ['model_name'],

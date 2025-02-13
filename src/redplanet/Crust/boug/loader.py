@@ -3,18 +3,28 @@ import numpy as np
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
+from redplanet.helper_functions.docstrings import substitute_docstrings
+
 
 
 
 
 _dat_boug: GriddedData | None = None
 
+@substitute_docstrings
 def get_dataset() -> GriddedData:
+    """
+    {full_get_dataset_GriddedData}
+    """
     if _dat_boug is None:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Crust.boug.load(<model_params>)`.')
     return _dat_boug
 
+@substitute_docstrings
 def get_metadata() -> dict:
+    """
+    {full_get_metadata}
+    """
     return dict(get_dataset().metadata)
 
 
@@ -22,6 +32,19 @@ def get_metadata() -> dict:
 
 
 def load(model: str = None):
+    """
+    Load Bouguer gravity anomaly dataset.
+
+    Parameters
+    ----------
+    model : str
+        Name of the Bouguer model to load. Options are: ['Genova2016'].
+
+    Raises
+    ------
+    ValueError
+        If an invalid model name is provided.
+    """
 
     ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility.
     info = {

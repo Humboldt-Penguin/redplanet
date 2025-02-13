@@ -47,6 +47,38 @@ def substitute_docstrings(func: Callable) -> Callable:
                 - numpy.ndarray (2D): if both `lon` and `lat` are numpy 1D arrays. The first dimension of output array corresponds to `lat` values.
                 - xarray.DataArray: see `as_xarray` parameter (this takes precedence over the above types).
             ''',
+        'full_get_dataset_GriddedData':
+            '''
+            Get the underlying dataset which is currently loaded.
+
+            Returns
+            -------
+            GriddedData
+                Instance of RedPlanet's `GriddedData` class, which stores all coordinate/data/metadata information and accessing/plotting methods.
+
+            Raises
+            ------
+            ValueError
+                If the dataset has not been loaded yet (see the `load` function for this module).
+
+            See Also
+            --------
+            `redplanet.helper_functions.GriddedData`
+            ''',
+        'full_get_metadata':
+            '''
+            Get metadata for the dataset which is currently loaded.
+
+            Returns
+            -------
+            dict
+                Contains information about the dataset such as description, units, references, download links, local file path, etc.
+
+            Raises
+            ------
+            ValueError
+                If the dataset has not been loaded yet (see the `load` function for this module).
+            ''',
     }
 
     ## python multiline strings are weird -- this strips whitespace/indentation so everything is as expected

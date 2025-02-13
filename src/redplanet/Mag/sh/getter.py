@@ -15,7 +15,7 @@ def get(
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
-    Get magnetic field values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Mag.sh.load(...)`.
+    Get magnetic field values at the specified coordinates. Dataset must be loaded first, see `redplanet.Mag.sh.load(...)`.
 
     Parameters
     ----------

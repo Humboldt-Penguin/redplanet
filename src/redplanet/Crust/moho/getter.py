@@ -15,7 +15,7 @@ def get(
     as_xarray           : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
-    Get Mohorovičić discontinuity depth (or derived crustal thickness) values at the specified coordinates. Dataset must be manually loaded first, see `redplanet.Crust.moho.load(...)`.
+    Get Mohorovičić discontinuity depth (or derived crustal thickness) values at the specified coordinates. Dataset must be loaded first, see `redplanet.Crust.moho.load(...)`.
 
     Parameters
     ----------
