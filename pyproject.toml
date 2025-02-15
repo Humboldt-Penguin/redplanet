@@ -40,4 +40,5 @@ dev = [
 docs = [
     "mkdocs-material>=9.6.1",
     "mkdocstrings-python>=1.13.0",
+    "ruff>=0.9.6",
 ]
