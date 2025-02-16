@@ -3,7 +3,7 @@ import xarray as xr
 
 from redplanet.Mag.sh.loader import get_dataset
 
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -19,15 +19,15 @@ def get(
 
     Parameters
     ----------
-    {param_lon}
-    {param_lat}
+    {param.lon}
+    {param.lat}
     quantity : str, optional
         Options are: ['radial', 'theta', 'phi', 'total', 'potential'], by default 'total'.
-    {param_as_xarray}
+    {param.as_xarray}
 
     Returns
     -------
-    {return_GriddedData}
+    {return.GriddedData}
 
         Units are nanotesla [nT].
 

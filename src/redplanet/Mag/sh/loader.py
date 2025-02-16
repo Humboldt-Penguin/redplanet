@@ -4,7 +4,7 @@ import pyshtools as pysh
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -15,7 +15,7 @@ _dat_mag: GriddedData | None = None
 @substitute_docstrings
 def get_dataset() -> GriddedData:
     """
-    {full_get_dataset_GriddedData}
+    {fulldoc.get_dataset_GriddedData}
     """
     if _dat_mag is None:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Mag.sh.load(<model_params>)`.')
@@ -24,7 +24,7 @@ def get_dataset() -> GriddedData:
 @substitute_docstrings
 def get_metadata() -> dict:
     """
-    {full_get_metadata}
+    {fulldoc.get_metadata}
     """
     return dict(get_dataset().metadata)
 

@@ -12,7 +12,7 @@ from redplanet.helper_functions.coordinates import (
     _plon2slon,
     _slon2plon,
 )
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -132,15 +132,15 @@ class GriddedData:
 
         Parameters
         ----------
-        {param_lon}
-        {param_lat}
+        {param.lon}
+        {param.lat}
         var : str
             The name of the data variable to extract (i.e. one value from `self.data_vars`).
-        {param_as_xarray}
+        {param.as_xarray}
 
         Returns
         -------
-        {return_GriddedData}
+        {return.GriddedData}
 
         Raises
         ------

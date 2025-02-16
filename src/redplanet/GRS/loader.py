@@ -6,7 +6,7 @@ import xarray as xr
 from redplanet.DatasetManager.master import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -17,7 +17,7 @@ _dat_grs: GriddedData | None = None
 @substitute_docstrings
 def get_dataset() -> GriddedData:
     """
-    {full_get_dataset_GriddedData}
+    {fulldoc.get_dataset_GriddedData}
     """
     if _dat_grs is None:
         _load()
@@ -26,7 +26,7 @@ def get_dataset() -> GriddedData:
 @substitute_docstrings
 def get_metadata() -> dict:
     """
-    {full_get_metadata}
+    {fulldoc.get_metadata}
     """
     return dict(get_dataset().metadata)
 

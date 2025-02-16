@@ -3,7 +3,7 @@ import xarray as xr
 
 from redplanet.Crust.boug.loader import get_dataset
 
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -18,13 +18,13 @@ def get(
 
     Parameters
     ----------
-    {param_lon}
-    {param_lat}
-    {param_as_xarray}
+    {param.lon}
+    {param.lat}
+    {param.as_xarray}
 
     Returns
     -------
-    {return_GriddedData}
+    {return.GriddedData}
 
         Units are milligals [mGal].
     """

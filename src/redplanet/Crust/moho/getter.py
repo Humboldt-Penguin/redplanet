@@ -3,7 +3,7 @@ import xarray as xr
 
 from redplanet.Crust.moho.loader import get_dataset
 
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -19,15 +19,15 @@ def get(
 
     Parameters
     ----------
-    {param_lon}
-    {param_lat}
+    {param.lon}
+    {param.lat}
     crthick : bool, optional
         If True, return crustal thickness values, which is just the difference between the plain moho and a spherical harmonic model of topography evaluated to the same degree. Default is False.
-    {param_as_xarray}
+    {param.as_xarray}
 
     Returns
     -------
-    {return_GriddedData}
+    {return.GriddedData}
 
         Units are meters [m].
     """

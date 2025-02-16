@@ -6,7 +6,7 @@ from redplanet.helper_functions.coordinates import (
     _verify_coords,
     _slon2plon,
 )
-from redplanet.helper_functions.docstrings import substitute_docstrings
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -21,9 +21,9 @@ def is_above(
 
     Parameters
     ----------
-    {param_lon}
-    {param_lat}
-    {param_as_xarray}
+    {param.lon}
+    {param.lat}
+    {param.as_xarray}
 
     Returns
     -------
