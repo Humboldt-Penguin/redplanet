@@ -9,10 +9,10 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 @substitute_docstrings
 def get(
-    lon                 : float | np.ndarray,
-    lat                 : float | np.ndarray,
-    quantity            : str  = 'total',
-    as_xarray           : bool = False
+    lon       : float | np.ndarray,
+    lat       : float | np.ndarray,
+    quantity  : str  = 'total',
+    as_xarray : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
     Get magnetic field values at the specified coordinates. Dataset must be loaded first, see `redplanet.Mag.sh.load(...)`.

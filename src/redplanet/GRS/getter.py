@@ -9,12 +9,12 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 @substitute_docstrings
 def get(
-    element             : str,
-    lon                 : float | np.ndarray,
-    lat                 : float | np.ndarray,
-    quantity            : str  = 'concentration',
-    normalize           : bool = False,
-    as_xarray           : bool = False
+    element   : str,
+    lon       : float | np.ndarray,
+    lat       : float | np.ndarray,
+    quantity  : str  = 'concentration',
+    normalize : bool = False,
+    as_xarray : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
     Get GRS element concentration/sigma values at the specified coordinates.

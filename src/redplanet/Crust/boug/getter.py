@@ -9,9 +9,9 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 @substitute_docstrings
 def get(
-    lon                 : float | np.ndarray,
-    lat                 : float | np.ndarray,
-    as_xarray           : bool = False
+    lon       : float | np.ndarray,
+    lat       : float | np.ndarray,
+    as_xarray : bool = False
 ) -> float | np.ndarray | xr.DataArray:
     """
     Get Bouguer anomaly values at the specified coordinates. Dataset must be loaded first, see `redplanet.Crust.boug.load(...)`.

@@ -33,8 +33,8 @@ def get_metadata() -> dict:
 
 
 def load(
-    model: str = None,
-    lmax : int = 134,
+    model : str = None,
+    lmax  : int = 134,
 ) -> None:
     """
     Load a magnetic field model for Mars.
