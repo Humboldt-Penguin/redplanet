@@ -1,6 +1,6 @@
 import numpy as np
 
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.DatasetManager.main import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
 
 from redplanet.helper_functions.docstrings.main import substitute_docstrings

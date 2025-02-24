@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.DatasetManager.main import _get_fpath_dataset
 
 from redplanet.helper_functions.coordinates import _slon2plon
 
