@@ -1,6 +1,7 @@
 from collections.abc import Callable
 
-from redplanet.helper_functions.docstrings.direct_subs.main import _direct_substitutions
+from redplanet.helper_functions.docstrings.direct_subs.main import _substitute_direct
+from redplanet.helper_functions.docstrings.references.main import _substitute_references
 
 
 def substitute_docstrings(func: Callable) -> Callable:
@@ -21,6 +22,7 @@ def substitute_docstrings(func: Callable) -> Callable:
     if not func.__doc__:
         return func
 
-    func = _direct_substitutions(func)
+    func = _substitute_direct(func)
+    func = _substitute_references(func)
 
     return func

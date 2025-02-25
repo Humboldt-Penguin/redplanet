@@ -58,7 +58,7 @@ class BibtexEntry:
     def cite(self, format: str) -> str:
         match format:
 
-            case 'full':
+            case 'full' | 'f':
 
                 match self.entry_type:
                     case 'article':
@@ -68,14 +68,14 @@ class BibtexEntry:
                     case _:
                         raise ValueError(f'Function `cite()` received an invalid value for `entry_type` -- must be one of "article" or "misc", but got: {self.entry_type=}')
 
-            case 'narrative':
+            case 'narrative' | 'n':
                 return f'{self._authors_intext(parenthetical=False)} ({self.fields["year"]})'
 
-            case 'parenthetical':  # note: you must add the parentheses yourself
+            case 'parenthetical' | 'p':  # note: you must add the parentheses yourself
                 return f'{self._authors_intext(parenthetical=True)}, {self.fields["year"]}'
 
             case _:
-                raise ValueError(f'Function `cite()` received an invalid value for `format` -- must be one of "full", "narrative", or "parenthetical", but got: {format=}')
+                raise ValueError(f'Function `cite()` received an invalid value for `format` "{format}" -- Must be one of "full"/"f", "narrative"/"n", or "parenthetical"/"p".')
 
 
     def _cite_full_article(self) -> str:
@@ -93,6 +93,7 @@ class BibtexEntry:
 
         link = self.fields.get('doi') or self.fields.get('url')
         if not link: raise ValueError(f'No DOI or URL found for entry {self.key}')
+        link = self._format_link(link)
 
         # build the journal info (italicized using asterisks)
         journal_info = f'*{journal}*'
@@ -118,12 +119,22 @@ class BibtexEntry:
 
         link = self.fields.get('doi') or self.fields.get('url')
         if not link: raise ValueError(f'No DOI or URL found for entry {self.key}')
+        link = self._format_link(link)
 
         title = f'*{title}*'
         if 'dataset' in self.fields.get('keywords', []):
             title += ' [Dataset]'
 
         return f'{authors} ({year}). {title}. {publisher}. {link}'
+
+
+    @staticmethod
+    def _format_link(url: str) -> str:
+        """
+        formats a url so it's highlighted and opens in a new tab
+        requires `mkdocs.yml` > `markdown_extensions:` to contain `attr_list`
+        """
+        return f'<{url}>' + '{target="_blank"}'
 
 
     def _authors_full(self) -> str:
@@ -203,7 +214,13 @@ class BibtexDatabase:
         try:
             return self.entries[key].cite(format)
         except KeyError:
-            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: {list(self.entries.keys())}')
+            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: {self.keys}')
+
+
+
+    @property
+    def keys(self) -> set[str]:
+        return set(self.entries.keys())
 
 
 
@@ -250,6 +267,8 @@ class BibtexDatabase:
             elif line.startswith('@'):
                 this_type = line.split('{')[0][1:].lower()
                 this_key = line.split('{')[1].split(',')[0].strip()
+                if this_key in entries:
+                    raise ValueError(f"Duplicate key: {this_key}")
                 entries[this_key] = {'type': this_type}
                 current_key = this_key
                 continue
