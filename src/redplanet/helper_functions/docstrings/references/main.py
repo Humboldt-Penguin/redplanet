@@ -74,7 +74,7 @@ def _substitute_references(func: Callable) -> Callable:
         'References',
         '----------',
     ]
-    refs.extend(f'1. {cite}' for cite in full_citations)
+    refs.extend(f'{i}. {cite}' for i, cite in enumerate(full_citations, 1))
     refs = '\n'.join(refs)
 
     ## add indentation to match the rest of the docstring, which is taken from the first non-empty line

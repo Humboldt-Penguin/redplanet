@@ -63,10 +63,10 @@ class BibtexEntry:
                 match self.entry_type:
                     case 'article':
                         return self._cite_full_article()
-                    case 'misc':
-                        return self._cite_full_misc()
+                    case 'dataset' | 'misc':
+                        return self._cite_full_dataset_or_misc()
                     case _:
-                        raise ValueError(f'Function `cite()` received an invalid value for `entry_type` -- must be one of "article" or "misc", but got: {self.entry_type=}')
+                        raise ValueError(f'Function `cite()` received an invalid value for `entry_type` -- must be one of "article", "dataset", or "misc", but got: {self.entry_type}')
 
             case 'narrative' | 'n':
                 return f'{self._authors_intext(parenthetical=False)} ({self.fields["year"]})'
@@ -80,7 +80,7 @@ class BibtexEntry:
 
     def _cite_full_article(self) -> str:
         """
-        Build a full APA citation for an article.
+        Build a full APA citation for an 'article'.
         """
         authors = self._authors_full()
         year    = self.fields['year']
@@ -107,9 +107,9 @@ class BibtexEntry:
         return f'{authors} ({year}). {title}. {journal_info}. {link}'
 
 
-    def _cite_full_misc(self) -> str:
+    def _cite_full_dataset_or_misc(self) -> str:
         """
-        Build a full APA citation for a misc type reference (e.g. dataset).
+        Build a full APA citation for a 'dataset' or 'misc' type reference.
         """
         authors = self._authors_full()
         year    = self.fields['year']
@@ -122,7 +122,7 @@ class BibtexEntry:
         link = self._format_link(link)
 
         title = f'*{title}*'
-        if 'dataset' in self.fields.get('keywords', []):
+        if self.entry_type == 'dataset':
             title += ' [Dataset]'
 
         return f'{authors} ({year}). {title}. {publisher}. {link}'
@@ -191,7 +191,7 @@ class BibtexDatabase:
     def __post_init__(self):
         bib_dict = self._read_bibtex_file(self.fpath)
         bib_dict = self._postprocess_clean_strings(bib_dict)
-        bib_dict = self._postprocess_separate_list(bib_dict, 'keywords', ', ')
+        bib_dict = self._postprocess_separate_list(bib_dict, 'keywords', ', ')  # I used to determine if something is a dataset if it's type 'misc' and 'dataset' was in the list of keywords, but that's hacky. Turns out `@dataset{...` is a valid BibTeX entry type.
         bib_dict = self._postprocess_separate_list(bib_dict, 'author', ' and ')
         bib_dict = self._postprocess_format_names(bib_dict)
 
@@ -214,7 +214,7 @@ class BibtexDatabase:
         try:
             return self.entries[key].cite(format)
         except KeyError:
-            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: {self.keys}')
+            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: ["{"\", \"".join(self.keys)}"]')
 
 
 
@@ -345,11 +345,11 @@ class BibtexDatabase:
         """
         In a dictionary of BibTeX entries (see output of `parse_bibtex_file`), convert a field from a single string to a list of strings.
 
-        Input:  "dataset, MOLA, DEM"
-        Output: ['dataset', 'MOLA', 'DEM']
-
         Input:  "Hahn, B. C. and McLennan, S. M. and Klein, E. C."
         Output: ['Hahn, B. C.', 'McLennan, S. M.', 'Klein, E. C.']
+
+        Input:  "dataset, MOLA, DEM"
+        Output: ['dataset', 'MOLA', 'DEM']
         """
         for key in d:
             if field_name in d[key]:
