@@ -109,7 +109,7 @@ class BibtexEntry:
 
     def _cite_full_dataset_or_misc(self) -> str:
         """
-        Build a full APA citation for a 'dataset' or 'misc' type reference.
+        Build a full APA citation for a 'dataset' (any type of dataset, on Zenodo or otherwise) or 'misc' (e.g. code base on Zenodo) type reference.
         """
         authors = self._authors_full()
         year    = self.fields['year']
@@ -191,7 +191,7 @@ class BibtexDatabase:
     def __post_init__(self):
         bib_dict = self._read_bibtex_file(self.fpath)
         bib_dict = self._postprocess_clean_strings(bib_dict)
-        bib_dict = self._postprocess_separate_list(bib_dict, 'keywords', ', ')  # I used to determine if something is a dataset if it's type 'misc' and 'dataset' was in the list of keywords, but that's hacky. Turns out `@dataset{...` is a valid BibTeX entry type.
+        bib_dict = self._postprocess_separate_list(bib_dict, 'keywords', ', ')  # I used to determine if something is a dataset if it's type 'misc' and 'dataset' was in the list of keywords, but that's hacky. Turns out `@dataset` is a valid BibTeX entry type -- that also frees up `@misc` to be used for entries in Zenodo that aren't datasets such as the SHTOOLS code.
         bib_dict = self._postprocess_separate_list(bib_dict, 'author', ' and ')
         bib_dict = self._postprocess_format_names(bib_dict)
 
@@ -345,11 +345,11 @@ class BibtexDatabase:
         """
         In a dictionary of BibTeX entries (see output of `parse_bibtex_file`), convert a field from a single string to a list of strings.
 
-        Input:  "Hahn, B. C. and McLennan, S. M. and Klein, E. C."
-        Output: ['Hahn, B. C.', 'McLennan, S. M.', 'Klein, E. C.']
+        Input: "Hahn, B. C. and McLennan, S. M. and Klein, E. C."
+        Output (sep=' and '): ['Hahn, B. C.', 'McLennan, S. M.', 'Klein, E. C.']
 
-        Input:  "dataset, MOLA, DEM"
-        Output: ['dataset', 'MOLA', 'DEM']
+        Input: "dataset, MOLA, DEM"
+        Output (sep=' '): ['dataset', 'MOLA', 'DEM']
         """
         for key in d:
             if field_name in d[key]:

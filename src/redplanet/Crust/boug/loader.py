@@ -31,6 +31,7 @@ def get_metadata() -> dict:
 
 
 
+@substitute_docstrings
 def load(model: str = None) -> None:
     """
     Load Bouguer gravity anomaly dataset.
@@ -38,7 +39,9 @@ def load(model: str = None) -> None:
     Parameters
     ----------
     model : str
-        Name of the Bouguer model to load. Options are: ['Genova2016'].
+        Name of the Bouguer model to load. Options are:
+
+        - `'Genova2016'` — Bouguer gravity anomaly map from {@Genova2016_boug.n}, computed from truncated GMM-3 solution (degree 2 to 90) ({@Genova2016_gmm3.p}).
 
     Raises
     ------

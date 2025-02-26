@@ -19,6 +19,8 @@ def is_above(
     """
     Determine if the given point(s) are above the dichotomy boundary.
 
+    See `help(redplanet.Crust.dichotomy.get_coords)` for the source of the dichotomy boundary coordinates data.
+
     Parameters
     ----------
     {param.lon}
@@ -68,13 +70,17 @@ def is_above(
 
 
 
+@substitute_docstrings
 def get_coords() -> np.ndarray:
     """
-    Get a list of dichotomy boundary coordinates. Returns a numpy array of shape (n, 2) where n is the number of coordinates, and the columns are longitude (0 to 360) and latitude respectively.
+    Get a list of dichotomy boundary coordinates.
 
-    Notes
-    -----
-    TODO: insert Wieczorek reference
+    The origin of the dataset is not fully clear. We use the file "dichotomy_coordinates-JAH-0-360.txt" downloaded from @{Wieczorek2022_icta.n}. They attribute the data to *"Andrews-Hanna et al. (2008)"* which is ambiguous (to me atleast, I could be missing something obvious) — my best guess is @{dichotomy_paper.n}.
+
+    Returns
+    -------
+    np.ndarray
+        A numpy array of shape `(n, 2)` where `n` is the number of coordinates, and the two columns are longitude (0->360) and latitude respectively.
     """
     fpath = _get_fpath_dataset('dichotomy_coords')
     dat_dichotomy_coords = np.loadtxt(fpath)

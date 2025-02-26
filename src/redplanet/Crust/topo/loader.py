@@ -31,6 +31,7 @@ def get_metadata() -> dict:
 
 
 
+@substitute_docstrings
 def load(model: str = None) -> None:
     """
     Load a topography model.
@@ -38,12 +39,23 @@ def load(model: str = None) -> None:
     Parameters
     ----------
     model : str
-        Name of the topography model to load. Options are: ['DEM_463m', 'DEM_200m'].
+        Name of the topography model to load. Options are:
+
+        - `'DEM_463m'` (2GB) — Mars MGS MOLA DEM 463m ({@DEM_463m.p}).
+        - `'DEM_200m'` (11GB) — Mars MGS MOLA - MEX HRSC Blended DEM 200m ({@DEM_200m.p}).
+
+        For description of our modifications to the original data, see notes section.
 
     Raises
     ------
     ValueError
         If an invalid model name is provided.
+
+    Notes
+    -----
+    We modify the original data files by reprojecting to the "Mars 2000 Sphere" model (radius = 3,396,190 km) and converting from the "TIFF" file format to a simple binary file containing the raw bytes of the array data for faster & less memory-intensive loading. For more information and our code, see <https://github.com/Humboldt-Penguin/redplanet/tree/main/datasets/Crust/topo/DEM>{target="_blank"}.
+
+    - TODO: I'll eventually have a section on my website to describe datasets and how we modified them, add a link to that here.
     """
 
     info = {

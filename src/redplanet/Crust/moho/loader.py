@@ -35,6 +35,7 @@ def get_metadata() -> dict:
 
 
 
+@substitute_docstrings
 def load(
     interior_model    : str,
     insight_thickness : int | str,
@@ -43,14 +44,17 @@ def load(
     fail_silently     : bool = False,    ##  False [default] -> return None,  True -> return type(bool)
 ) -> None | bool:
     """
-    Load a model of the Mohorovičić discontinuity (crust-mantle interface).
+    Load a model of the Mohorovičić discontinuity (crust-mantle interface) with the given parameters. For a list of valid combinations of parameters (total 21,894 options), run `redplanet.Crust.moho.get_registry()` (returns a pandas DataFrame).
+
+    Spherical harmonic coefficients are precomputed in {@Wieczorek2022_icta.n} and downloaded on-the-fly from our own mirror. The full paper discusses/analyzes the models in detail ({@Wieczorek2022_icta_paper.p}). We process spherical harmonic coefficients with `pyshtools` ({@shtools.p}; {@shtools_paper.p}).
+
 
     Parameters
     ----------
     interior_model : str
         Name of the interior model used for the mantle and core (see notes for more information).
 
-        Options are: ['DWAK', 'DWThot', 'DWThotCrust1', 'DWThotCrust1r', 'EH45Tcold', 'EH45TcoldCrust1', 'EH45TcoldCrust1r', 'EH45ThotCrust2', 'EH45ThotCrust2r', 'Khan2022', 'LFAK', 'SANAK', 'TAYAK', 'YOTHotRc1760kmDc40km', 'YOTHotRc1810kmDc40km', 'ZG_DW'].
+        Options are: ['DWAK', 'DWThot', 'DWThotCrust1', 'DWThotCrust1r', 'EH45Tcold', 'EH45TcoldCrust1', 'EH45TcoldCrust1r', 'EH45ThotCrust2', 'EH45ThotCrust2r', 'Khan2022', 'LFAK', 'SANAK', 'TAYAK', 'YOTHotRc1760kmDc40km', 'YOTHotRc1810kmDc40km', 'ZG_DW']. See notes for more information.
     insight_thickness : int | str
         Assumed crustal thickness beneath the InSight landing site, in km.
     rho_south : int | str
@@ -79,9 +83,9 @@ def load(
 
     Notes
     -----
-    - Reference interior models:
-        - [ctplanet function to read reference interior models](https://markwieczorek.github.io/ctplanet/source/generated/ctplanet.ReadRefModel.html)
-        - [interior model files](https://github.com/MarkWieczorek/ctplanet/tree/74e8550080d4adc68ae291a500e8d198a40d437c/examples/Data/Mars-reference-interior-models)
+    - More information on reference interior models:
+        - [`ctplanet` function to read reference interior models (we don't use it, but it may be helpful if you're implementing this yourself)](https://markwieczorek.github.io/ctplanet/source/generated/ctplanet.ReadRefModel.html){target="_blank"}
+        - [interior model files](https://github.com/MarkWieczorek/ctplanet/tree/74e8550080d4adc68ae291a500e8d198a40d437c/examples/Data/Mars-reference-interior-models){target="_blank"}
     """
 
     ## load moho
