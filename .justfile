@@ -85,6 +85,11 @@ test-verbose:
 # type-check target=".":
 #     uvx mypy {{target}}
 
+[group("3. Project tools")]
+[doc("Start the live-reloading docs server locally (see: http://localhost:8000/ ).")]
+site-serve:
+    uv run mkdocs serve
+
 
 
 

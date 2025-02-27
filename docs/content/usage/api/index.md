@@ -1,0 +1,41 @@
+- Craters
+    - get()
+    - get_dataset()
+    - _load() [???]
+- Crust
+    - Bouguer Anomaly
+        - load()
+        - get()
+        - get_metadata()
+        - get_dataset()
+    - Mohorovičić Discontinuity / Crustal Thickness
+        - get_registry()
+        - load()
+        - get()
+        - get_metadata()
+        - get_dataset()
+    - Topography
+        - load()
+        - get()
+        - get_metadata()
+        - get_dataset()
+    - Dichotomy
+        - is_above()
+        - get_coords()
+- GRS
+    - get()
+    - get_metadata()
+    - get_dataset()
+- Mag
+    - Spherical Harmonic Model
+        - load()
+        - get()
+        - get_metadata()
+        - get_dataset()
+    - Source Depths
+        - get_nearest()
+        - get_dataset()
+- analysis
+    - impact_demag
+    - radial_profile
+- helper_functions
