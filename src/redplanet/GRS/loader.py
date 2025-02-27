@@ -36,70 +36,57 @@ def get_metadata() -> dict:
 
 def _load() -> None:
     """
-    NOTE:
-        - This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine.
-        - In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
+    Load the GRS dataset.
+
+    The
+
+    NOTE: This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine. In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
     """
 
-    fpath = _get_fpath_dataset('GRS')
-    ds = None
+    fpath = _get_fpath_dataset('GRS_v2')
 
-    ## open zipfile and iterate over files
-    with zipfile.ZipFile(fpath, 'r') as zipped_dir:
-        for zipped_file in zipped_dir.infolist():
-            filename = zipped_file.filename
-            if filename.startswith('README'):
-                continue
-            element_name = filename.split('_')[0].lower()
+    df = pd.read_excel(
+        fpath,
+        engine='calamine',  # `python-calamine` takes ~0.09s, while `openpyxl` takes ~0.6s! Old method (unzipping) takes ~0.1-0.2s altogether.
+        na_values=0,
+    ).dropna(axis=1, how='all')
 
 
-            ## read data file to pandas dataframe
-            with zipped_dir.open(filename) as unzipped_file:
-                df = pd.read_csv(
-                    unzipped_file,
-                    sep       = r'\s+',
-                    na_values = 9999.999,
-                    header    = 0,
-                    usecols   = [0, 1, 2, 3],
-                    names     = ['lat', 'lon', 'concentration', 'sigma']
-                )
-
-
-            ## convert units
-            if element_name == 'th':
-                scale_factor = 0.000001  # convert "ppm" to mass fraction (out of 1)
-            else:
-                scale_factor = 0.01      # convert "weight percent" (0-100) to mass fraction (out of 1)
-            df[['concentration','sigma']] *= scale_factor
-
-
-            ## convert to `pandas.DataFrame` to `xarray.DataSet`, and append to existing
-            df['element'] = element_name  # adds 'element' column
-            df = df.set_index(['element', 'lat', 'lon'])  # multi-indexing to allow for conversion to xarray, looks like this: https://files.catbox.moe/b2wpsp.png
-            this_ds = xr.Dataset.from_dataframe(df)
-            if ds is None:
-                ds = this_ds
-            else:
-                ds = xr.concat( [ds, this_ds], dim='element' )
-
-
-    ## Precompute volatiles
-    volatiles = (
-        ds
-        .sel(element=['cl','h2o','s'])
-        .sum(dim='element')
-        .expand_dims({'element': ['cl+h2o+s']})
+    df.columns = (
+        df.columns
+        .str.lower()
+        .str.replace('latitude', 'lat')
+        .str.replace('longitude', 'lon')
+        .str.replace(' wt%', '_concentration')
+        .str.replace(' wt %', '_concentration')
+        .str.replace(' ppm', '_concentration')
+        .str.replace(' sigma', '_sigma')
     )
-    ds = xr.concat( [ds, volatiles], dim='element' )
+
+    for col in df.columns:
+        if col in ['lat', 'lon']:
+            continue
+
+        if 'th' in col:
+            scale_factor = 0.000001  # convert "ppm" to mass fraction (out of 1)
+        else:
+            scale_factor = 0.01      # convert "weight percent" (0-100) to mass fraction (out of 1)
+        df[col] = df[col] * scale_factor
+
+    df = df.set_index(['lat', 'lon'])
 
 
-    ## Now convert from xarray.DataSet to redplanet.GriddedData
+    ds = xr.Dataset.from_dataframe(df)
+    ds['cl+h2o+s_concentration'] = ds['cl_concentration'] + ds['h2o_concentration'] + ds['s_concentration']
+    ds['cl+h2o+s_sigma'] = ds['cl_sigma'] + ds['h2o_sigma'] + ds['s_sigma']
+
+    # ds['cl+h2o+s_concentration'] = ds['cl+h2o+s_concentration'].fillna(0)
+    # ds['cl+h2o+s_sigma'] = ds['cl+h2o+s_sigma'].fillna(0)
+
+
     data_dict = {}
-
-    for element in list(ds.element.values):
-        for quantity in list(ds.data_vars):
-            data_dict[f'{element}_{quantity}'] = ds[quantity].sel(element=element).values
-
+    for var in ds.data_vars:
+        data_dict[var] = ds[var].values
 
     global _dat_grs
     _dat_grs = GriddedData(
@@ -108,15 +95,14 @@ def _load() -> None:
         is_slon   = True,
         data_dict = data_dict,
         metadata  = {
-            'description' : '2001 Mars Odyssey Gamma Ray Spectrometer Element Concentration Maps',
-            'units'       : 'mass fraction (out of 1)',
-            'elements'    : list(ds.element.values),
-            'grid_spacing': 5,
-            'links': {
-                'download': 'https://repository.lsu.edu/geo_psl/1/',
-                'paper'   : 'https://doi.org/10.1029/2022GL099235',
+            'description'   : '2001 Mars Odyssey Gamma Ray Spectrometer Element Concentration Maps',
+            'units'         : 'mass fraction (out of 1)',
+            'grid_spacing'  : 5,
+            'links'         : {
+                'paper'     : 'https://doi.org/10.1029/2022GL099235',
+                'download'  : 'https://data.mendeley.com/datasets/3jd9whd78m/1',
             },
-            'fpath'       : fpath,
+            'fpath'         : fpath,
         },
     )
 

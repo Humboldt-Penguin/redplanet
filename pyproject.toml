@@ -12,6 +12,7 @@ dependencies = [
     "numpy>=2.1.1",
     "pandas>=2.2.2",
     "pyshtools>=4.13.1",
+    "python-calamine>=0.3.1",
     "scipy>=1.14.1",
     "xarray>=2024.9.0",
     "xxhash>=3.5.0",

@@ -13,8 +13,8 @@ class Test__get_download_info:
 
     ## Valid input
     def test__get_download_info__grs_fname(self):
-        result = _get_download_info(name='GRS')
-        assert result['fname'] == '2022_Mars_Odyssey_GRS_Element_Concentration_Maps.zip'
+        result = _get_download_info(name='dichotomy_coords')
+        assert result['fname'] == 'dichotomy_coordinates-JAH-0-360.txt'
 
     ## Invalid input: `name` not available
     def test__get_download_info__invalid_dataset(self):

@@ -4,12 +4,21 @@ import pandas as pd
 
 
 _DATASETS = {
-    'GRS': {
-        'url'    : 'https://rutgers.box.com/shared/static/3u8cokpvnbpl8k7uuka7qtz1atj9pxu5',
-        'fname'  : '2022_Mars_Odyssey_GRS_Element_Concentration_Maps.zip',
+    # 'GRS': {
+    #     'url'    : 'https://rutgers.box.com/shared/static/3u8cokpvnbpl8k7uuka7qtz1atj9pxu5',
+    #     'fname'  : '2022_Mars_Odyssey_GRS_Element_Concentration_Maps.zip',
+    #     'dirpath': 'GRS/',
+    #     'hash'   : {
+    #         'sha256': 'ba2b5cc62b18302b1da0c111101d0d2318e69421877c4f9c145116b41502777b',
+    #     },
+    # },
+    'GRS_v2': {  # TODO: rename this to 'GRS' at some point
+        'url'    : 'https://data.mendeley.com/public-files/datasets/3jd9whd78m/files/a0c6ddc8-fbca-4119-b6f5-533a5775b719/file_downloaded',
+        # 'url'    : 'https://rutgers.box.com/shared/static/qxfzuv7ka5c57k5awj83ueknr27dmyi4', # alt mirror on my own box account
+        'fname'  : 'Rani2022_new_GRS_data.xlsx',
         'dirpath': 'GRS/',
         'hash'   : {
-            'sha256': 'ba2b5cc62b18302b1da0c111101d0d2318e69421877c4f9c145116b41502777b',
+            'sha256': '06f7b8cfc89a803c714a7dd69beba0d65ba9f26ccf8eb5ddc276e280c4e5b917',
         },
     },
     'dichotomy_coords': {
