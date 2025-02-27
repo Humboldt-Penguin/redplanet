@@ -10,6 +10,10 @@ _enable_stream_hash_check: bool = False
 def get_enable_stream_hash_check() -> bool:
     """
     Get the current value of the flag that determines whether we verify the hash of a file at URL by streaming before fully downloading it.
+
+    Returns
+    -------
+    bool
     """
     return _enable_stream_hash_check
 
@@ -17,6 +21,10 @@ def get_enable_stream_hash_check() -> bool:
 def set_enable_stream_hash_check(value: bool) -> None:
     """
     Set the flag that determines whether we verify the hash of a file at URL by streaming before fully downloading it.
+
+    Parameters
+    ----------
+    value : bool
     """
     global _enable_stream_hash_check
     _enable_stream_hash_check = value
