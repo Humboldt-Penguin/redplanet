@@ -6,6 +6,7 @@ import pandas as pd
 
 from redplanet.DatasetManager.main import _get_fpath_dataset
 from redplanet.helper_functions.coordinates import _plon2slon
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -22,11 +23,14 @@ def get_dataset() -> pd.DataFrame:
 
 
 
+@substitute_docstrings
 def _load() -> None:
     """
-    NOTE:
-        - This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine.
-        - In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
+    Load the magnetic source depth dataset.
+
+    Data is provided by {@Gong2021_data.n}. The full paper discusses/analyzes the models in detail ({@Gong2021_paper.p}).
+
+    NOTE: This method is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine. In contrast, in other modules like `Crust.topo` / `Crust.moho`, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
     """
 
     fname2level = {

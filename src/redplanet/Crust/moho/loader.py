@@ -46,7 +46,7 @@ def load(
     """
     Load a model of the Mohorovičić discontinuity (crust-mantle interface) with the given parameters. For a list of valid combinations of parameters (total 21,894 options), run `redplanet.Crust.moho.get_registry()` (returns a pandas DataFrame).
 
-    Spherical harmonic coefficients are precomputed in {@Wieczorek2022_icta.n} and downloaded on-the-fly from our own mirror. The full paper discusses/analyzes the models in detail ({@Wieczorek2022_icta_paper.p}). We process spherical harmonic coefficients with `pyshtools` ({@shtools.p}; {@shtools_paper.p}).
+    Spherical harmonic coefficients are precomputed in {@Wieczorek2022_icta.n} and downloaded on-the-fly from our own mirror. The full paper discusses/analyzes the models in detail ({@Wieczorek2022_icta_paper.p}). We process spherical harmonic coefficients with `pyshtools` ({@shtools_code.p}; {@shtools_paper.p}).
 
 
     Parameters

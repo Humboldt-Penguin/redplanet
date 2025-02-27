@@ -19,6 +19,9 @@ def get(
     """
     Get GRS element concentration/sigma values at the specified coordinates.
 
+    For source of the GRS data, see `help(redplanet.GRS.loader._load)`.
+
+
     Parameters
     ----------
     element : str
@@ -28,8 +31,11 @@ def get(
     quantity : str, optional
         Return 'concentration' or 'sigma' values, by default 'concentration'.
     normalize : bool, optional
-        If True, normalize the element quantity to a volatile-free (Cl, H2O, S) basis, by default False. See Notes for more information.
+        If True, normalize the element quantity to a volatile-free (Cl, H2O, S) basis, by default False.
+
+        > "The GRS instrument measures elemental abundances in the top-most tens of centimeters of the Martian surface, and thus is strongly influenced by near-surface soils, ice and dust deposits. These sediments broadly represent the bulk chemistry of the Martian upper crust when renormalized to a volatile-free basis [Taylor and McLennan, 2009] and as such, K and Th values must be renormalized to a H2O-, S-, and Cl-free basis to better reflect bulk crustal values." (@{Hahn2011.p})
     {param.as_xarray}
+
 
     Returns
     -------
@@ -37,25 +43,13 @@ def get(
 
         Units are mass fraction (out of one).
 
+
     Raises
     ------
     ValueError
-        - If `element` is not one of ['al', 'ca', 'cl', 'fe', 'h2o', 'k', 'si', 's', 'th'].
-        - If `quantity` is not one of ['concentration', 'sigma'].
-        - If `normalize` is True and `element` is one of ['cl', 'h2o', 's'] -- you can't normalize a volatile element to a volatile-free basis!
-
-    Notes
-    -----
-    Explanation of `normalize` parameter:
-
-    > "The GRS instrument measures elemental abundances in the top-most tens of centimeters of the Martian surface, and thus is strongly influenced by near-surface soils, ice and dust deposits. These sediments broadly represent the bulk chemistry of the Martian upper crust when renormalized to a volatile-free basis [Taylor and McLennan, 2009] and as such, K and Th values must be renormalized to a H2O-, S-, and Cl-free basis to better reflect bulk crustal values."
-
-    _Source: Hahn, B. C., S. M. McLennan, and E. C. Klein (2011), Martian surface heat production and crustal heat flow from Mars Odyssey Gamma-Ray spectrometry, Geophys. Res. Lett., 38, L14203, doi:[10.1029/2011GL047435](https://doi.org/10.1029/2011GL047435)._
-
-    References
-    ----------
-    https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2022GL099235
-    https://repository.lsu.edu/geo_psl/1/
+        - `element` is not one of ['al', 'ca', 'cl', 'fe', 'h2o', 'k', 'si', 's', 'th'].
+        - `quantity` is not one of ['concentration', 'sigma'].
+        - `normalize` is True and `element` is one of ['cl', 'h2o', 's'] -- you can't normalize a volatile element to a volatile-free basis!
     """
 
     ## input validation

@@ -34,13 +34,14 @@ def get_metadata() -> dict:
 
 
 
+@substitute_docstrings
 def _load() -> None:
     """
     Load the GRS dataset.
 
-    The
+    Data is provided by {@GRS_data.n}. The full paper discusses/analyzes the models in detail ({@GRS_paper.p}).
 
-    NOTE: This is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine. In contrast, in other modules like Crust.topo / Crust.moho, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
+    NOTE: This method is private & less modular because there will only ever be one GRS dataset, so lazy loading upon the first access is fine. In contrast, in other modules like `Crust.topo` / `Crust.moho`, we want the user to explicitly/deliberately call `load(<model_params>)` so they're aware of different models and which one they're choosing.
     """
 
     fpath = _get_fpath_dataset('GRS_v2')

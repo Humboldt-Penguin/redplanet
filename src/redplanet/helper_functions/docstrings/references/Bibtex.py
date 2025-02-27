@@ -121,11 +121,11 @@ class BibtexEntry:
         if not link: raise ValueError(f'No DOI or URL found for entry {self.key}')
         link = self._format_link(link)
 
-        title = f'*{title}*'
+        title = f'{title}'
         if self.entry_type == 'dataset':
             title += ' [Dataset]'
 
-        return f'{authors} ({year}). {title}. {publisher}. {link}'
+        return f'{authors} ({year}). *{title}*. {publisher}. {link}'
 
 
     @staticmethod
