@@ -22,7 +22,7 @@ def get(
     {param.lon}
     {param.lat}
     crthick : bool, optional
-        If True, return crustal thickness values, which is just the difference between the plain moho and a spherical harmonic model of topography evaluated to the same degree. Default is False.
+        If True, return crustal thickness values, which is just the difference between the moho and a spherical harmonic model of topography evaluated to the same degree (same method as {@Wieczorek2022_icta.n}). Default is False.
     {param.as_xarray}
 
     Returns

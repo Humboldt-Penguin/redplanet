@@ -95,6 +95,10 @@ class BibtexEntry:
         if not link: raise ValueError(f'No DOI or URL found for entry {self.key}')
         link = self._format_link(link)
 
+        note = self.fields.get('_note', '')
+        if note:
+            note = f' *[{note}]*'
+
         # build the journal info (italicized using asterisks)
         journal_info = f'*{journal}*'
         if volume:
@@ -104,7 +108,7 @@ class BibtexEntry:
         if pages:
             journal_info += f', {pages}'
 
-        return f'{authors} ({year}). {title}. {journal_info}. {link}'
+        return f'{authors} ({year}). {title}. {journal_info}. {link}{note}'
 
 
     def _cite_full_dataset_or_misc(self) -> str:
@@ -121,11 +125,15 @@ class BibtexEntry:
         if not link: raise ValueError(f'No DOI or URL found for entry {self.key}')
         link = self._format_link(link)
 
+        note = self.fields.get('_note', '')
+        if note:
+            note = f' *[{note}]*'
+
         title = f'{title}'
         if self.entry_type == 'dataset':
             title += ' [Dataset]'
 
-        return f'{authors} ({year}). *{title}*. {publisher}. {link}'
+        return f'{authors} ({year}). *{title}*. {publisher}. {link}{note}'
 
 
     @staticmethod

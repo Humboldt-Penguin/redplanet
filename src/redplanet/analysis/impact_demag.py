@@ -14,7 +14,7 @@ def compute_pressure(
     return_params          : bool  = False,
 ) -> np.ndarray | tuple[np.ndarray, dict]:
     """
-    Compute the maximum subusrface shock pressures from an impact using the Rankine-Hugoniot relations.
+    Compute the maximum subsurface shock pressures from an impact using the Rankine-Hugoniot relations.
 
 
     Parameters

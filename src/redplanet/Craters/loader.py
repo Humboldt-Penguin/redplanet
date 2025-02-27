@@ -4,6 +4,7 @@ import pandas as pd
 from redplanet.DatasetManager.main import _get_fpath_dataset
 
 from redplanet.helper_functions.coordinates import _slon2plon
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -13,13 +14,34 @@ _df_craters: pd.DataFrame | None = None
 def _get_dataset() -> pd.DataFrame:
     """
     Returns the full crater dataset. If the dataset has not been loaded yet, it will be loaded.
+
+    Returns
+    -------
+    pd.DataFrame
+        For description of columns, see `help(redplanet.Craters.get)`.
     """
     if _df_craters is None:
         _load()
     return _df_craters
 
 
+@substitute_docstrings
 def _load() -> None:
+    """
+    Load the crater dataset.
+
+    We create a custom database which unifies the following:
+
+    1. Global database of Martian impact craters ({@Robbins2012_crater_db.p}).
+    2. Crater ages from both Hartmann and Neukum isochron methods ({@Robbins2013_crater_ages.p}).
+    3. IAU-approved crater nomenclature ({@IAU_crater_names.p}}).
+
+    For more information and our code, see <https://github.com/Humboldt-Penguin/redplanet/tree/main/datasets/Craters>{target="_blank"}.
+
+    - TODO: I'll eventually have a section on my website to describe datasets and how we modified them, add a link to that here.
+
+    {note._load}
+    """
     fpath_df = _get_fpath_dataset('crater_db')
     global _df_craters
     _df_craters = pd.read_csv(fpath_df)

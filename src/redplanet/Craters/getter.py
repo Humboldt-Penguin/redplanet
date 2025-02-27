@@ -18,6 +18,8 @@ def get(
     """
     Filter/query a dataset of craters >50km diameter, with ages/names when available. Calling this with no arguments will return the full dataset.
 
+    For source of the crater database, see `help(redplanet.Craters.loader._load)`.
+
     Parameters
     ----------
     crater_id : str | list[str], optional
@@ -57,10 +59,6 @@ def get(
         - `['N_H(10)', 'N_N(10)', 'N_H(25)', 'N_N(25)', 'N_H(50)', 'N_N(50)', 'Hartmann Isochron Age', 'Neukum Isochron Age', 'Hartmann Turn-Off Diameter', 'Neukum Turn-Off Diameter']` : None | list[float, float, float]
             - When available, the ages are given in a list where the first value is the estimated age and second/third are uncertainties (they will always be negative/positive respectively). All values are in billions of years (aka "giga-annums"/"Ga").
             - For more info, see Supplementary Table 3 of https://doi.org/10.1016/j.icarus.2013.03.019 .
-
-    Notes
-    -----
-    TODO: insert Robbins citation... or link to `dataset/Craters/README.md` in my github repo...? probably both, but rely on the README for the full citation/information and only provide cursory info here.
     """
 
     df = _get_dataset()
