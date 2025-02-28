@@ -41,7 +41,7 @@ def load(model: str = None) -> None:
     model : str
         Name of the Bouguer model to load. Options are:
 
-        - `'Genova2016'` — Bouguer gravity anomaly map from {@Genova2016_boug.n}, computed from truncated GMM-3 solution (degree 2 to 90) ({@Genova2016_gmm3.p}).
+        - `'Genova2016'` — Bouguer gravity anomaly map from {@Genova2016_boug_data.n}, computed from truncated GMM-3 solution (degree 2 to 90) ({@Genova2016_boug_paper.p}).
 
     Raises
     ------
