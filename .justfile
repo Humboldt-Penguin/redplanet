@@ -88,7 +88,7 @@ test-verbose:
 [group("3. Project tools")]
 [doc("Start the live-reloading docs server locally (see: http://localhost:8000/ ).")]
 site-serve:
-    uv run mkdocs serve
+    uv run mkdocs serve --config-file docs/mkdocs.yml
 
 
 

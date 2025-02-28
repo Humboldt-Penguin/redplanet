@@ -3,6 +3,9 @@ repo_url: https://github.com/humboldt-penguin/redplanet
 repo_name: RedPlanet
 # site_url: TODO
 
+docs_dir: 'site'
+
+
 theme:
   name: material
 
@@ -34,7 +37,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          paths: [src]  ## see: https://mkdocstrings.github.io/python/usage/#using-the-paths-option
+          paths: [../src/]  ## see: https://mkdocstrings.github.io/python/usage/#using-the-paths-option
           options:
             docstring_style: numpy
             force_inspection: true  ## resolve dynamic docstrings, mainly from `@substitute_docstrings` decorator -- TODO: implement selective inspection at some point, see: https://mkdocstrings.github.io/griffe/guide/users/how-to/selectively-inspect/
@@ -47,9 +50,13 @@ plugins:
             # show_root_toc_entry: false  ## hide methods from TOC, you can specify them manually with the `toc_label` option (see: https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_toc_entry )
 
 
+## Don't exclude '.assets' although all other '.*' are excluded (see: https://www.mkdocs.org/user-guide/configuration/#exclude_docs — NOTE: the examples on the website don't work on their own because you can't have comments at the end of a line in a gitignore since it'll pick up the trailing whitespace!!! stupid!!)
+exclude_docs: |
+  !.assets
+
 extra_css:
-  - assets/css/fonts.css
-  - assets/css/themes.css
+  - .assets/css/fonts.css
+  - .assets/css/themes.css
 
 
 ## LaTeX, MathJax (see: https://squidfunk.github.io/mkdocs-material/reference/math/#mathjax-mkdocsyml )
@@ -69,7 +76,7 @@ markdown_extensions:
   - pymdownx.details
   - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (see: https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
 extra_javascript:
-  - assets/javascripts/mathjax.js
+  - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 
@@ -81,37 +88,37 @@ nav:
   - Home: index.md
 
   - Usage:
-    - content/usage/index.md
+    - usage/index.md
 
     - Getting Started:
-      - Installation: content/usage/getting_started/installation.md
-      # - Datasets: content/usage/getting_started/datasets.md
-      # - Analysis: content/usage/getting_started/analysis.md
+      - Installation: usage/getting_started/installation.md
+      # - Datasets: usage/getting_started/datasets.md
+      # - Analysis: usage/getting_started/analysis.md
 
     - API Reference:
-      - content/usage/api/index.md
+      - usage/api/index.md
       - Crust:
         - Bouguer Anomaly:
-          - load()         : content/usage/api/crust/boug/load.md
-          - get()          : content/usage/api/crust/boug/get.md
-          - get_metadata() : content/usage/api/crust/boug/get_metadata.md
-          - get_dataset()  : content/usage/api/crust/boug/get_dataset.md
+          - load()         : usage/api/crust/boug/load.md
+          - get()          : usage/api/crust/boug/get.md
+          - get_metadata() : usage/api/crust/boug/get_metadata.md
+          - get_dataset()  : usage/api/crust/boug/get_dataset.md
 
 
   - Supplemental:
-    - content/supplemental/index.md
+    - supplemental/index.md
 
     # - Datasets:
     #   - Crust:
-    #     - Bouguer Anomaly: content/supplemental/datasets/crust/boug.md
-    - Impact Demagnetization: content/supplemental/impact_demagnetization.md
-    - Radial Profile: content/supplemental/radial_profile.md
-    - Plotting: content/supplemental/plotting.md
-    # - Heat Flow: content/supplemental/heat_flow.md
+    #     - Bouguer Anomaly: supplemental/datasets/crust/boug.md
+    - Impact Demagnetization: supplemental/impact_demagnetization.md
+    - Radial Profile: supplemental/radial_profile.md
+    - Plotting: supplemental/plotting.md
+    # - Heat Flow: supplemental/heat_flow.md
 
 
   - About:
-    - Contact: content/about/contact.md
-    - Changelog: content/about/changelog.md
-    - License: content/about/license.md
-    - Contributing: content/about/contributing.md
+    - Contact: about/contact.md
+    - Changelog: about/changelog.md
+    - License: about/license.md
+    - Contributing: about/contributing.md
