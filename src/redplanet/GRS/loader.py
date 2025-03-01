@@ -39,7 +39,7 @@ def _load() -> None:
     """
     Load the GRS dataset.
 
-    Data is provided by {@GRS_data.n}. The full paper discusses/analyzes the models in detail ({@GRS_paper.p}).
+    For more information on the dataset, see `help(redplanet.GRS.get)`.
 
     {note._load}
     """

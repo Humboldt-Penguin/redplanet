@@ -30,15 +30,7 @@ def _load() -> None:
     """
     Load the crater dataset.
 
-    We create a custom database which unifies the following:
-
-    1. Global database of Martian impact craters ({@Robbins2012_crater_db.p}).
-    2. Crater ages from both Hartmann and Neukum isochron methods ({@Robbins2013_crater_ages.p}).
-    3. IAU-approved crater nomenclature ({@IAU_crater_names.p}}).
-
-    For more information and our code, see <https://github.com/Humboldt-Penguin/redplanet/tree/main/datasets/Craters>{target="_blank"}.
-
-    - TODO: I'll eventually have a section on my website to describe datasets and how we modified them, add a link to that here.
+    For more information on the dataset, see `help(redplanet.Craters.get)`.
 
     {note._load}
     """

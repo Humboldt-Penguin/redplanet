@@ -18,7 +18,7 @@ def get_nearest(
     """
     Get magnetic source depth data, sorted from closest to furthest from the given point.
 
-    For source of the data, see `help(redplanet.Mag.depth.loader._load)`.
+    Data is provided by {@Gong2021_data.n}. The full paper discusses/analyzes the models in detail ({@Gong2021_paper.p}).
 
     Parameters
     ----------
@@ -32,7 +32,7 @@ def get_nearest(
     Returns
     -------
     pd.DataFrame | list[dict]
-        Information about 412 dipoles provided by Gong & Wieczorek 2021, sorted from closest to furthest from the given point. Columns are:
+        Information about all 412 dipoles sorted from closest to furthest from the input coordinate. Columns are:
 
         - `lon` : float
             - Longitude in range [-180, 180].

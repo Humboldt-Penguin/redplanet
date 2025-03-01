@@ -28,7 +28,7 @@ def _load() -> None:
     """
     Load the magnetic source depth dataset.
 
-    Data is provided by {@Gong2021_data.n}. The full paper discusses/analyzes the models in detail ({@Gong2021_paper.p}).
+    For more information on the dataset, see `help(redplanet.Mag.depth.get_nearest)`.
 
     {note._load}
     """

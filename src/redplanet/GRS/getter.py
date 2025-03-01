@@ -19,7 +19,7 @@ def get(
     """
     Get GRS element concentration/sigma values at the specified coordinates.
 
-    For source of the GRS data, see `help(redplanet.GRS.loader._load)`.
+    Data is provided by {@GRS_data.n}. The full paper discusses/analyzes the models in detail ({@GRS_paper.p}).
 
 
     Parameters
