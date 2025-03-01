@@ -58,7 +58,7 @@ exclude_docs: |
 
 extra_css:
   - .assets/css/fonts.css
-  - .assets/css/indent.css
+  - .assets/css/spacing.css
   - .assets/css/themes.css
 
 
@@ -90,12 +90,16 @@ extra_javascript:
 ## Site map
 nav:
 
-  - Introduction:
+  - Home:
     - index.md
     - Quick Start:
       - Installation: quick_start/installation.md
       - Overview: quick_start/overview.md
-
+    - About:
+      - Contact: about/contact.md
+      - Changelog: about/changelog.md
+      - License: about/license.md
+      - Contributing: about/contributing.md
 
 
   - Usage:
@@ -168,10 +172,5 @@ nav:
     - Plotting: supplemental/plotting.md
     # - Heat Flow: supplemental/heat_flow.md
 
-
-
-  - About:
-    - Contact: about/contact.md
-    - Changelog: about/changelog.md
-    - License: about/license.md
-    - Contributing: about/contributing.md
+  - Tutorials & Guides:
+    - tutorials/index.md
