@@ -93,17 +93,28 @@ site-serve:
 [group("3. Project tools")]
 [doc("Deploy to GitHub Pages.")]
 site-deploy:
-    uv run mkdocs gh-deploy --config-file docs/mkdocs.yml
+    uv run mkdocs gh-deploy --config-file docs/mkdocs.yml --no-history
+    just _clean_site
 
 
 
 
 
 [group("misc")]
-[doc("Clean up Python bytecode artifacts & website build files.")]
+[doc("Clean up Python bytecode artifacts + website build files.")]
 clean:
+    just _clean_python
+    just _clean_site
+
+
+
+# Clean up Python bytecode artifacts.
+_clean_python:
     find . -type d -name "__pycache__" -exec rm -r {} +
     find . -type f -name "*.pyc" -exec rm -f {} +
     find . -type d -name ".mypy_cache" -exec rm -r {} +
     find . -type d -name ".pytest_cache" -exec rm -r {} +
+
+# Clean up website build files.
+_clean_site:
     rm -rf docs/site/

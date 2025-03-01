@@ -45,16 +45,16 @@ plugins:
           options:
             docstring_style: numpy
             force_inspection: true  ## resolve dynamic docstrings, mainly from `@substitute_docstrings` decorator -- TODO: implement selective inspection at some point, see: https://mkdocstrings.github.io/griffe/guide/users/how-to/selectively-inspect/
-            annotations_path: source  ## verbosity for annotations path, e.g. `ndarray` vs `numpy.ndarray` (see: https://mkdocstrings.github.io/python/usage/configuration/signatures/#annotations_path )
-            # docstring_section_style: list  ## render parameters/returns/etc as bulleted lists (like numpy) instead of the default tables (see: https://mkdocstrings.github.io/python/usage/configuration/docstrings/?h=docstring_section_style#list )
-            show_root_heading: true  ## make function titles visible on page (see: https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_heading )
+            annotations_path: source  ## verbosity for annotations path, e.g. `ndarray` vs `numpy.ndarray` (https://mkdocstrings.github.io/python/usage/configuration/signatures/#annotations_path )
+            # docstring_section_style: list  ## render parameters/returns/etc as bulleted lists (like numpy) instead of the default tables (https://mkdocstrings.github.io/python/usage/configuration/docstrings/?h=docstring_section_style#list )
+            show_root_heading: true  ## make function titles visible on page (https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_heading )
             heading_level: 1
-            separate_signature: true  ## put function signature in a code block below the heading (see: https://mkdocstrings.github.io/python/usage/configuration/signatures/#separate_signature )
-            show_signature_annotations: true  ## show type annotations in function signatures (see: https://mkdocstrings.github.io/python/usage/configuration/signatures/#show_signature_annotations )
-            # show_root_toc_entry: false  ## hide methods from TOC, you can specify them manually with the `toc_label` option (see: https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_toc_entry )
+            separate_signature: true  ## put function signature in a code block below the heading (https://mkdocstrings.github.io/python/usage/configuration/signatures/#separate_signature )
+            show_signature_annotations: true  ## show type annotations in function signatures (https://mkdocstrings.github.io/python/usage/configuration/signatures/#show_signature_annotations )
+            # show_root_toc_entry: false  ## hide methods from TOC, you can specify them manually with the `toc_label` option (https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_toc_entry )
 
 
-## Don't exclude '.assets' although all other '.*' are excluded (see: https://www.mkdocs.org/user-guide/configuration/#exclude_docs — NOTE: the examples on the website don't work on their own because you can't have comments at the end of a line in a gitignore since it'll pick up the trailing whitespace!!! stupid!!)
+## Don't exclude '.assets' although all other '.*' are excluded (https://www.mkdocs.org/user-guide/configuration/#exclude_docs — NOTE: the examples on the website don't work on their own because you can't have comments at the end of a line in a gitignore since it'll pick up the trailing whitespace!!! stupid!!)
 exclude_docs: |
   !.assets
 
@@ -64,9 +64,9 @@ extra_css:
   - .assets/css/themes.css
 
 
-## LaTeX, MathJax (see: https://squidfunk.github.io/mkdocs-material/reference/math/#mathjax-mkdocsyml )
-## Code blocks (see: https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
-## Admonitions (see: https://squidfunk.github.io/mkdocs-material/reference/admonitions/ )
+## LaTeX, MathJax (https://squidfunk.github.io/mkdocs-material/reference/math/#mathjax-mkdocsyml )
+## Code blocks (https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
+## Admonitions (https://squidfunk.github.io/mkdocs-material/reference/admonitions/ )
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -79,11 +79,16 @@ markdown_extensions:
   - pymdownx.superfences
   - admonition
   - pymdownx.details
-  - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (see: https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
+  - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
   - md_in_html  ## annotations
 extra_javascript:
   - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
+## hide footer (https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/ )
+extra:
+  generator: false
 
 
 

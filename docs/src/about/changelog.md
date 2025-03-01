@@ -7,6 +7,7 @@ TODO
 - Breaking changes
     - (None currently planned)
 - Major features
+    - [ ] Plotting (with hillshade background...?)
     - [ ] Add MAVEN magnetometer module
 - Minor changes/updates
     - [ ] Update crater database with new [IAU additions](https://planetarynames.wr.usgs.gov/SearchResults?Target=20_Mars&Feature%20Type=9_Crater,%20craters){target="_blank"}
