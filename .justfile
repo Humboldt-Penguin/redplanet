@@ -90,14 +90,20 @@ test-verbose:
 site-serve:
     uv run mkdocs serve --config-file docs/mkdocs.yml
 
+[group("3. Project tools")]
+[doc("Deploy to GitHub Pages.")]
+site-deploy:
+    uv run mkdocs gh-deploy --config-file docs/mkdocs.yml
+
 
 
 
 
 [group("misc")]
-[doc("Clean up Python bytecode artifacts.")]
+[doc("Clean up Python bytecode artifacts & website build files.")]
 clean:
     find . -type d -name "__pycache__" -exec rm -r {} +
     find . -type f -name "*.pyc" -exec rm -f {} +
     find . -type d -name ".mypy_cache" -exec rm -r {} +
     find . -type d -name ".pytest_cache" -exec rm -r {} +
+    rm -rf docs/site/

@@ -3,7 +3,9 @@ repo_url: https://github.com/humboldt-penguin/redplanet
 repo_name: RedPlanet
 # site_url: TODO
 
+## both of these are relative to `mkdocs.yml` whose path is provided via cli (`--config-file docs/mkdocs.yml`)
 docs_dir: 'src'
+site_dir: 'site'
 
 
 theme:
