@@ -3,7 +3,7 @@ repo_url: https://github.com/humboldt-penguin/redplanet
 repo_name: RedPlanet
 # site_url: TODO
 
-docs_dir: 'site'
+docs_dir: 'src'
 
 
 theme:
