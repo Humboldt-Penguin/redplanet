@@ -1,0 +1,1 @@
+::: redplanet.user_config.set_enable_stream_hash_check

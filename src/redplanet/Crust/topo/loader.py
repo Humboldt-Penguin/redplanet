@@ -53,9 +53,7 @@ def load(model: str = None) -> None:
 
     Notes
     -----
-    We modify the original data files by reprojecting to the "Mars 2000 Sphere" model (radius = 3,396,190 km) and converting from the "TIFF" file format to a simple binary file containing the raw bytes of the array data for faster & less memory-intensive loading. For more information and our code, see <https://github.com/Humboldt-Penguin/redplanet/tree/main/datasets/Crust/topo/DEM>{target="_blank"}.
-
-    - TODO: I'll eventually have a section on my website to describe datasets and how we modified them, add a link to that here.
+    We modify the original data files by reprojecting to the "Mars 2000 Sphere" model (radius = 3,396,190 km) and converting from the "TIFF" file format to a simple binary file containing the raw bytes of the array data for faster & less memory-intensive loading. For more information and our code, see <https://github.com/Humboldt-Penguin/redplanet/tree/main/datasets/Crust/topo/DEM>{target="_blank"} -- TODO: I'll eventually have a section on my website to describe datasets and how we modified them, add a link to that here.
     """
 
     info = {

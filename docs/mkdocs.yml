@@ -24,12 +24,14 @@ theme:
   icon:
     logo: material/satellite-variant
     repo: fontawesome/brands/github
+    annotation: material/plus-circle-outline
 
   features:
     - navigation.tabs  ## tabs in the top bar (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/?h=navigation+tabs#navigation-tabs )
     - content.code.copy  ## code blocks: copy button (https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
     - navigation.instant  ## behaves like a single-page application, i.e. extremely fast for free (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#instant-loading )
     - navigation.indexes  ## clicking on a section brings you to an overview page (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#section-index-pages )
+    # - navigation.expand  ## everything is expanded by default (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-expansion-with-expansion ) -- I'm tentatively leaning towards NOT doing this so users get a better sense of nesting / big-picture structure...?
 
 
 plugins:
@@ -56,6 +58,7 @@ exclude_docs: |
 
 extra_css:
   - .assets/css/fonts.css
+  - .assets/css/indent.css
   - .assets/css/themes.css
 
 
@@ -75,6 +78,7 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (see: https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
+  - md_in_html  ## annotations
 extra_javascript:
   - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -85,36 +89,85 @@ extra_javascript:
 
 ## Site map
 nav:
-  - Home: index.md
+
+  - Introduction:
+    - index.md
+    - Quick Start:
+      - Installation: quick_start/installation.md
+      - Overview: quick_start/overview.md
+
+
 
   - Usage:
     - usage/index.md
-
-    - Getting Started:
-      - Installation: usage/getting_started/installation.md
-      # - Datasets: usage/getting_started/datasets.md
-      # - Analysis: usage/getting_started/analysis.md
-
-    - API Reference:
-      - usage/api/index.md
+    - User Config:
+      - get_dirpath_datacache(): usage/user_config/get_dirpath_datacache.md
+      - set_dirpath_datacache(...): usage/user_config/set_dirpath_datacache.md
+      - get_max_size_to_calculate_hash_GiB(): usage/user_config/get_max_size_to_calculate_hash_GiB.md
+      - set_max_size_to_calculate_hash_GiB(...): usage/user_config/set_max_size_to_calculate_hash_GiB.md
+      - get_enable_stream_hash_check(): usage/user_config/get_enable_stream_hash_check.md
+      - set_enable_stream_hash_check(...): usage/user_config/set_enable_stream_hash_check.md
+    - Datasets:
+      - Craters:
+        - get(...): usage/datasets/Craters/get.md
       - Crust:
+        - Topography / DEM:
+          - load(...): usage/datasets/Crust/topo/load.md
+          - get(...): usage/datasets/Crust/topo/get.md
+          - get_metadata(): usage/datasets/Crust/topo/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/topo/get_dataset.md
+        - Dichotomy:
+          - get_coords(): usage/datasets/Crust/dichotomy/get_coords.md
+          - is_above(...): usage/datasets/Crust/dichotomy/is_above.md
+        - Mohorovičić Discontinuity / Crustal Thickness:
+          - get_registry(): usage/datasets/Crust/moho/get_registry.md
+          - load(...): usage/datasets/Crust/moho/load.md
+          - get(...): usage/datasets/Crust/moho/get.md
+          - get_metadata(): usage/datasets/Crust/moho/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/moho/get_dataset.md
         - Bouguer Anomaly:
-          - load()         : usage/api/crust/boug/load.md
-          - get()          : usage/api/crust/boug/get.md
-          - get_metadata() : usage/api/crust/boug/get_metadata.md
-          - get_dataset()  : usage/api/crust/boug/get_dataset.md
+          - load(...): usage/datasets/Crust/boug/load.md
+          - get(...): usage/datasets/Crust/boug/get.md
+          - get_metadata(): usage/datasets/Crust/boug/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/boug/get_dataset.md
+      - Gamma-Ray Spectrometer (GRS):
+        - get(...): usage/datasets/GRS/get.md
+        - get_metadata(): usage/datasets/GRS/get_metadata.md
+        - get_dataset(): usage/datasets/GRS/get_dataset.md
+      - Magnetic Field:
+        - Spherical Harmonic Models:
+          - load(...): usage/datasets/Mag/sh/load.md
+          - get(...): usage/datasets/Mag/sh/get.md
+          - get_metadata(): usage/datasets/Mag/sh/get_metadata.md
+          - get_dataset(): usage/datasets/Mag/sh/get_dataset.md
+        - Magnetic Source Depths:
+          - get_dataset(...): usage/datasets/Mag/depth/get_dataset.md
+          - get_nearest(...): usage/datasets/Mag/depth/get_nearest.md
+    - Analysis:
+      - Radial Profile:
+        - get_concentric_ring_coords(...): usage/analysis/radial_profile/get_concentric_ring_coords.md
+        - get_profile(...): usage/analysis/radial_profile/get_profile.md
+      - Impact Demagnetization:
+        - compute_pressure(...): usage/analysis/impact_demag/compute_pressure.md
+    - Helper Functions:
+      - Coordinates:
+        - _plon2slon(...): usage/helper_functions/coordinates/_plon2slon.md
+        - _slon2plon(...): usage/helper_functions/coordinates/_slon2plon.md
+      - Geodesy:
+        - get_distance(...): usage/helper_functions/geodesy/get_distance.md
+        - move_forward(...): usage/helper_functions/geodesy/move_forward.md
+        - make_circle(...): usage/helper_functions/geodesy/make_circle.md
+      - Misc:
+        - timer(...): usage/helper_functions/misc/timer.md
+
 
 
   - Supplemental:
-    - supplemental/index.md
-
-    # - Datasets:
-    #   - Crust:
-    #     - Bouguer Anomaly: supplemental/datasets/crust/boug.md
     - Impact Demagnetization: supplemental/impact_demagnetization.md
     - Radial Profile: supplemental/radial_profile.md
     - Plotting: supplemental/plotting.md
     # - Heat Flow: supplemental/heat_flow.md
+
 
 
   - About:

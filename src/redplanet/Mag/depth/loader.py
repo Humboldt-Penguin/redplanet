@@ -14,9 +14,44 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 _dat_depths: pd.DataFrame | None = None
 
-def get_dataset() -> pd.DataFrame:
+@substitute_docstrings
+def get_dataset(as_dict: bool = False) -> pd.DataFrame:
+    """
+    Get the full magnetic source depth dataset.
+
+    Data is provided by {@Gong2021_data.n}. The full paper discusses/analyzes the models in detail ({@Gong2021_paper.p}).
+
+
+    Parameters
+    ----------
+    as_dict : bool, optional
+        If True, return the data as a list of dictionaries. Default is False.
+
+
+    Returns
+    -------
+    pd.DataFrame | list[dict]
+        Information about all 412 dipoles. Columns are:
+
+        - `lon` : float
+            - Longitude in range [-180, 180].
+        - `lat` : float
+            - Latitude in range [-90, 90].
+        - `chi_reduced` : float
+            - "reduced chi^2 value of the best fitting model"
+        - `cap_radius_km` : list[float]
+            - "angular radii of the magnetized caps (best-fit, and 1-sigma lower/upper limits)"
+        - `depth_km` : list[float]
+            - "magnetization depth (best-fit, and 1-sigma lower/upper limits)"
+        - `dipole_mment_Am2` : list[float]
+            - "square root of the metric N<M^2>V^2 [in A m^2] (best-fit, and 1-sigma lower/upper limits)"
+
+        Note that the 1-sigma lower/upper values are NaN when the minimum reduced chi^2 value of the best fitting model is outside the 1-sigma confidence level of the reduced chi^2 that were obtained from Monte Carlo simulations.
+    """
     if _dat_depths is None:
         _load()
+    if as_dict:
+        return _dat_depths.to_dict(orient='records')
     return _dat_depths
 
 

@@ -18,7 +18,7 @@ def get_nearest(
     """
     Get magnetic source depth data, sorted from closest to furthest from the given point.
 
-    Data is provided by {@Gong2021_data.n}. The full paper discusses/analyzes the models in detail ({@Gong2021_paper.p}).
+    For source of the dataset, see references of `help(redplanet.Mag.depth.get_nearest)`.
 
     Parameters
     ----------
@@ -32,24 +32,10 @@ def get_nearest(
     Returns
     -------
     pd.DataFrame | list[dict]
-        Information about all 412 dipoles sorted from closest to furthest from the input coordinate. Columns are:
+        Information about all 412 dipoles, sorted from closest to furthest from the given input coordinate. Columns are identical to those in `redplanet.Mag.depth.get_dataset` (look there for full explanations), with the addition of a computed column:
 
-        - `lon` : float
-            - Longitude in range [-180, 180].
-        - `lat` : float
-            - Latitude in range [-90, 90].
-        - `chi_reduced` : float
-            - "reduced chi^2 value of the best fitting model"
-        - `cap_radius_km` : list[float]
-            - "angular radii of the magnetized caps (best-fit, and 1-sigma lower/upper limits)"
-        - `depth_km` : list[float]
-            - "magnetization depth (best-fit, and 1-sigma lower/upper limits)"
-        - `dipole_mment_Am2` : list[float]
-            - "square root of the metric N<M^2>V^2 [in A m^2] (best-fit, and 1-sigma lower/upper limits)"
         - `distance_km` : float
-            - "distance from the given point to the dipole in km"
-
-        Note that the 1-sigma lower/upper values are NaN when the minimum reduced chi^2 value of the best fitting model is outside the 1-sigma confidence level of the reduced chi^2 that were obtained from Monte Carlo simulations.
+            - Distance from the given input coordinate to the dipole, in km.
     """
 
     lon = _plon2slon(lon)

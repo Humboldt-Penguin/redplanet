@@ -1,0 +1,1 @@
+::: redplanet.user_config.set_max_size_to_calculate_hash_GiB

@@ -3,9 +3,11 @@ import pandas as pd
 from redplanet.Craters.loader import _get_dataset
 
 from redplanet.helper_functions.coordinates import _verify_coords
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
+@substitute_docstrings
 def get(
     crater_id : str | list[str]     = None,
     name      : str | list[str]     = None,
@@ -33,7 +35,9 @@ def get(
     name : str | list[str], optional
         Crater name according to official IAU nomenclature (as of 2024-11-26).
     lon : tuple[float, float], optional
-        Filter craters whose center falls within this range of longitudes. The given range must be a subset of either [-180,180] or [0,360] -- e.g. `lon=[-170,350]` is not allowed (it doesn't make sense).
+        Filter craters whose center falls within this range of longitudes.
+
+        The given range must be a subset of either [-180,180] or [0,360] -- e.g. `lon=[-170,350]` is not allowed (it doesn't make sense).
     lat : tuple[float, float], optional
         Filter craters whose center falls within this range of latitudes.
     diameter : tuple[float, float], optional
@@ -61,10 +65,10 @@ def get(
         - `diam` : float
             - Diameter of the crater, in km.
         - `['diam_sd', 'diam_elli_major', 'diam_elli_minor', 'diam_elli_angle', 'diam_elli_major_sd', 'diam_elli_minor_sd']` : float
-            - For more info, see Appendix A of https://doi.org/10.1029/2011JE003966 .
+            - For more info, see Appendix A of {@Robbins2012_crater_db.n}.
         - `['N_H(10)', 'N_N(10)', 'N_H(25)', 'N_N(25)', 'N_H(50)', 'N_N(50)', 'Hartmann Isochron Age', 'Neukum Isochron Age', 'Hartmann Turn-Off Diameter', 'Neukum Turn-Off Diameter']` : None | list[float, float, float]
             - When available, the ages are given in a list where the first value is the estimated age and second/third are uncertainties (they will always be negative/positive respectively). All values are in billions of years (aka "giga-annums"/"Ga").
-            - For more info, see Supplementary Table 3 of https://doi.org/10.1016/j.icarus.2013.03.019 .
+            - For more info, see Supplementary Table 3 of {@Robbins2013_crater_ages.n}.
     """
 
     df = _get_dataset()

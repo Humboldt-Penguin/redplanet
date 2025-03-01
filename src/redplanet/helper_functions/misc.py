@@ -16,6 +16,15 @@ def timer(message='', d=3):
         A message to display when the code block is executed, by default nothing.
     d : int, optional
         The number of decimal places to display in the elapsed time, by default 3.
+
+    Examples
+    --------
+    >>> from redplanet.helper_functions.misc import timer
+    >>> with timer('Elapsed time: '):
+    ...     print(f'Sum of first 10^7 squared integers: {sum(x*x for x in range(10_000_000)):,}')
+
+    Sum of first 10^7 squared integers: 333,333,283,333,335,000,000
+    Elapsed time: 0.886 seconds
     """
     start = time.time()
     yield

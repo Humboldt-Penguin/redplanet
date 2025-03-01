@@ -45,7 +45,9 @@ def load(
     model : str
         Name of the magnetic field model to load. Options are:
 
-        - `'Langlais2019'` — Spherical harmonic model of the magnetic field of Mars with a spatial resolution of ~160 km at the surface, corresponding to spherical harmonic degree 134. Integrates data from MGS magnetometer, MGS electron reflectometer, and MAVEN magnetometer. Dataset downloaded from {@Langlais2019_data.n}. The full paper discusses/analyzes the models in detail ({@Langlais2019_paper.p}). We process spherical harmonic coefficients with `pyshtools` ({@shtools_code.p}; {@shtools_paper.p}).
+        - `'Langlais2019'` — Spherical harmonic model of the magnetic field of Mars with a spatial resolution of ~160 km at the surface, corresponding to spherical harmonic degree 134. Integrates data from MGS magnetometer, MGS electron reflectometer, and MAVEN magnetometer.
+            - Dataset downloaded from {@Langlais2019_data.n}. The full paper discusses/analyzes the models in detail ({@Langlais2019_paper.p}).
+            - We process spherical harmonic coefficients with `pyshtools` ({@shtools_code.p}; {@shtools_paper.p}).
     lmax : int, optional
         The maximum spherical harmonic degree of the coefficients to load. Default is 134 (maximum for 'Langlais2019').
 
