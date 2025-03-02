@@ -39,8 +39,7 @@ def test_load_invalid():
 
 
 def test_registry():
-    df = Crust.moho.get_registry()
-    assert df.shape[0] == 21894
+    Crust.moho.get_registry().shape == (21894, 4)
 
 
 
