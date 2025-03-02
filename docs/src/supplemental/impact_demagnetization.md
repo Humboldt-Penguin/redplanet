@@ -12,7 +12,7 @@ This document offers a simplified explanation/overview which a beginner could fo
 
 ---
 
-## [1] Observed Crater Diameter $\left( D_o \right)$ $\to$ Radius of Projectile $\left( r_{\text{proj}} \right)$
+## [1] Observed Crater Diameter ⟶ Radius of Projectile
 
 The *Holsapple* [1993] scaling relationship is
 
@@ -176,7 +176,7 @@ where:
 
 <!-- [TOO VERBOSE, see rewrite] Note that many works approximate the *pressure itself* as decaying according to a power law (i.e. swap $u_{IC}$ with $P_{IC}$), but the first occurrence of this idea I could find says it's the *particle velocity* that decays (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056) [[doi](https://doi.org/10.2172/4227056)]) and the alternate version is an approximation of this. I don't think this makes much a difference, but good to know. -->
 
-Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056) [[doi](https://doi.org/10.2172/4227056)]), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
+Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056){target="_blank"} [[doi](https://doi.org/10.2172/4227056)]{target="_blank"}), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
 
 
 
@@ -207,7 +207,7 @@ $$
 ### [2.3] Reflected Shock Wave Correction (Surface Boundary Condition)
 
 
-During an impact, the induced pressure at the surface must drop to zero. This causes the shock wave to reflect, generating a [rarefaction wave](https://en.wikipedia.org/wiki/Rarefaction) that travels back and interacts with the initial shock wave. If the rarefaction wave arrives *before* the peak pressure is reached (this period is known as the "rise time"), it can interfere with the buildup of the pressure wave and reduce the peak pressure achieved. See [figure 1](#fig1) below for a basic diagram.
+During an impact, the induced pressure at the surface must drop to zero. This causes the shock wave to reflect, generating a [rarefaction wave](https://en.wikipedia.org/wiki/Rarefaction){target="_blank"} that travels back and interacts with the initial shock wave. If the rarefaction wave arrives *before* the peak pressure is reached (this period is known as the "rise time"), it can interfere with the buildup of the pressure wave and reduce the peak pressure achieved. See [figure 1](#fig1) below for a basic diagram.
 
 <div id="fig1" style="text-align: center;">
     <img src="https://files.catbox.moe/87yl73.png" style="max-height: 400px; width: auto;">

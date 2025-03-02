@@ -1,5 +1,8 @@
 # Full Index of API Reference
 
+This page gives an overview of all public RedPlanet objects, functions and methods.
+
+---
 ## User Config
 
 - [get_dirpath_datacache()](user_config/get_dirpath_datacache.md)
