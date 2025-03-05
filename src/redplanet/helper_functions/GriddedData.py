@@ -156,7 +156,7 @@ class GriddedData:
 
         ## input validation
         if var not in self.data_vars:
-            raise ValueError(f'Unknown data variable: \"{var}\".\nOptions are: \"{"\", \"".join(self.data_vars)}\".')
+            raise ValueError(f'Unknown data variable: "{var}".\nOptions are: {", ".join(self.data_vars)}.')
 
         _verify_coords(lon, lat)
 

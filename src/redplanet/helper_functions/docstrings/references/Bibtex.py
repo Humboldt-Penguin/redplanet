@@ -222,7 +222,7 @@ class BibtexDatabase:
         try:
             return self.entries[key].cite(format)
         except KeyError:
-            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: ["{"\", \"".join(self.keys)}"]')
+            raise KeyError(f'Key "{key}" not found in the BibTeX database. Options are: [{", ".join(self.keys)}]')
 
 
 
