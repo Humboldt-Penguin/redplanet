@@ -71,13 +71,13 @@ update-lockfile:
 test:
     @# Note that we use `uv run` as opposed to `uv tool run` since the tool in question (pytest) should NOT be isolated from the project...
     @#     [Excerpt from docs:] "If you are running a tool in a project and the tool requires that your project is installed, e.g., when using pytest or mypy, you'll want to use uv run instead of uvx. Otherwise, the tool will be run in a virtual environment that is isolated from your project."
-    @# For more info, search the docs for 'pytest': https://docs.astral.sh/uv/guides/tools/#running-tools
-    uv run pytest
+    @# For more info/tips/guidance, search the docs for 'pytest': https://docs.astral.sh/uv/guides/tools/#running-tools
+    uv run pytest tests/
 
 [group("3. Project tools")]
 [doc("Run tests, do not suppress print statements.")]
 test-verbose:
-    uv run pytest -s
+    uv run pytest tests/ -s
 
 # TODO: change this to `uv run` (see comments in `test` recipe)
 # [group("3. Project tools")]
