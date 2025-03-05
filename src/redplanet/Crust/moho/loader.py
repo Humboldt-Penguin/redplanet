@@ -92,8 +92,8 @@ def load(
 
     if interior_model not in _interior_models:
         raise ValueError(
-            f'Unknown interior model: \"{interior_model}\".\n'
-            f'Options are: \"{"\", \"".join(_interior_models)}\".'
+            f'Unknown interior model: "{interior_model}".\n'
+            f'Options are: {", ".join(_interior_models)}.'
         )
 
     try:
