@@ -10,6 +10,7 @@ TODO
 
 - Explanation of justfile
     - Run `just` to see all options... (insert image)
+    - Run tests with `just test` (insert image)
 
 
 We encourage you to use [Conventional Commit Messages](https://www.conventionalcommits.org/) for best practices/standardization, although it's not required.

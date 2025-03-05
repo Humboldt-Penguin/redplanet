@@ -1,3 +1,13 @@
+RedPlanet is currently officially supported for Python 3.10 and later, and works on Linux, MacOS, and Windows (as verified by [our CI/CD tests](https://github.com/Humboldt-Penguin/redplanet/actions)).
+
+Send an email if you'd like to request support for earlier versions of Python, it might only take a few minutes to add compatibility.
+
+To see the Python foundation's support status for all versions, look [here](https://devguide.python.org/versions) or [here](https://endoflife.date/python).
+
+
+&nbsp;
+
+---
 ## Experienced Users
 
 Install from [PyPI](https://pypi.org/project/redplanet/) with `pip install redplanet`.
