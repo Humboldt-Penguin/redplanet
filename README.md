@@ -1,4 +1,4 @@
-https://humboldt-penguin.github.io/redplanet/
+Start here: https://humboldt-penguin.github.io/redplanet/
 
 ---
 

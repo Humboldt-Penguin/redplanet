@@ -9,6 +9,7 @@ dependencies = {
         'numpy',
         'pandas',
         'pyshtools',
+        'python-calamine',
         'scipy',
         'xarray',
         'xxhash',
