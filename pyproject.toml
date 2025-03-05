@@ -43,6 +43,7 @@ dev = [
     "pytest>=8.3.3",
 ]
 docs = [
+    "mkdocs-git-revision-date-localized-plugin>=1.4.1",
     "mkdocs-material>=9.6.1",
     "mkdocstrings-python>=1.13.0",
     "ruff>=0.9.6",

@@ -39,6 +39,11 @@ theme:
 
 plugins:
   - search
+  - git-revision-date-localized:  ## date created/modified (https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#revisioning )
+      type: timeago
+      enable_creation_date: true
+      exclude:
+          - index.md
   - mkdocstrings:
       handlers:
         python:
