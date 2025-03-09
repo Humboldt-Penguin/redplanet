@@ -1,0 +1,44 @@
+name: Publish
+## For reference, see https://github.com/astral-sh/trusted-publishing-examples/blob/main/.github/workflows/release.yml
+
+on:
+  push:
+  ## publish on any tag starting with a `v`, e.g. v1.2.3
+    tags:
+      - v*
+
+
+
+jobs:
+  pypi:
+    name: Build + Publish to PyPI
+
+
+    ## Configure environment(s)
+    runs-on: ubuntu-latest
+    environment:
+      name: publish  ## corresponds to entry in GitHub repo's "Settings" > "Environments"
+    permissions:
+      id-token: write
+
+
+    ## Declare steps/commands
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv and set Python version
+        uses: astral-sh/setup-uv@v5  ## Ref: [1] https://github.com/marketplace/actions/astral-sh-setup-uv, [2] https://docs.astral.sh/uv/guides/integration/github/
+
+      - name: Build source distribution and wheels
+        run: uv build
+
+      - name: Smoke test (wheel)
+        run: uv run --isolated --no-project --python 3.12 --with dist/*.whl --with pytest -- pytest tests/Mag/test_sh.py
+
+      - name: Smoke test (source distribution)
+        run: uv run --isolated --no-project --python 3.12 --with dist/*.tar.gz --with pytest -- pytest tests/Mag/test_sh.py
+
+      - name: Publish to PyPI
+        run: uv publish --trusted-publishing always
+
+      ## TODO: add workflow to publish to GitHub Releases and/or conda-forge
