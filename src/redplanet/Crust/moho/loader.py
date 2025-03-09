@@ -69,8 +69,12 @@ def load(
     Returns
     -------
     None | bool
-        - If `fail_silently` is False (default), return None.
-        - If `fail_silently` is True, return True if the dataset was loaded successfully, or False if there is no dataset for the given parameters.
+        Return is determined as follows:
+
+        |                         | **Successfully Loaded** | **Model Doesn't Exist**          |
+        | ----------------------- | ----------------------- | -------------------------------- |
+        | **fail_silently=False** | `None`                  | Raise `MohoDatasetNotFoundError` |
+        | **fail_silently=True**  | `True`                  | `False`                          |
 
 
     Raises

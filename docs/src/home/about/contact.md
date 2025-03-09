@@ -4,4 +4,4 @@ Feel free to contact me at [zain.eris.kamal@rutgers.edu](mailto:zain.eris.kamal@
 
 &nbsp;
 
-You can see more of my work here: [github.com/humboldt-penguin](https://github.com/humboldt-penguin/)
+You can see more of my work here: [github.com/humboldt-penguin](https://github.com/humboldt-penguin/){target="_blank"}.

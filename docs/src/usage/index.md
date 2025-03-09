@@ -2,8 +2,13 @@
 
 This page gives an overview of all public RedPlanet objects, functions and methods.
 
+All of this information is also accessible with Python's built-in `help` function. For example, try running `help(redplanet.Craters.get)` in your shell/notebook.
+
+
 ---
-## User Config
+## [1] User Config
+
+Configure where datasets will be downloaded and how file integrity is verified.
 
 - [get_dirpath_datacache()](user_config/get_dirpath_datacache.md)
 - [set_dirpath_datacache(...)](user_config/set_dirpath_datacache.md)
@@ -14,7 +19,9 @@ This page gives an overview of all public RedPlanet objects, functions and metho
 
 
 ---
-## Datasets
+## [2] Datasets
+
+Loading/accessing datasets in a standardized way.
 
 - Craters:
     - [get(...)](datasets/Craters/get.md)
@@ -54,7 +61,9 @@ This page gives an overview of all public RedPlanet objects, functions and metho
 
 
 ---
-## Analysis
+## [3] Analysis
+
+Advanced dataset operations/calculations and other tools.
 
 - Radial Profile:
     - [get_concentric_ring_coords(...)](analysis/radial_profile/get_concentric_ring_coords.md)
@@ -64,7 +73,9 @@ This page gives an overview of all public RedPlanet objects, functions and metho
 
 
 ---
-## Helper Functions
+## [4] Helper Functions
+
+Miscellaneous functions used internally.
 
 - Coordinates:
     - [_plon2slon(...)](helper_functions/coordinates/_plon2slon.md)

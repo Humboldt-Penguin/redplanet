@@ -16,6 +16,7 @@ TODO
     - [ ] Publish to conda forge ([tutorial](https://www.pyopensci.org/python-package-guide/tutorials/publish-conda-forge.html#how-to-publish-your-package-on-conda-forge))
     - [ ] Add GitHub actions for CI/CD
         - Specifically, GH actions for [running tests with uv](https://docs.astral.sh/uv/guides/integration/github/#syncing-and-running), and [publishing the site](https://squidfunk.github.io/mkdocs-material/publishing-your-site/#with-github-actions) (see justfile for more specific commands!)
+    - [ ] Switch from `pandas` to `polars` to save a lot of space and slight performance improvements (move pandas to optional dependecy group)
     - [ ] Change all `loader` modules so they have an additional semi-private method which returns the respective `GriddedData` object, which is then assigned to the global variable by the `load()`/`load(...)`/`_load()` method. This is more clean and extensible in edge cases, e.g. `Crust.moho` wants the pysh topo model to make a crthick model (kind of).
     - [ ] Move `DatasetManager` to `redplanet.helper_functions`?
 
@@ -23,7 +24,7 @@ TODO
 
 # Explaining Versioning Scheme
 
-RedPlanet uses a modified version of [Semantic Versioning](https://semver.org/).
+RedPlanet uses a modified version of [Semantic Versioning](https://semver.org/){target="_blank"}.
 
 ??? note "*Why modify SemVer?*"
 

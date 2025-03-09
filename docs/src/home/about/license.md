@@ -1,4 +1,4 @@
-The [MIT license](https://choosealicense.com/licenses/mit/) is a permissive license that allows commercial use, private modification/redistribution, and everything else as long as the original authors are credited.
+The [MIT license](https://choosealicense.com/licenses/mit/){target="_blank"} is a permissive license that allows commercial use, private modification/redistribution, and everything else as long as the original authors are credited.
 
 &nbsp;
 

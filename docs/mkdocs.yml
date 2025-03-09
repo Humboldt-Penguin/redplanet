@@ -1,7 +1,7 @@
 site_name: RedPlanet
 repo_url: https://github.com/humboldt-penguin/redplanet
 repo_name: RedPlanet
-site_url: https://humboldt-penguin.github.io/redplanet/  ## this is required for `navigation.instant` to work? but it's still slow, idk...
+site_url: https://humboldt-penguin.github.io/redplanet/  ## this is required for `navigation.instant` to work?
 
 
 ## both of these are relative to `mkdocs.yml` whose path is provided via cli (`--config-file docs/mkdocs.yml`)
@@ -106,13 +106,13 @@ nav:
   - Home:
     - index.md
     - Quick Start:
-      - Installation: quick_start/installation.md
-      - Overview: quick_start/overview.md
+      - Installation: home/quick_start/installation.md
+      - Overview: home/quick_start/overview.md
     - About:
-      - Contact: about/contact.md
-      - Changelog: about/changelog.md
-      - License: about/license.md
-      - Contributing: about/contributing.md
+      - Contact: home/about/contact.md
+      - Changelog: home/about/changelog.md
+      - License: home/about/license.md
+      - Contributing: home/about/contributing.md
 
 
   - Usage:
@@ -180,7 +180,7 @@ nav:
 
 
   - Supplemental:
-    # - supplemental/index.md
+    - supplemental/index.md
     # - Dataset Modifications:
     #   - Topography / DEM: supplemental/data_mods/Crust/index.md
     #   - Craters: supplemental/data_mods/Craters/index.md
