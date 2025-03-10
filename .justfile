@@ -96,6 +96,27 @@ site-deploy:
     uv run -- mkdocs gh-deploy --config-file docs/mkdocs.yml --no-history
     just _clean_site
 
+[group("3. Project tools")]
+[doc("Create an annotated git tag with the version from `pyproject.toml`. NOTE: this triggers a PyPI release when pushed!")]
+tag:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    version=$(uv run -- python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
+    version="v${version}"
+    echo "Create tag \"$version\"? [y/n]"
+    read -r response
+    if [ "$response" != "y" ]; then
+        echo "Exiting without creating tag."
+        exit
+    fi
+    git tag -a "$version"
+    # Self note: always use annotated tags over lightweight tags, even if the message is empty -- see [1] for an explanation, and [2] for useful commands/reference
+    #   [1] https://stackoverflow.com/a/4971817
+    #   [2] https://stackoverflow.com/a/25996877
+    echo "- Push this tag: \`git push origin $version\`"
+    echo "- Push all tags: \`git push --tags\`"
+    echo "- Delete this tag locally (no 'amend' option): \`git tag -d $version\`"
+
 
 
 
