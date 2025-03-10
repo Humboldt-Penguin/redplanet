@@ -43,4 +43,4 @@ jobs:
         run: uv sync --dev  ## leave out `-all-extras` for now -- in the future, add back "interactive" group if I add plotting tests
 
       - name: Run tests with pytest
-        run: uv run pytest tests/
+        run: uv run -- pytest tests/

@@ -3,7 +3,7 @@ name: Publish
 
 on:
   push:
-  ## publish on any tag starting with a `v`, e.g. v1.2.3
+  ## publish on any tag starting with a `v`, e.g. `v1.2.3`
     tags:
       - v*
 

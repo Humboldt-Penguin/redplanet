@@ -72,12 +72,12 @@ test:
     @# Note that we use `uv run` as opposed to `uv tool run` since the tool in question (pytest) should NOT be isolated from the project...
     @#     [Excerpt from docs:] "If you are running a tool in a project and the tool requires that your project is installed, e.g., when using pytest or mypy, you'll want to use uv run instead of uvx. Otherwise, the tool will be run in a virtual environment that is isolated from your project."
     @# For more info/tips/guidance, search the docs for 'pytest': https://docs.astral.sh/uv/guides/tools/#running-tools
-    uv run pytest tests/
+    uv run -- pytest tests/
 
 [group("3. Project tools")]
 [doc("Run tests, do not suppress print statements.")]
 test-verbose:
-    uv run pytest tests/ -s
+    uv run -- pytest tests/ -s
 
 # TODO: change this to `uv run` (see comments in `test` recipe)
 # [group("3. Project tools")]
@@ -88,12 +88,12 @@ test-verbose:
 [group("3. Project tools")]
 [doc("Start the live-reloading docs server locally (see: http://localhost:8000/ ).")]
 site-serve:
-    uv run mkdocs serve --config-file docs/mkdocs.yml
+    uv run -- mkdocs serve --config-file docs/mkdocs.yml
 
 [group("3. Project tools")]
 [doc("Deploy to GitHub Pages.")]
 site-deploy:
-    uv run mkdocs gh-deploy --config-file docs/mkdocs.yml --no-history
+    uv run -- mkdocs gh-deploy --config-file docs/mkdocs.yml --no-history
     just _clean_site
 
 
