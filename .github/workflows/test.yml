@@ -23,10 +23,10 @@ jobs:
           - windows-latest
         python-version:
           ## see version statuses: https://devguide.python.org/versions/ (also: https://endoflife.date/python )
-          - "3.13"
           - "3.12"
           - "3.11"
           - "3.10"
+          - "3.9"
     runs-on: ${{ matrix.os }}
 
 
