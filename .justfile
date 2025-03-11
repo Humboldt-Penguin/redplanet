@@ -106,7 +106,7 @@ deploy-site:
 
 
 [group("Publish")]
-[doc("Create an annotated git tag with the version extracted from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed!")]
+[doc("Create an annotated git tag with the version extracted from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! Always push the plain commit first and ensure tests are passing in GitHub Actions: https://github.com/Humboldt-Penguin/redplanet/actions")]
 tag:
     #!/usr/bin/env bash
     set -euo pipefail
