@@ -19,7 +19,7 @@ def get(
     """
     Get GRS element concentration/sigma values at the specified coordinates.
 
-    Data is provided by {@GRS_data.n}. The full paper discusses/analyzes the models in detail ({@GRS_paper.p}).
+    Data (0.41 MiB) is provided by {@GRS_data.n}. The full paper discusses/analyzes the models in detail ({@GRS_paper.p}).
 
 
     Parameters
@@ -33,7 +33,7 @@ def get(
     normalize : bool, optional
         If True, normalize the element quantity to a volatile-free (Cl, H2O, S) basis, by default False.
 
-        > "The GRS instrument measures elemental abundances in the top-most tens of centimeters of the Martian surface, and thus is strongly influenced by near-surface soils, ice and dust deposits. These sediments broadly represent the bulk chemistry of the Martian upper crust when renormalized to a volatile-free basis [Taylor and McLennan, 2009] and as such, K and Th values must be renormalized to a H2O-, S-, and Cl-free basis to better reflect bulk crustal values." (@{Hahn2011.p})
+        > "The GRS instrument measures elemental abundances in the top-most tens of centimeters of the Martian surface, and thus is strongly influenced by near-surface soils, ice and dust deposits. These sediments broadly represent the bulk chemistry of the Martian upper crust when renormalized to a volatile-free basis [Taylor and McLennan, 2009] and as such, K and Th values must be renormalized to a H2O-, S-, and Cl-free basis to better reflect bulk crustal values." ({@Hahn2011.p})
     {param.as_xarray}
 
 

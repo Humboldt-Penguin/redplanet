@@ -176,6 +176,7 @@ nav:
         - make_circle(...): usage/helper_functions/geodesy/make_circle.md
       - Misc:
         - timer(...): usage/helper_functions/misc/timer.md
+        - prefetch(): usage/helper_functions/misc/prefetch.md
 
 
 

@@ -60,6 +60,9 @@ Loading/accessing datasets in a standardized way.
         - [get_nearest(...)](datasets/Mag/depth/get_nearest.md)
 
 
+All `load(...)` functions will check if a dataset file already exists in your cache directory. If found, it verifies the hash to ensure it wasn't modified; if not found, it will download and verify the file. For convenience, we provide [`prefetch()`](helper_functions/misc/prefetch.md) to download a few key datasets all at once.
+
+
 ---
 ## [3] Analysis
 
@@ -86,3 +89,4 @@ Miscellaneous functions used internally.
     - [make_circle(...)](helper_functions/geodesy/make_circle.md)
 - Misc:
     - [timer(...)](helper_functions/misc/timer.md)
+    - [prefetch()](helper_functions/misc/prefetch.md)

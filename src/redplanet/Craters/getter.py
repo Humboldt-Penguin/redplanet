@@ -20,7 +20,7 @@ def get(
     """
     Filter/query a dataset of craters >50km diameter, with ages/names when available. Calling this with no arguments will return the full dataset.
 
-    We create a custom dataset which unifies the following:
+    We create a custom dataset (0.28 MiB) which unifies the following:
 
     1. Global database of Martian impact craters ({@Robbins2012_crater_db.p}).
     2. Crater ages from both Hartmann and Neukum isochron methods ({@Robbins2013_crater_ages.p}).

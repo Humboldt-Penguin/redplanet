@@ -75,7 +75,7 @@ def get_coords() -> np.ndarray:
     """
     Get a list of dichotomy boundary coordinates.
 
-    The origin of the dataset is not fully clear. We use the file "dichotomy_coordinates-JAH-0-360.txt" downloaded from @{Wieczorek2022_icta.n}. They attribute the data to *"Andrews-Hanna et al. (2008)"* which is ambiguous (to me atleast, I could be missing something obvious) — my best guess is @{dichotomy_paper.n}.
+    The origin of the dataset is not fully clear. We use the file "dichotomy_coordinates-JAH-0-360.txt" (0.046 MiB) downloaded from {@Wieczorek2022_icta.n}. They attribute the data to *"Andrews-Hanna et al. (2008)"* which is ambiguous (to me atleast, I could be missing something obvious) — my best guess is {@dichotomy_paper.n}.
 
     Returns
     -------
