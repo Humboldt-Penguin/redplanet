@@ -9,8 +9,10 @@ This document offers a simplified explanation/overview which a beginner could fo
 &nbsp;
 
 ---
+
 ---
-## [1] Observed Crater Diameter $\left( D_o \right)$ $\to$ Radius of Projectile $\left( r_{\text{proj}} \right)$
+
+## [1] Observed Crater Diameter ⟶ Radius of Projectile
 
 The *Holsapple* [1993] scaling relationship is
 
@@ -21,6 +23,7 @@ $$
 $$
 
 where:
+
 - $D_o$ — Observed crater diameter.
     - Note: this is the only crater-dependent input for our calculation (not counting crustal density at that location).
 - $D_*$ — Transition diameter from simple to complex crater.
@@ -39,6 +42,7 @@ $$
 $$
 
 where:
+
 - $v_{\text{proj}}$ — Projectile velocity.
     - The majority of impact craters on Mars are formed by heliocentric projectiles with velocity 8-12 km/s (Neukum & Wise, 1976).
 - $g$ — Surface gravity of Mars.
@@ -51,12 +55,13 @@ where:
 &nbsp;
 
 Now assume the projectile is spherical and composed of basalts. This lets us write out a few trivial relations:
+
 - $\rho_{\text{proj}} = 2,900 \ \text{kg} / \text{m}^3$
 - $V_{\text{proj}} = \tfrac{4}{3} \pi r_{\text{proj}}^2$
 - $E_{\text{proj}} = \tfrac{1}{2} M_{\text{proj}} v_{\text{proj}}^2$
 
 <!-- We combine all of these through $\rho_{\text{proj}} = \frac{ M_{\text{proj}} }{ V_{\text{proj}} }$ and solve for the radius of the projectile to find: -->
-We combine all of these through $\rho_{\text{proj}} = M_{\text{proj}} / V_{\text{proj}} $ and solve for the radius of the projectile to find:
+We combine all of these through $\rho_{\text{proj}} = M_{\text{proj}} / V_{\text{proj}}$ and solve for the radius of the projectile to find:
 
 $$
 \begin{equation}
@@ -67,15 +72,12 @@ $$
 
 
 
-
-
-
-
-
 &nbsp;
 
 ---
+
 ---
+
 ## [2] Shock Wave Pressures
 
 ---
@@ -90,12 +92,13 @@ $$
 $$
 
 where:
-- $ P $ — Pressure behind the shock front (compressed region).
-- $ P_0 $ — Pressure ahead of the shock front (unshocked region), i.e. ambient/initial pressure.
+
+- $P$ — Pressure behind the shock front (compressed region).
+- $P_0$ — Pressure ahead of the shock front (unshocked region), i.e. ambient/initial pressure.
     - In this case, $P_0$ is atmospheric pressure which is negligible.
-- $ \rho_{\text{crust}} $ — Density of the target material, i.e. Martian crust.
-- $ u_{sw} $ — Shock wave velocity, the speed at which the shock front propagates through the material.
-- $ u_p $ — Particle velocity, the speed at which particles in the material move due to the passage of the shock wave.
+- $\rho_{\text{crust}}$ — Density of the target material, i.e. Martian crust.
+- $u_{sw}$ — Shock wave velocity, the speed at which the shock front propagates through the material.
+- $u_p$ — Particle velocity, the speed at which particles in the material move due to the passage of the shock wave.
 
 &nbsp;
 
@@ -108,6 +111,7 @@ $$
 $$
 
 where:
+
 - $C$ — Represents the bulk sound speed (i.e. speed at which small-amplitude sound waves travel through the material under uncompressed/ambient conditions).
     - Previous works give a wide range of values ($2.6$, $3$, and $3.5$ $\text{km} / \text{s}$), some higher (?).
     - The pressures we're interested in are about less than or equal to the Hugoniot elastic limit (the point where a material transitions from a purely elastic state to an elastic-plastic state), so we use this constant to model the propogation of shock waves for the entirety of this work.
@@ -144,11 +148,14 @@ $$
 $$
 
 where:
+
 - $r$ — Distance from the center of the isobaric core.
 - $R_{IC}$ — Radius of the IC.
     - As previously explained, we assume $R_{IC} \approx r_{\text{proj}}$ (for reference, some works say $R_{IC} \approx 0.7 \cdot r_{\text{proj}}$; we assume they're the same size, it doesn't make a huge difference).
 - $u_{IC}$ — Particle velocity in the isobaric core.
     - When the impactor and target have similar mechanical properties, the particle velocity is about half the impactor velocity, i.e. $u_{IC} = \tfrac{1}{2} v_{\text{proj}}$.
+
+
 
 &nbsp;
 
@@ -163,12 +170,15 @@ $$
 $$
 
 where:
+
 - $n$ — Exponential decay constant.
     - This varies widely between works. *Melosh 1989* uses a constant $n=1.87$, while *Mitani 2003* uses variable $n$ for different pressure regions. We use the former for our purposes ('intermediate' impacts where $D_o < 500 \ \text{km}$, and we're only concerned about furthest demagnetization extent).
 
 <!-- [TOO VERBOSE, see rewrite] Note that many works approximate the *pressure itself* as decaying according to a power law (i.e. swap $u_{IC}$ with $P_{IC}$), but the first occurrence of this idea I could find says it's the *particle velocity* that decays (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056) [[doi](https://doi.org/10.2172/4227056)]) and the alternate version is an approximation of this. I don't think this makes much a difference, but good to know. -->
 
-Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056) [[doi](https://doi.org/10.2172/4227056)]), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
+Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056){target="_blank"} [[doi](https://doi.org/10.2172/4227056)]{target="_blank"}), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
+
+
 
 &nbsp;
 
@@ -197,7 +207,7 @@ $$
 ### [2.3] Reflected Shock Wave Correction (Surface Boundary Condition)
 
 
-During an impact, the induced pressure at the surface must drop to zero. This causes the shock wave to reflect, generating a [rarefaction wave](https://en.wikipedia.org/wiki/Rarefaction) that travels back and interacts with the initial shock wave. If the rarefaction wave arrives *before* the peak pressure is reached (this period is known as the "rise time"), it can interfere with the buildup of the pressure wave and reduce the peak pressure achieved. See [figure 1](#fig1) below for a basic diagram.
+During an impact, the induced pressure at the surface must drop to zero. This causes the shock wave to reflect, generating a [rarefaction wave](https://en.wikipedia.org/wiki/Rarefaction){target="_blank"} that travels back and interacts with the initial shock wave. If the rarefaction wave arrives *before* the peak pressure is reached (this period is known as the "rise time"), it can interfere with the buildup of the pressure wave and reduce the peak pressure achieved. See [figure 1](#fig1) below for a basic diagram.
 
 <div id="fig1" style="text-align: center;">
     <img src="https://files.catbox.moe/87yl73.png" style="max-height: 400px; width: auto;">
@@ -221,6 +231,7 @@ $$
 $$
 
 where:
+
 - $R_{\text{dir}}, R_{\text{ref}}$ — Distances traveled by the direct and reflected waves respectively.
 - $x,y$ — Horizontal and vertical distances from the impact point respectively.
 
@@ -261,7 +272,9 @@ $$
 &nbsp;
 
 ---
+
 ---
+
 ## References:
 - [1] Mohit & Arkani-Hamed 2003
     - https://files.catbox.moe/kbrqh9.pdf
@@ -269,28 +282,3 @@ $$
     - https://files.catbox.moe/bqeh07.pdf
 - [3] Melosh 2011
     - https://sseh.uchicago.edu/doc/Melosh_ch_6.pdf
-
-
-
-
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-
-
-<!-- COMMON COPY/PASTE:
-
-_{\text{}}
-
-$$
-\begin{equation}
-\end{equation}
-$$
-
- -->

@@ -6,9 +6,7 @@ from redplanet import Craters
 
 
 def test_getall():
-    df = Craters.get()
-    assert df.shape[0] == 2072
-    assert df.equals(Craters.get_dataset())
+    assert Craters.get().shape == (2072, 22)
 
 
 def test_getall_with_params():

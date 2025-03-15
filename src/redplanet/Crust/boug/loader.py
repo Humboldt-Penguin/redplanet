@@ -1,7 +1,9 @@
 import numpy as np
 
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.DatasetManager.main import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
+
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -9,19 +11,43 @@ from redplanet.helper_functions.GriddedData import GriddedData
 
 _dat_boug: GriddedData | None = None
 
+@substitute_docstrings
 def get_dataset() -> GriddedData:
+    """
+    {fulldoc.get_dataset_GriddedData}
+    """
     if _dat_boug is None:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Crust.boug.load(<model_params>)`.')
     return _dat_boug
 
+@substitute_docstrings
 def get_metadata() -> dict:
+    """
+    {fulldoc.get_metadata}
+    """
     return dict(get_dataset().metadata)
 
 
 
 
 
-def load(model: str = None):
+@substitute_docstrings
+def load(model: str = None) -> None:
+    """
+    Load Bouguer gravity anomaly dataset.
+
+    Parameters
+    ----------
+    model : str
+        Name of the Bouguer model to load. Options are:
+
+        - `'Genova2016'` (127 MiB) — Bouguer gravity anomaly map from {@Genova2016_boug_data.n}, computed from truncated GMM-3 solution (degree 2 to 90) ({@Genova2016_boug_paper.p}).
+
+    Raises
+    ------
+    ValueError
+        If an invalid model name is provided.
+    """
 
     ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility.
     info = {
@@ -75,3 +101,5 @@ def load(model: str = None):
 
     else:
         raise ValueError(f"THE DEVELOPER MESSED UP. THIS SHOULD NOT HAPPEN.")
+
+    return

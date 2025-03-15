@@ -1,0 +1,194 @@
+site_name: RedPlanet
+repo_url: https://github.com/humboldt-penguin/redplanet
+repo_name: RedPlanet
+site_url: https://humboldt-penguin.github.io/redplanet/  ## this is required for `navigation.instant` to work?
+
+
+## both of these are relative to `mkdocs.yml` whose path is provided via cli (`--config-file docs/mkdocs.yml`)
+docs_dir: 'src'
+site_dir: 'site'
+
+
+theme:
+  name: material
+
+  palette:
+    ## toggle dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    ## toggle light mode
+    - scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+  icon:
+    logo: material/satellite-variant
+    repo: fontawesome/brands/github
+    annotation: material/plus-circle-outline
+
+  features:
+    - navigation.tabs  ## tabs in the top bar (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/?h=navigation+tabs#navigation-tabs )
+    - content.code.copy  ## code blocks: copy button (https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
+    - navigation.instant  ## behaves like a single-page application, i.e. extremely fast for free (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#instant-loading )
+    - navigation.indexes  ## clicking on a section brings you to an overview page (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#section-index-pages )
+    # - navigation.expand  ## everything is expanded by default (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-expansion-with-expansion ) -- I'm tentatively leaning towards NOT doing this so users get a better sense of nesting / big-picture structure...?
+
+
+plugins:
+  - search
+  - git-revision-date-localized:  ## date created/modified (https://squidfunk.github.io/mkdocs-material/setup/adding-a-git-repository/#revisioning )
+      type: timeago
+      enable_creation_date: true
+      exclude:
+          - index.md
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [../src/]  ## see: https://mkdocstrings.github.io/python/usage/#using-the-paths-option
+          options:
+            docstring_style: numpy
+            force_inspection: true  ## resolve dynamic docstrings, mainly from `@substitute_docstrings` decorator -- TODO: implement selective inspection at some point, see: https://mkdocstrings.github.io/griffe/guide/users/how-to/selectively-inspect/
+            annotations_path: source  ## verbosity for annotations path, e.g. `ndarray` vs `numpy.ndarray` (https://mkdocstrings.github.io/python/usage/configuration/signatures/#annotations_path )
+            # docstring_section_style: list  ## render parameters/returns/etc as bulleted lists (like numpy) instead of the default tables (https://mkdocstrings.github.io/python/usage/configuration/docstrings/?h=docstring_section_style#list )
+            show_root_heading: true  ## make function titles visible on page (https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_heading )
+            heading_level: 1
+            separate_signature: true  ## put function signature in a code block below the heading (https://mkdocstrings.github.io/python/usage/configuration/signatures/#separate_signature )
+            show_signature_annotations: true  ## show type annotations in function signatures (https://mkdocstrings.github.io/python/usage/configuration/signatures/#show_signature_annotations )
+            # show_root_toc_entry: false  ## hide methods from TOC, you can specify them manually with the `toc_label` option (https://mkdocstrings.github.io/python/usage/configuration/headings/#show_root_toc_entry )
+
+
+## Don't exclude '.assets' although all other '.*' are excluded (https://www.mkdocs.org/user-guide/configuration/#exclude_docs — NOTE: the examples on the website don't work on their own because you can't have comments at the end of a line in a gitignore since it'll pick up the trailing whitespace!!! stupid!!)
+exclude_docs: |
+  !.assets
+
+extra_css:
+  - .assets/css/fonts.css
+  - .assets/css/spacing.css
+  - .assets/css/themes.css
+
+
+## LaTeX, MathJax (https://squidfunk.github.io/mkdocs-material/reference/math/#mathjax-mkdocsyml )
+## Code blocks (https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
+## Admonitions (https://squidfunk.github.io/mkdocs-material/reference/admonitions/ )
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - admonition
+  - pymdownx.details
+  - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
+  - md_in_html  ## annotations
+extra_javascript:
+  - .assets/javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
+## hide footer (https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/ )
+extra:
+  generator: false
+
+
+
+
+
+## Site map
+nav:
+
+  - Home:
+    - index.md
+    - Quick Start:
+      - Installation: home/quick_start/installation.md
+      - Overview: home/quick_start/overview.md
+    - About:
+      - Contact: home/about/contact.md
+      - Changelog: home/about/changelog.md
+      - License: home/about/license.md
+      - Contributing: home/about/contributing.md
+
+
+  - Usage:
+    - usage/index.md
+    - User Config:
+      - get_dirpath_datacache(): usage/user_config/get_dirpath_datacache.md
+      - set_dirpath_datacache(...): usage/user_config/set_dirpath_datacache.md
+      - get_max_size_to_calculate_hash_GiB(): usage/user_config/get_max_size_to_calculate_hash_GiB.md
+      - set_max_size_to_calculate_hash_GiB(...): usage/user_config/set_max_size_to_calculate_hash_GiB.md
+      - get_enable_stream_hash_check(): usage/user_config/get_enable_stream_hash_check.md
+      - set_enable_stream_hash_check(...): usage/user_config/set_enable_stream_hash_check.md
+    - Datasets:
+      - Craters:
+        - get(...): usage/datasets/Craters/get.md
+      - Crust:
+        - Topography / DEM:
+          - load(...): usage/datasets/Crust/topo/load.md
+          - get(...): usage/datasets/Crust/topo/get.md
+          - get_metadata(): usage/datasets/Crust/topo/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/topo/get_dataset.md
+        - Dichotomy:
+          - get_coords(): usage/datasets/Crust/dichotomy/get_coords.md
+          - is_above(...): usage/datasets/Crust/dichotomy/is_above.md
+        - Mohorovičić Discontinuity / Crustal Thickness:
+          - get_registry(): usage/datasets/Crust/moho/get_registry.md
+          - load(...): usage/datasets/Crust/moho/load.md
+          - get(...): usage/datasets/Crust/moho/get.md
+          - get_metadata(): usage/datasets/Crust/moho/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/moho/get_dataset.md
+        - Bouguer Anomaly:
+          - load(...): usage/datasets/Crust/boug/load.md
+          - get(...): usage/datasets/Crust/boug/get.md
+          - get_metadata(): usage/datasets/Crust/boug/get_metadata.md
+          - get_dataset(): usage/datasets/Crust/boug/get_dataset.md
+      - Gamma-Ray Spectrometer (GRS):
+        - get(...): usage/datasets/GRS/get.md
+        - get_metadata(): usage/datasets/GRS/get_metadata.md
+        - get_dataset(): usage/datasets/GRS/get_dataset.md
+      - Magnetic Field:
+        - Spherical Harmonic Models:
+          - load(...): usage/datasets/Mag/sh/load.md
+          - get(...): usage/datasets/Mag/sh/get.md
+          - get_metadata(): usage/datasets/Mag/sh/get_metadata.md
+          - get_dataset(): usage/datasets/Mag/sh/get_dataset.md
+        - Magnetic Source Depths:
+          - get_dataset(...): usage/datasets/Mag/depth/get_dataset.md
+          - get_nearest(...): usage/datasets/Mag/depth/get_nearest.md
+    - Analysis:
+      - Radial Profile:
+        - get_concentric_ring_coords(...): usage/analysis/radial_profile/get_concentric_ring_coords.md
+        - get_profile(...): usage/analysis/radial_profile/get_profile.md
+      - Impact Demagnetization:
+        - compute_pressure(...): usage/analysis/impact_demag/compute_pressure.md
+    - Helper Functions:
+      - Coordinates:
+        - _plon2slon(...): usage/helper_functions/coordinates/_plon2slon.md
+        - _slon2plon(...): usage/helper_functions/coordinates/_slon2plon.md
+      - Geodesy:
+        - get_distance(...): usage/helper_functions/geodesy/get_distance.md
+        - move_forward(...): usage/helper_functions/geodesy/move_forward.md
+        - make_circle(...): usage/helper_functions/geodesy/make_circle.md
+      - Misc:
+        - timer(...): usage/helper_functions/misc/timer.md
+        - prefetch(): usage/helper_functions/misc/prefetch.md
+
+
+
+  - Supplemental:
+    - supplemental/index.md
+    # - Dataset Modifications:
+    #   - Topography / DEM: supplemental/data_mods/Crust/index.md
+    #   - Craters: supplemental/data_mods/Craters/index.md
+    - Impact Demagnetization: supplemental/impact_demagnetization.md
+    - Radial Profile: supplemental/radial_profile.md
+    - Plotting: supplemental/plotting.md
+    # - Heat Flow: supplemental/heat_flow.md
+
+  - Tutorials & Guides:
+    - tutorials/index.md

@@ -1,0 +1,46 @@
+name: Test
+
+on:
+  push:
+  ## publish to any push on any branch except `gh-pages` (mkdocs output)
+    branches-ignore:
+      - gh-pages
+
+
+
+jobs:
+  test:
+    name: Run tests
+
+
+    ## Configure environment(s)
+    strategy:
+      fail-fast: false  ## continue running jobs even if one fails
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        python-version:
+          ## see version statuses: https://devguide.python.org/versions/ (also: https://endoflife.date/python )
+          - "3.12"
+          - "3.11"
+          - "3.10"
+    runs-on: ${{ matrix.os }}
+
+
+    ## Declare steps/commands
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv and set Python version
+        uses: astral-sh/setup-uv@v5  ## Ref: [1] https://github.com/marketplace/actions/astral-sh-setup-uv, [2] https://docs.astral.sh/uv/guides/integration/github/
+        with:
+          # version: "0.6.4"  ## uv version (good practice for reproducibility, but I'm worried I'll forget to update)
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install project dependencies and pytest
+        run: uv sync --dev  ## leave out `-all-extras` for now -- in the future, add back "interactive" group if I add plotting tests
+
+      - name: Run tests with pytest
+        run: uv run -- pytest tests/

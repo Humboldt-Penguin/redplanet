@@ -2,8 +2,7 @@ __all__ = []
 
 
 
-from redplanet.Craters.load_get import get, get_dataset
+from redplanet.Craters.getter import get
 __all__.extend([
     'get',
-    'get_dataset',
 ])

@@ -1,0 +1,24 @@
+/* In left sidebar, indent everything relative to the top-most heading (https://github.com/squidfunk/mkdocs-material/discussions/2496#discussioncomment-540091 ) */
+/* .md-nav__item--section > .md-nav > .md-nav__list {
+    margin-left: 0.5rem;
+} */
+
+/* In left sidebar, add vertical line for children (https://github.com/squidfunk/mkdocs-material/discussions/6460#discussioncomment-7936316 ) */
+/* .md-nav[data-md-level="2"] > .md-nav__list { */
+/* .md-nav > .md-nav__list {
+    margin-left: 0.5em;
+    border-left: 0.1px solid var(--md-accent-fg-color);
+    padding-left: 1em;
+} */
+
+
+
+/* TENTATIVE — bigger indentation in left-side nav list */
+.md-nav > .md-nav__list {
+    margin-left: 0.7em;
+}
+
+/* Make the page ever so slightly wider — I think default is about 61rem? (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#content-area-width-docsstylesheetsextracss ) */
+.md-grid {
+    max-width: 1400px;
+}

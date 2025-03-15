@@ -7,6 +7,25 @@ import numpy as np
 
 @contextmanager
 def timer(message='', d=3):
+    """
+    A context manager that measures the time taken to execute the code block within it.
+
+    Parameters
+    ----------
+    message : str, optional
+        A message to display when the code block is executed, by default nothing.
+    d : int, optional
+        The number of decimal places to display in the elapsed time, by default 3.
+
+    Examples
+    --------
+    >>> from redplanet.helper_functions.misc import timer
+    >>> with timer('Elapsed time: '):
+    ...     print(f'Sum of first 10^7 squared integers: {sum(x*x for x in range(10_000_000)):,}')
+
+    Sum of first 10^7 squared integers: 333,333,283,333,335,000,000
+    Elapsed time: 0.886 seconds
+    """
     start = time.time()
     yield
     end = time.time()
@@ -22,25 +41,20 @@ def find_closest_indices(
     """
     Find the indices of the closest elements in a sorted array for each target value.
 
-    For each value in `target_values`, this function identifies the index of the element in
-    `sorted_array` that is closest to it. In cases where a target value is exactly midway
-    between two elements, the index of the left (smaller) element is returned.
+    For each value in `target_values`, this function identifies the index of the element in `sorted_array` that is closest to it. In cases where a target value is exactly midway between two elements, the index of the left (smaller) element is returned.
 
     Parameters
     ----------
     sorted_array : np.ndarray
-        A one-dimensional NumPy array sorted in ascending order. The array should contain
-        numeric values.
+        A one-dimensional NumPy array sorted in ascending order. The array should contain numeric values.
 
     target_values : np.ndarray
-        A one-dimensional NumPy array of target values for which to find the closest indices
-        in `sorted_array`.
+        A one-dimensional NumPy array of target values for which to find the closest indices in `sorted_array`.
 
     Returns
     -------
     np.ndarray
-        A one-dimensional NumPy array of integers, where each element is the index in
-        `sorted_array` that is closest to the corresponding target value in `target_values`.
+        A one-dimensional NumPy array of integers, where each element is the index in `sorted_array` that is closest to the corresponding target value in `target_values`.
 
 
     Examples

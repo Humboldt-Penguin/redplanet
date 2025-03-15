@@ -16,16 +16,26 @@ def get_nearest(
     as_dict : bool = False,
 ) -> pd.DataFrame | list[dict]:
     """
-    Returns info about 412 dipoles, sorted from closest to furthest from the given point.
+    Get magnetic source depth data, sorted from closest to furthest from the given point.
 
-    Columns are:
-        'lon'               : float
-        'lat'               : float
-        'chi2_reduced'      : float
-        'cap_radius_km'     : numpy array with 3 values -- best-fit, and 1-sigma lower/upper limits
-        'depth_km'          : numpy array with 3 values -- best-fit, and 1-sigma lower/upper limits
-        'dipole_moment_Am2' : numpy array with 3 values -- best-fit, and 1-sigma lower/upper limits
-        'distance_km'       : float
+    For source of the dataset, see references of `help(redplanet.Mag.depth.get_nearest)`.
+
+    Parameters
+    ----------
+    lon : float
+        Longitude coordinate in range [-180, 360].
+    lat : float
+        Latitude coordinate in range [-90, 90].
+    as_dict : bool, optional
+        If True, return the data as a list of dictionaries. Default is False.
+
+    Returns
+    -------
+    pd.DataFrame | list[dict]
+        Information about all 412 dipoles, sorted from closest to furthest from the given input coordinate. Columns are identical to those in `redplanet.Mag.depth.get_dataset` (look there for full explanations), with the addition of a computed column:
+
+        - `distance_km` : float
+            - Distance from the given input coordinate to the dipole, in km.
     """
 
     lon = _plon2slon(lon)

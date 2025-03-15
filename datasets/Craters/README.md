@@ -44,7 +44,7 @@ NOTE: this dataset only has craters >50km diameter
         - Source:
             - Download site: https://craters.sjrdesign.net/
                 - Maintainer: Robbins
-            - [Companian paper] DOI: (1) https://doi.org/10.1029/2011JE003967, (2) https://doi.org/10.1029/2011JE003966
+            - [Companian paper] DOI: (1) https://doi.org/10.1029/2011JE003966, (2) https://doi.org/10.1029/2011JE003967
                 - Authors: Robbins, Hynek
                 - Title: "A new global database of Mars impact craters ≥1 km: [...]"
                 - Published: 2012 May

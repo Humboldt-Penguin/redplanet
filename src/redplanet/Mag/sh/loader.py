@@ -1,8 +1,10 @@
 import numpy as np
 import pyshtools as pysh
 
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.DatasetManager.main import _get_fpath_dataset
 from redplanet.helper_functions.GriddedData import GriddedData
+
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -10,22 +12,50 @@ from redplanet.helper_functions.GriddedData import GriddedData
 
 _dat_mag: GriddedData | None = None
 
+@substitute_docstrings
 def get_dataset() -> GriddedData:
+    """
+    {fulldoc.get_dataset_GriddedData}
+    """
     if _dat_mag is None:
         raise ValueError('Bouguer dataset not loaded. Use `redplanet.Mag.sh.load(<model_params>)`.')
     return _dat_mag
 
+@substitute_docstrings
 def get_metadata() -> dict:
+    """
+    {fulldoc.get_metadata}
+    """
     return dict(get_dataset().metadata)
 
 
 
 
 
+@substitute_docstrings
 def load(
-    model: str = None,
-    lmax : int = 134,
-):
+    model : str = None,
+    lmax  : int = 134,
+) -> None:
+    """
+    Load a magnetic field model for Mars.
+
+    Parameters
+    ----------
+    model : str
+        Name of the magnetic field model to load. Options are:
+
+        - `'Langlais2019'` (0.081 MiB) — Spherical harmonic model of the magnetic field of Mars with a spatial resolution of ~160 km at the surface, corresponding to spherical harmonic degree 134. Integrates data from MGS magnetometer, MGS electron reflectometer, and MAVEN magnetometer.
+            - Dataset downloaded from {@Langlais2019_data.n}. The full paper discusses/analyzes the models in detail ({@Langlais2019_paper.p}).
+            - We process spherical harmonic coefficients with `pyshtools` ({@shtools_code.p}; {@shtools_paper.p}).
+    lmax : int, optional
+        The maximum spherical harmonic degree of the coefficients to load. Default is 134 (maximum for 'Langlais2019').
+
+    Raises
+    ------
+    ValueError
+        If an invalid model name is provided.
+    """
 
     ## I expect to add more later, so users should explicitly choose Genova2016 for forward compatibility. Mittelholz might be publishing hers soon.
     info = {
@@ -93,3 +123,5 @@ def load(
 
     else:
         raise ValueError(f"THE DEVELOPER MESSED UP. THIS SHOULD NOT HAPPEN.")
+
+    return

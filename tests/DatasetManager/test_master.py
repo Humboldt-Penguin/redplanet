@@ -5,7 +5,7 @@ import time
 import pytest
 
 from redplanet.user_config import get_dirpath_datacache, set_dirpath_datacache
-from redplanet.DatasetManager.master import _get_fpath_dataset
+from redplanet.DatasetManager.main import _get_fpath_dataset
 from redplanet.DatasetManager.dataset_info import _get_download_info
 from redplanet.DatasetManager.hash import _calculate_hash_from_file
 

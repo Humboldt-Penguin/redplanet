@@ -3,12 +3,25 @@ name = "redplanet"
 version = "0.1.0"
 description = "User-friendly accessors/calculations/plotting for various Mars datasets and derived geophysics quantities."
 readme = "README.md"
-requires-python = ">=3.12"
+authors = [
+    { name = "Zain Eris Kamal", email = "zain.eris.kamal@rutgers.edu" }
+]
+license = "MIT"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.10, <3.13"
 dependencies = [
     "cartopy>=0.24.1",
     "numpy>=2.1.1",
     "pandas>=2.2.2",
     "pyshtools>=4.13.1",
+    "python-calamine>=0.3.1",
     "scipy>=1.14.1",
     "xarray>=2024.9.0",
     "xxhash>=3.5.0",
@@ -33,4 +46,10 @@ build-backend = "hatchling.build"
 [dependency-groups]
 dev = [
     "pytest>=8.3.3",
+]
+docs = [
+    "mkdocs-git-revision-date-localized-plugin>=1.4.1",
+    "mkdocs-material>=9.6.1",
+    "mkdocstrings-python>=1.13.0",
+    "ruff>=0.9.6",
 ]

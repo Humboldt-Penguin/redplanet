@@ -10,14 +10,18 @@ _dirpath_datacache: Path = None
 
 def get_dirpath_datacache() -> Path:
     """
-    Get the data path where datasets are downloaded/cached. Initializes to default path ('/home/USERNAME/.cache/redplanet/') if not set.
+    Get the data path where datasets are downloaded/cached. Initializes to default path ('/home/<user>/.cache/redplanet/') if not set.
 
-    Returns:
-        Path: The current data path.
+    Returns
+    -------
+    Path
 
-    [DEV NOTES]
-        - It's good design to defer initialization of default value until first access in `get_dirpath_datacache()`...
-            - This way, we avoid any overhead or side-effects of executing any potentially expensive / unnecessary code (esp related to file system operations) during the module import (i.e. lazy initialization).
+    Notes
+    -----
+    [DEVELOPER NOTES:]
+
+    - It's good design to defer initialization of default value until first access in `get_dirpath_datacache()`...
+        - This way, we avoid any overhead or side-effects of executing any potentially expensive / unnecessary code (esp related to file system operations) during the module import (i.e. lazy initialization).
     """
     ## Lazy load
     if _dirpath_datacache is None:
@@ -32,11 +36,18 @@ def set_dirpath_datacache(target_path: str | Path) -> None:
     """
     Set the data path where datasets will be downloaded/cached.
 
-    Args:
-        path: str or Path
-            The file system path to store datasets.
-    """
+    Parameters
+    ----------
+    target_path : str | Path
+        The file system path to store datasets.
 
+    Raises
+    ------
+    TypeError
+        Path must be a string or a Path object.
+    ValueError
+        Invalid path string provided.
+    """
     ## Input type validation && conversion to Path object
     match target_path:
 

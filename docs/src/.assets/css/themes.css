@@ -1,0 +1,19 @@
+/* This overrides a few color values in the mkdocs-material default themes ("slate"=dark, "default"=light) — self warning, it's way too much effort to rewrite an entire theme from scratch */
+
+[data-md-color-scheme="slate"] {
+    /* Colorscheme taken from `cartopy` docs */
+
+    /* Main page background */
+    --md-default-bg-color: rgb(19, 23, 29);
+
+    /* Top bar background */
+    --md-primary-fg-color: rgb(33, 39, 50);
+
+    /* Text */
+    --md-typeset-color: rgb(230, 230, 230);
+}
+
+[data-md-color-scheme="default"] {
+    /* Top bar background */
+    --md-primary-fg-color: rgb(33, 39, 50);
+}

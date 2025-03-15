@@ -34,7 +34,7 @@ class Test__set_dirpath_datacache:
 		valid_path_str = "/tmp/redplanet_cache"
 		set_dirpath_datacache(valid_path_str)
 
-		assert get_dirpath_datacache() == Path(valid_path_str)
+		assert get_dirpath_datacache() == Path(valid_path_str).resolve()
 
 
 	## Valid input: pathlib.Path
@@ -42,7 +42,7 @@ class Test__set_dirpath_datacache:
 		valid_path_obj = Path("/tmp/redplanet_cache")
 		set_dirpath_datacache(valid_path_obj)
 
-		assert get_dirpath_datacache() == valid_path_obj
+		assert get_dirpath_datacache() == valid_path_obj.resolve()
 
 
 	## Invalid input: str not valid path
