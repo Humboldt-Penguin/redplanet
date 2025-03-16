@@ -176,7 +176,7 @@ where:
 
 <!-- [TOO VERBOSE, see rewrite] Note that many works approximate the *pressure itself* as decaying according to a power law (i.e. swap $u_{IC}$ with $P_{IC}$), but the first occurrence of this idea I could find says it's the *particle velocity* that decays (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056) [[doi](https://doi.org/10.2172/4227056)]) and the alternate version is an approximation of this. I don't think this makes much a difference, but good to know. -->
 
-Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056){target="_blank"} [[doi](https://doi.org/10.2172/4227056)]{target="_blank"}), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
+Many works approximate *pressure* decay using a power law (i.e., replacing $u_{IC}$ with $P_{IC}$). However, the earliest reference I found attributes this decay to *particle velocity* instead (see [page 18 of Perret & Bass, 1975](https://www.osti.gov/servlets/purl/4227056){target="_blank"} [[doi](https://doi.org/10.2172/4227056){target="_blank"}]), with the pressure-based version being an approximation. This likely makes little difference, but it's worth noting.
 
 
 
