@@ -131,10 +131,11 @@ tag:
 
 
 [group("misc")]
-[doc("Clean up Python bytecode artifacts + website build files.")]
+[doc("Clean up miscellaneous build/artifact files.")]
 clean:
     just _clean_python
     just _clean_site
+    just _clean_build
 
 
 
@@ -148,3 +149,7 @@ _clean_python:
 # Clean up website build files.
 _clean_site:
     rm -rf docs/site/
+
+# Clean up all build files.
+_clean_build:
+    rm -rf dist/
