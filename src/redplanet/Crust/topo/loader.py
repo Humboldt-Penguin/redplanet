@@ -129,11 +129,13 @@ def load(model: str = None) -> None:
     metadata = info[model]['metadata']
     metadata['fpath'] = fpath
 
+    is_slon = info[model]['lon'][0] < 0
+
     global _dat_topo
     _dat_topo = GriddedData(
         lon       = info[model]['lon'],
         lat       = info[model]['lat'],
-        is_slon   = True,
+        is_slon   = is_slon,
         data_dict = {'topo': dat},
         metadata  = metadata,
     )

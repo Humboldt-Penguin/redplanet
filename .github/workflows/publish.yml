@@ -1,5 +1,5 @@
 name: Publish
-## For reference, see https://github.com/astral-sh/trusted-publishing-examples/blob/main/.github/workflows/release.yml
+## For reference on publishing with uv via workflows, see https://github.com/astral-sh/trusted-publishing-examples/blob/main/.github/workflows/release.yml
 
 on:
   push:
@@ -17,7 +17,10 @@ jobs:
     ## Configure environment(s)
     runs-on: ubuntu-latest
     environment:
-      name: publish  ## corresponds to entry in GitHub repo's "Settings" > "Environments"
+      name: publish
+      ## The current filename and "name" above should correspond to entries in GitHub's "Environments" settings and PyPI's "Publishing" settings, which you must add manually:
+      ##   - GitHub: https://files.catbox.moe/7s8q99.png
+      ##   - PyPI: https://files.catbox.moe/qcecbd.png
     permissions:
       id-token: write
 
@@ -26,7 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install uv and set Python version
+      - name: Install uv
         uses: astral-sh/setup-uv@v5  ## Ref: [1] https://github.com/marketplace/actions/astral-sh-setup-uv, [2] https://docs.astral.sh/uv/guides/integration/github/
 
       - name: Build source distribution and wheels
