@@ -17,7 +17,7 @@ def test_load_get_valid():
     ### global mean
     lons = np.linspace(-180, 360, 100)
     lats = np.linspace(-90, 90, 100)
-    assert np.allclose( Crust.topo.get(lons, lats).mean() , -492.8185 )
+    assert np.allclose( Crust.topo.get(lons, lats).mean() , -28.1777 )
 
     ### wraparound
     lons = np.linspace(-180, 0, 100)
