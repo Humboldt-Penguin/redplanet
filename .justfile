@@ -51,10 +51,10 @@ update-flake:
 ## TODO: add commands for creating the venv from scratch using the lockfile (WITHOUT updating anything)
 
 [group("Dependencies")]
-[doc("Sync the project's environment (`.venv/`) with exact dependencies in the lockfile (`uv.lock`), both optional and development groups. If `.venv/` doesn't exist, it will be created.")]
+[doc("Sync the project's environment (`.venv/`) with exact dependencies in the lockfile (`uv.lock`), including installing this project in editable mode. If `.venv/` doesn't exist, it will be created.")]
 sync-venv:
     @# For more info, see: https://docs.astral.sh/uv/reference/cli/#uv-sync
-    @#   Note: `--all-extras` and `--all-groups` refer to the optional (`[project.optional-dependencies]`) and development (`[dependency-groups]`) dependencies in `pyproject.toml`, respectively. For more info, see commit `b25359d`.
+    @#   Note: `--all-extras` and `--all-groups` refer to the optional (`[project.optional-dependencies]`) and development (`[dependency-groups]`) dependencies in `pyproject.toml` respectively. For more info, see commit `b25359d`.
     uv sync --all-extras --all-groups
 
 [group("Dependencies")]
@@ -106,9 +106,10 @@ deploy-site:
 
 
 [group("Publish")]
-[doc("Create an annotated git tag with the version extracted from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! Always push the plain commit first and ensure tests are passing in GitHub Actions: https://github.com/Humboldt-Penguin/redplanet/actions")]
+[doc("Create an annotated git tag with version from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! You should (1) update version manually in `pyproject.toml` and automatically in `uv.lock`, then commit; (2) push, then verify tests passing in GitHub Actions; (3) merge to main, then `just tag`; (4) double check, then push commit + tag.")]
 tag:
     #!/usr/bin/env bash
+    # Link to GitHub Actions: https://github.com/Humboldt-Penguin/redplanet/actions
     set -euo pipefail
     version=$(uv run -- python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])")
     version="v${version}"

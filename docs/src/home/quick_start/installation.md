@@ -1,13 +1,13 @@
 ## [1] System Requirements
 
-RedPlanet is supported on the following platforms, as verified by our [tests via GitHub Actions](https://github.com/Humboldt-Penguin/redplanet/actions/workflows/test.yml){target="_blank"}:
+RedPlanet is supported on the following platforms, as verified by our [automated tests on GitHub Actions](https://github.com/Humboldt-Penguin/redplanet/actions/workflows/test.yml){target="_blank"}:
 
 - ^^Operating Systems^^ — Linux, MacOS, and Windows
 - ^^Python Version^^ — 3.10 to 3.12
     - We plan to add support for 3.13 once [pyshtools is updated](https://github.com/SHTOOLS/SHTOOLS/pull/500){target="_blank"}.
     - To see the official support timeline for all versions of Python, look [here](https://devguide.python.org/versions){target="_blank"} or [here](https://endoflife.date/python){target="_blank"}.
 
-Feel free to send an email or open an issue on GitHub if you're having installation issues or want to request support for earlier versions of Python. It might only take a few minutes to add compatibility.
+If you're having installation issues or want to request support for earlier versions of Python, feel free to send an email or open an issue on GitHub. It might only take a few minutes to add compatibility.
 
 
 
@@ -18,13 +18,13 @@ Feel free to send an email or open an issue on GitHub if you're having installat
 ---
 ## [2] Installation
 
-For beginners, I wrote a [Python Installation Guide](../../tutorials/install_python.md){target="_blank"} to explain the concepts, steps, and suggested tools for installing Python and packages *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*.
+For beginners, I wrote a [guide](../../tutorials/install_python.md){target="_blank"} which explains the concepts, steps, and suggested tools for installing Python and packages *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. For intermediate/advanced users, I recommend checking out a new tool called [`uv` by Astral](https://docs.astral.sh/uv/){target="_blank"}.
 
 &nbsp;
 
 Past that, install from [PyPI](https://pypi.org/project/redplanet/){target="_blank"} with `pip install redplanet`.
 
-We'd be happy to upload to conda-forge if anyone requests — feel free to send an email or open an issue on GitHub.
+We'd be happy to upload to conda-forge upon request, feel free to send an email or open an issue on GitHub.
 
 
 
@@ -73,7 +73,7 @@ Included in `pip install redplanet`
 ---
 ### [3.2] Optional Dependencies
 
-For specific features, you'll need to install additional packages.
+For additional features, you'll need to install additional packages.
 
 &nbsp;
 
@@ -102,4 +102,4 @@ For specific features, you'll need to install additional packages.
 
 ---
 
-Note: you can install both sets of optional dependencies with a single command: `pip install "redplanet[interactive,generate-datasets]"`.
+Note you can install both sets of optional dependencies with a single command: `pip install "redplanet[interactive,generate-datasets]"`.

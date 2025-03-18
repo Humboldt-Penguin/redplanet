@@ -1,8 +1,8 @@
-This document is for anyone who wants to contribute to RedPlanet's code.
+This page is for anyone who wants to contribute to RedPlanet's code.
 
 We assume you're familiar with GitHub and Git. If not, learn about them [here](https://docs.github.com/en/get-started/start-your-journey/hello-world){target="_blank"}.
 
-If you're not comfortable with this process, feel free to contact us by [email](mailto:zain.eris.kamal@rutgers.edu) — we'd happy to implement your suggestions!
+If you're not comfortable with this process, feel free to contact us by email or open an issue on GitHub — we'd happy to implement your suggestions!
 
 
 ---
@@ -15,7 +15,7 @@ If you're not comfortable with this process, feel free to contact us by [email](
 
 Any operating system should be fine:
 
-| OS:                        | Instructions:                                                                                                                                                                                                                                                         |
+| OS                         | Instructions                                                                                                                                                                                                                                                          |
 | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Linux/MacOS                | Everything should work out of the box.                                                                                                                                                                                                                                |
 | Windows                    | Please just use [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/about){target="_blank"}, it takes a few minutes to set up and will make anything programming-related exponentially easier.                                          |
@@ -26,9 +26,39 @@ Any operating system should be fine:
 Please install:
 
 1. [`uv` by Astral](https://docs.astral.sh/uv/getting-started/installation/){target="_blank"} for running/managing Python environments.
-2. [`just` by Casey Rodarmor](https://just.systems/man/en/prerequisites.html){target="_blank"} as a command runner, very similar to GNU Make / Makefiles. You can preview the recipes by running `just`, or see the exact commands in our `.justfile`:
+2. [`just` by Casey Rodarmor](https://just.systems/man/en/prerequisites.html){target="_blank"} as a command runner, very similar to GNU Make / Makefiles. You can see the exact commands in our `.justfile`, or list the recipes by running `just`:
 
-![](https://files.catbox.moe/vnk61w.png)
+<!-- Self note: get the text below with `just > tmp.txt`, don't fuss with copying from terminal or screenshotting. -->
+
+```toml
+Available recipes:
+    [Help]
+    help              # List all recipes (or just run `just`).
+
+    [Development shell via Nix package manager]
+    activate-devshell # Activate interactive development shell with uv (remember to `exit` when done) — we recommend getting into the habit of using this recipe over plain `nix develop` since it incorporates guard rails against entering multi-nested devshells.
+    update-flake      # Update flake. (check for `uv` updates in nixpkgs here: https://github.com/NixOS/nixpkgs/blob/nixpkgs-unstable/pkgs/by-name/uv/uv/package.nix )
+
+    [Dependencies]
+    sync-venv         # Sync the project's environment (`.venv/`) with exact dependencies in the lockfile (`uv.lock`), including installing this project in editable mode. If `.venv/` doesn't exist, it will be created.
+    update-lockfile   # Update lockfile (`uv.lock`) with the latest versions of all dependencies. This does NOT install or modify `.venv/` — for that, see `sync-venv`.
+
+    [Test]
+    test              # Run tests.
+    test-verbose      # Run tests, do not suppress print statements.
+
+    [Website]
+    serve-site        # Start the live-reloading docs server locally (see: http://localhost:8000/ ).
+    deploy-site       # Deploy to GitHub Pages.
+
+    [Publish]
+    tag               # Create an annotated git tag with version from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! You should (1) update version manually in `pyproject.toml` and automatically in `uv.lock`, then commit; (2) push, then verify tests passing in GitHub Actions; (3) merge to main, then `just tag`; (4) double check, then push commit + tag.
+
+    [misc]
+    clean             # Clean up miscellaneous build/artifact files.
+```
+
+<!-- ![](https://files.catbox.moe/vnk61w.png) -->
 
 
 &nbsp;
@@ -36,7 +66,7 @@ Please install:
 ---
 ### [1.2] Install Project Locally
 
-Run `just sync-venv` (or `uv sync --all-extras --all-groups`) to sync the project's environment (`.venv/`) with exact dependencies in the lockfile (`uv.lock`). This will also install `redplanet` in editable mode, so you can make changes to the code and see them reflected immediately. If `.venv/` doesn't exist, it will be created.
+Run `just sync-venv` (which calls `uv sync --all-extras --all-groups` under the hood) to sync the project's environment (`.venv/`) with exact dependencies in the lockfile (`uv.lock`). This will also install `redplanet` in editable mode (corresponding to `pip install -e .`), so you can make changes to the code and see them reflected immediately. If `.venv/` doesn't exist, it will be created.
 
 
 &nbsp;
