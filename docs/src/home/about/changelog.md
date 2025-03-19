@@ -22,7 +22,12 @@
 ---
 ## [2] Changelog
 
-RedPlanet follows the [Semantic Versioning](https://semver.org/){target="_blank"} standard.
+RedPlanet follows the [Semantic Versioning](https://semver.org/){target="_blank"} standard. In short, this means that version numbers follow the pattern `MAJOR.MINOR.PATCH`, where `MAJOR` is incremented for breaking changes (i.e. not backwards compatible), `MINOR` is incremented for new features, and `PATCH` is incremented for bug fixes.
+
+
+??? info "Complete rewrite in 2024 September & deleting v1.0.0"
+
+    I completely rewrote this project in 2024 September, erasing the entire git history and restarting from scratch. On PyPI, I deleted the only version which which was ever published (v1.0.0), so it's impossible to download now (as opposed to "yanking" which would allow for downloading if the exact version were accidentally requested). An archive of the old repo is available here: https://github.com/Humboldt-Penguin/redplanet_archive-240910
 
 
 &nbsp;

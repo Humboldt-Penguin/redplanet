@@ -112,8 +112,8 @@ nav:
     - About:
       - Contact: home/about/contact.md
       - Changelog: home/about/changelog.md
-      - License: home/about/license.md
       - Contributing: home/about/contributing.md
+      - License: home/about/license.md
 
 
   - Usage:

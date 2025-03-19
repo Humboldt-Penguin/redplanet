@@ -23,10 +23,10 @@ Any operating system should be fine:
 
 &nbsp;
 
-Please install:
+Please install the following tools (these are fairly lightweight, easy to uninstall, and will never permanently alter you system in any way — I'd never ask you to install something I wouldn't be comfortable with on my own personal computer!):
 
 1. [`uv` by Astral](https://docs.astral.sh/uv/getting-started/installation/){target="_blank"} for running/managing Python environments.
-2. [`just` by Casey Rodarmor](https://just.systems/man/en/prerequisites.html){target="_blank"} as a command runner, very similar to GNU Make / Makefiles. You can see the exact commands in our `.justfile`, or list the recipes by running `just`:
+2. [`just` by Casey Rodarmor](https://just.systems/man/en/prerequisites.html){target="_blank"} as a lightweight/basic command runner, very similar to GNU Make / Makefiles. You can see the exact commands in the `.justfile`, or list the recipes by running `just`:
 
 <!-- Self note: get the text below with `just > tmp.txt`, don't fuss with copying from terminal or screenshotting. -->
 

@@ -42,6 +42,10 @@ TODO: GOOGLE COLAB
 &nbsp;
 
 ---
-## Get Started
+## Links
 
-TODO: INTERNAL LINKS
+- Hosts:
+    - [GitHub](https://github.com/Humboldt-Penguin/redplanet){target="_blank"}
+    - [PyPI](https://pypi.org/project/redplanet/){target="_blank"}
+- Useful resources:
+    - [Mars QuickMap](https://mars.quickmap.io/layers?prjExtent=-16435210.8833828%2C-8021183.5691341%2C12908789.1166172%2C7866816.4308659&showGraticule=true&layers=NrBMBoAYvBGcQGYAsA2AHHGkB0BOcAOwFcAbU8AbwCIAzUgSwGMBrAUwCdqAuWgQ1IBnNgF8AumKrixQA&proj=3&time=2024-11-11T07%3A09%3A37.723Z){target="_blank"} (this is an incredible resource for everyone, from beginners to advanced users — big props to [Applied Coherent Technology (ACT) Corporation](https://www.actgate.com/){target="_blank"} :)
