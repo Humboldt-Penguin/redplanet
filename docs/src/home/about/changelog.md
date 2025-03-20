@@ -5,6 +5,8 @@
 - Major features
     - [ ] Plotting (with hillshade background...?)
     - [ ] Add MAVEN magnetometer module
+- Known bugs
+    - [ ] boug data has weird wraparound at lon 180 -- reproduce, run `import redplanet as rp; rp.Crust.boug.load('Genova2016'); d = 1.e-6; print(rp.Crust.boug.get(-180 + d, 0)); print(rp.Crust.boug.get( 180 - d, 0))`
 - Minor changes/updates
     - [ ] Update crater database with new [IAU additions](https://planetarynames.wr.usgs.gov/SearchResults?Target=20_Mars&Feature%20Type=9_Crater,%20craters){target="_blank"}
         - Redplanet currently uses a database up to 2024-11-26 with 1218 craters -- as of 2025-02-27, there are 1231 craters (13 additions).

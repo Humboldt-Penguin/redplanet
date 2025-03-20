@@ -52,7 +52,7 @@ Available recipes:
     deploy-site       # Deploy to GitHub Pages.
 
     [Publish]
-    tag               # Create an annotated git tag with version from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! You should (1) update version manually in `pyproject.toml` and automatically in `uv.lock`, then commit; (2) push, then verify tests passing in GitHub Actions; (3) merge to main, then `just tag`; (4) double check, then push commit + tag.
+    tag               # Create an annotated git tag with version from `pyproject.toml` — NOTE: this triggers a PyPI release when pushed! You should (1) push and verify tests passing in GitHub Actions; (2) update version manually in `pyproject.toml` and automatically in `uv.lock` (`just test`), then commit; (3) merge to main, then `just tag`; (4) double check, then push commit + tag.
 
     [misc]
     clean             # Clean up miscellaneous build/artifact files.
