@@ -1,14 +1,12 @@
-TODO
-
----
-
-# Roadmap/todo (maybe move this elsewhere?)
+## [1] Planned Features
 
 - Breaking changes
     - (None currently planned)
 - Major features
     - [ ] Plotting (with hillshade background...?)
     - [ ] Add MAVEN magnetometer module
+- Known bugs
+    - [ ] boug data has weird wraparound at lon 180 -- reproduce, run `import redplanet as rp; rp.Crust.boug.load('Genova2016'); d = 1.e-6; print(rp.Crust.boug.get(-180 + d, 0)); print(rp.Crust.boug.get( 180 - d, 0))`
 - Minor changes/updates
     - [ ] Update crater database with new [IAU additions](https://planetarynames.wr.usgs.gov/SearchResults?Target=20_Mars&Feature%20Type=9_Crater,%20craters){target="_blank"}
         - Redplanet currently uses a database up to 2024-11-26 with 1218 craters -- as of 2025-02-27, there are 1231 craters (13 additions).
@@ -20,46 +18,23 @@ TODO
     - [ ] Change all `loader` modules so they have an additional semi-private method which returns the respective `GriddedData` object, which is then assigned to the global variable by the `load()`/`load(...)`/`_load()` method. This is more clean and extensible in edge cases, e.g. `Crust.moho` wants the pysh topo model to make a crthick model (kind of).
     - [ ] Move `DatasetManager` to `redplanet.helper_functions`?
 
----
 
-# Explaining Versioning Scheme
-
-RedPlanet uses a modified version of [Semantic Versioning](https://semver.org/){target="_blank"}.
-
-??? note "*Why modify SemVer?*"
-
-    In short, we find the "major" category is too broad.
-
-    For example, under SemVer, both of the following changes would be considered "major" (i.e. breaking changes, not backwards compatible):
-
-    1. Consider the return type of the function `Crust.topo.get(lon, lat)` when both inputs are floats, e.g. `x = Crust.topo.get(lon=0, lat=0)`.
-        - Currently, the return type is a singleton numpy array (i.e. `type(x) == np.ndarray`, and `x.ndim == 0`).
-        - In an update, the return type is changed to a float value (i.e. `type(x) == float`), which is the result of calling `.item()` on the output of the previous case. This will only affect a subset of users, and the fix for them would be trivial.
-    2. An update redesigns the package so `Crust.topo` is no longer a valid namespace and the new "topography" module uses a different dataset and accessing function. Users will have to completely rewrite/rethink their usage.
-
-    We want a way for users to differentiate between these two cases. Thus we introduce the `epoch` category which is better suited for example 2 above.
-
-Our versions are in the format `epoch.major.minor-patch` (`#.#.#-@`), where:
-
-- `patch` (letter) indicates a bug fix, performance improvement, dependency update, and/or cosmetic change with no changes to observed inputs/outputs.
-    - e.g. `x.x.x` -> `x.x.x-a`; or `x.x.x-a` -> `x.x.x-b`
-    - => You can update patches without much thought.
-- `minor` (number) indicates a new feature that IS backwards compatible.
-    - e.g. `x.x.1-b` -> `x.x.2`
-    - => You can update minor versions without much thought. Additionally, check the changelog for new features that may enhance your workflow.
-- `major` (number) indicates a breaking change that is NOT backwards compatible.
-    - e.g. `x.1.2-c` -> `x.2.0`
-    - => Check for new features/improvements, and if you'd like to use them, you may need to update your code.
-- `epoch` (number) draws a user's attention to a notable/significant change, such as a complete rewrite or a change in the underlying philosophy of the package.
-    - e.g. `1.2.3-d` -> `2.0.0`
-    - => Older epochs might become depracated. If you see a new epoch is available, you should read the release notes even if your code is running fine and you have no need to upgrade. We try to bump epochs only when absolutely necessary, such as being forced to migrate dataset download links to a new host.
+&nbsp;
 
 ---
+## [2] Changelog
 
-# Changelog
+RedPlanet follows the [Semantic Versioning](https://semver.org/){target="_blank"} standard. In short, this means that version numbers follow the pattern `MAJOR.MINOR.PATCH`, where `MAJOR` is incremented for breaking changes (i.e. not backwards compatible), `MINOR` is incremented for new features, and `PATCH` is incremented for bug fixes.
 
-...
 
+??? info "Complete rewrite in 2024 September & deleting v1.0.0"
+
+    I completely rewrote this project in 2024 September, erasing the entire git history and restarting from scratch. On PyPI, I deleted the only version which which was ever published (v1.0.0), so it's impossible to download now (as opposed to "yanking" which would allow for downloading if the exact version were accidentally requested). An archive of the old repo is available here: https://github.com/Humboldt-Penguin/redplanet_archive-240910
+
+
+&nbsp;
+
+---
 
 self note:
 

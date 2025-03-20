@@ -72,7 +72,7 @@ def main():
     registry_noshcoeffs : dict = add_fileinfo_to_registry(
         client,
         root_folder_id,
-        # func_exclude = eval(func_exclude_str)
+        # func_exclude = foo(func_exclude_str)  ## For publishing purposes, I replaced `eval` with `foo` since it gets flagged as suspicious by code scanners. That's normally a good thing, you should generally never install a package that uses `eval`. This script isn't included in the package build (it's for reproducing a dataset archive, 99.99% chance no one else will ever run this in their life), but I'm still replacing it just in case.
     )
 
     log.info('')

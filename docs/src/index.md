@@ -21,11 +21,11 @@ Resources such as [pyshtools](https://github.com/SHTOOLS/SHTOOLS){target="_blank
 
 (citations are missing from here until I figure out how I'm handling that)
 
-- **Crater database** which unifies [1] comprehensive database of craters D>=1km, [2] crater ages from both Hartmann and Neukum isochron-fitting, and [3] official/up-to-date IAU crater names.
-- **Digital elevation models** up to 200m resolution with memory-mapping, parallelization, and chunking for high-performance.
-- **Mohorovičić discontinuity** (crust-mantle interface) models and derived **crustal thickness** maps — models are parameterized by north/south crustal density, reference interior models, and crustal thickness beneath the InSight lander with a total of ~20,000 valid combinations.
-- **Magnetic source depth** data from spherical harmonic inversions.
-- **Heat flow** and **Curie depth** calculations from **gamma-ray spectroscopy (GRS)** data.
+- ^^Crater database^^ which unifies [1] comprehensive database of craters D>=1km, [2] crater ages from both Hartmann and Neukum isochron-fitting, and [3] official/up-to-date IAU crater names.
+- ^^Digital elevation models^^ up to 200m resolution with memory-mapping, parallelization, and chunking for high-performance.
+- ^^Mohorovičić discontinuity^^ (crust-mantle interface) models and derived ^^crustal thickness^^ maps — models are parameterized by north/south crustal density, reference interior models, and crustal thickness beneath the InSight lander with a total of ~20,000 valid combinations.
+- ^^Magnetic source depth^^ data from spherical harmonic inversions.
+- ^^Heat flow^^ and ^^Curie depth^^ calculations from ^^gamma-ray spectroscopy (GRS)^^ data.
 - MAVEN magnetometer data, filtered for nighttime and low-altitude (COMING SOON).
 
 
@@ -42,6 +42,10 @@ TODO: GOOGLE COLAB
 &nbsp;
 
 ---
-## Get Started
+## Links
 
-TODO: INTERNAL LINKS
+- Hosts:
+    - [GitHub](https://github.com/Humboldt-Penguin/redplanet){target="_blank"}
+    - [PyPI](https://pypi.org/project/redplanet/){target="_blank"}
+- Useful resources:
+    - [Mars QuickMap](https://mars.quickmap.io/layers?prjExtent=-16435210.8833828%2C-8021183.5691341%2C12908789.1166172%2C7866816.4308659&showGraticule=true&layers=NrBMBoAYvBGcQGYAsA2AHHGkB0BOcAOwFcAbU8AbwCIAzUgSwGMBrAUwCdqAuWgQ1IBnNgF8AumKrixQA&proj=3&time=2024-11-11T07%3A09%3A37.723Z){target="_blank"} (this is an incredible resource for everyone, from beginners to advanced users — big props to [Applied Coherent Technology (ACT) Corporation](https://www.actgate.com/){target="_blank"} :)

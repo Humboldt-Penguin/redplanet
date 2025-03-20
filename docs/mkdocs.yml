@@ -87,6 +87,7 @@ markdown_extensions:
   - pymdownx.details
   - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
   - md_in_html  ## annotations
+  - pymdownx.caret  ## underline with `^^` (https://squidfunk.github.io/mkdocs-material/reference/formatting/?h=underline#highlighting-text )
 extra_javascript:
   - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -111,8 +112,8 @@ nav:
     - About:
       - Contact: home/about/contact.md
       - Changelog: home/about/changelog.md
-      - License: home/about/license.md
       - Contributing: home/about/contributing.md
+      - License: home/about/license.md
 
 
   - Usage:
@@ -192,3 +193,4 @@ nav:
 
   - Tutorials & Guides:
     - tutorials/index.md
+    - How to Install/Use Python: tutorials/install_python.md

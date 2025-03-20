@@ -41,7 +41,7 @@ im = ax.imshow(
     cmap   = 'RdBu_r',
     # cmap   = 'Greys',
     origin = 'lower',
-    aspect = 'auto',  ## this makes pixels into squares; alternative is 'equal'
+    aspect = 'auto',  ## 'auto' makes rectangular pixels, 'equal' makes square pixels
     extent = [lon_bounds[0], lon_bounds[1], lat_bounds[0], lat_bounds[1]],
 )
 

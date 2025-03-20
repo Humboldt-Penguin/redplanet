@@ -1,36 +1,13 @@
-RedPlanet is currently officially supported for Python 3.10 to 3.12 (3.13 will be supported once [pyshtools updates](https://github.com/SHTOOLS/SHTOOLS/pull/500){target="_blank"}), and works on Linux, MacOS, and Windows (as verified by [our CI/CD tests](https://github.com/Humboldt-Penguin/redplanet/actions){target="_blank"}).
+## [1] System Requirements
 
-Send an email if you'd like to request support for earlier versions of Python, it might only take a few minutes to add compatibility.
+RedPlanet is supported on the following platforms, as verified by our [automated tests on GitHub Actions](https://github.com/Humboldt-Penguin/redplanet/actions/workflows/test.yml){target="_blank"}:
 
-To see the Python foundation's support status for all versions, look [here](https://devguide.python.org/versions){target="_blank"} or [here](https://endoflife.date/python){target="_blank"}.
+- ^^Operating Systems^^ — Linux, MacOS, and Windows
+- ^^Python Version^^ — 3.10 to 3.12
+    - We plan to add support for 3.13 once [pyshtools is updated](https://github.com/SHTOOLS/SHTOOLS/pull/500){target="_blank"}.
+    - To see the official support timeline for all versions of Python, look [here](https://devguide.python.org/versions){target="_blank"} or [here](https://endoflife.date/python){target="_blank"}.
 
-
-&nbsp;
-
----
-## [1] Experienced Users
-
-Install from [PyPI](https://pypi.org/project/redplanet/){target="_blank"} with `pip install redplanet`.
-
-We'd be happy to upload to conda-forge if anyone requests — feel free to [reach out directly](mailto:zain.eris.kamal@rutgers.edu) or [open an issue](https://github.com/Humboldt-Penguin/redplanet/issues/new){target="_blank"}.
-
-
-
-&nbsp;
-
----
-## [2] Beginners
-
-If you've never installed a Python package before, we'll walk you through the steps and concepts.
-
-### [2.1] bwaa
-
-The standard tool for installing Python packages is `pip`, which downloads packages from the [Python Package Index (PyPI)](https://pypi.org/){target="_blank"}. To install `redplanet` from PyPI, run the following command:
-
-```shell
-pip install redplanet
-pip install --upgrade redplanet  # to upgrade a pre-existing installation
-```
+If you're having installation issues or want to request support for earlier versions of Python, feel free to send an email or open an issue on GitHub. It might only take a few minutes to add compatibility.
 
 
 
@@ -38,26 +15,46 @@ pip install --upgrade redplanet  # to upgrade a pre-existing installation
 
 ---
 
+---
+## [2] Installation
+
+For beginners, I wrote a [guide](../../tutorials/install_python.md){target="_blank"} which explains the concepts, steps, and suggested tools for installing Python and packages *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. For intermediate/advanced users, I recommend checking out a new tool called [`uv` by Astral](https://docs.astral.sh/uv/){target="_blank"}.
+
+&nbsp;
+
+Past that, install from [PyPI](https://pypi.org/project/redplanet/){target="_blank"} with `pip install redplanet`.
+
+We'd be happy to upload to conda-forge upon request, feel free to send an email or open an issue on GitHub.
+
+
+
+&nbsp;
+
+---
+
+---
 ## [3] Dependencies
 
 <!-- format inspired by: https://pandas.pydata.org/pandas-docs/stable/getting_started/install.html#dependencies -->
 
 ??? info ""Installation Size""
 
-    <!-- We provide an estimated size for each package for convenience (low: < 5MB, medium: 5-50MB, high: > 50MB). However, please note these are **rough estimates** and can vary based on your system and the specific dependencies required. -->
+    <!-- We provide an estimated size for each package for convenience (low: < 5MB, medium: 5-50MB, high: > 50MB). However, please note these are ^^rough estimates^^ and can vary based on your system and the specific dependencies required. -->
 
-    For convenience, we provide an estimated size for each package — these are **ROUGH ESTIMATES** and can vary wildly based on your system and combinations of dependency groups (e.g. `pyshtools` requires `scipy`, so we can't remove the latter without removing the former):
+    For convenience, we provide an estimated size for each package — these are ^^ROUGH ESTIMATES^^ and can vary wildly based on your system and combinations of dependency groups (e.g. `pyshtools` requires `scipy`, so we can't remove the latter without removing the former):
 
-    - **Low**: < 5MB
-    - **Medium**: 5-50MB
-    - **High**: > 50MB
+    - ^^Low^^: < 5MB
+    - ^^Medium^^: 5-50MB
+    - ^^High^^: > 50MB
 
     For reference, installing ALL dependencies *(including developer dependencies, which normal users will never need)* in a fresh Python environment takes ~1GB.
 
-
+---
 ### [3.1] Required Dependencies
 
 Included in `pip install redplanet`
+
+<!-- TODO: Consider reorganizing in order of importance??? -->
 
 | Package                                                                      | Purpose                                                      | Minimum Version | Installed Size |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------ | --------------- | -------------- |
@@ -73,10 +70,12 @@ Included in `pip install redplanet`
 
 &nbsp;
 
+---
 ### [3.2] Optional Dependencies
 
-For specific features, you'll need to install additional packages.
+For additional features, you'll need to install additional packages.
 
+&nbsp;
 
 #### [3.2.1] Interactive/Plotting (recommended)
 
@@ -87,7 +86,6 @@ For specific features, you'll need to install additional packages.
 | [jupyter](https://pypi.org/project/jupyter){target="_blank"}       | Interactive notebooks, extremely useful | 1.1.1           | High           |
 | [matplotlib](https://pypi.org/project/matplotlib){target="_blank"} | Static 2D plots                         | 3.9.2           | Medium         |
 | [plotly](https://pypi.org/project/plotly){target="_blank"}         | Interactive 2D/3D plots                 | 5.24.1          | Medium         |
-
 
 #### [3.2.2] Reproduce Datasets
 
@@ -102,4 +100,6 @@ For specific features, you'll need to install additional packages.
 
 &nbsp;
 
-Note: you can install both sets of optional dependencies with a single command: `pip install "redplanet[interactive,generate-datasets]"`.
+---
+
+Note you can install both sets of optional dependencies with a single command: `pip install "redplanet[interactive,generate-datasets]"`.
