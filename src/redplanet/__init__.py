@@ -27,3 +27,7 @@ __all__.extend([
 
     'analysis',
 ])
+
+
+from redplanet.helper_functions.plotter import plot
+__all__.extend(['plot'])

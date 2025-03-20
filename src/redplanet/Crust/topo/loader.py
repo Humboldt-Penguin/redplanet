@@ -46,6 +46,8 @@ def load(model: str = None) -> None:
         - `'DEM_463m'` (2 GB) — MGS MOLA Digital Elevation Model 463m ({@DEM_463m.p}).
         - `'DEM_200m'` (11 GB) — MGS MOLA - MEX HRSC Blended Digital Elevation Model 200m ({@DEM_200m.p}).
 
+        **NOTE:** Higher resolution models are only *slightly* slower than lower resolution models. Our loading/accessing methods are already highly optimized (arrays are memory-mapped so they don't occupy RAM, e.g. accessing a global grid of 1e6 points takes ~0.01 seconds). Regardless, if you only want to download the smallest necessary dataset, we recommend 'SH' models for global maps and 'DEM' models for local maps (e.g. craters). In our experience, the `'DEM_463m'` model is sufficient for almost all purposes (hence it's included in `prefetch` and the default for plotting hillshade).
+
         For description of our modifications to the original data, see notes section.
 
     Raises
@@ -64,49 +66,53 @@ def load(model: str = None) -> None:
 
     info = {
         'SH_10km': {
-            'shape'    : (2135, 4269),
-            'dtype'    : np.int16,
-            'lon'      : np.linspace(0, 360, 4269),
-            'lat'      : np.linspace(-90, 90, 2135),
+            'shape': (2135, 4269),
+            'dtype': np.int16,
+            'lon': np.linspace(0, 360, 4269),
+            'lat': np.linspace(-90, 90, 2135),
             'metadata': {
-                'title'   : 'Spherical harmonic models of the shape of Mars (MOLA) — 10 km resolution, corresponding to degree 1066',
-                'units'   : 'm',
+                'title': 'Spherical harmonic models of the shape of Mars (MOLA) — 10 km resolution, corresponding to degree 1066',
+                'units': 'm',
                 'citation': 'Wieczorek, M. (2024). Spherical harmonic models of the shape of Mars (MOLA) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.10820719',
+                'meters_per_pixel': 10_000 / 2,  ## NOTE: The effective spatial resolution of a spherical harmonic model of degree L is given by (2*pi*R)/(2L+1), in this case 1066 -> 10 km. The expansion yields a finer grid than we'd expect, but its only interpolating between independent resolution elements defined by the bandlimit.
             },
         },
         'SH_5km': {
-            'shape'    : (4269, 8537),
-            'dtype'    : np.int16,
-            'lon'      : np.linspace(0, 360, 8537),
-            'lat'      : np.linspace(-90, 90, 4269),
+            'shape': (4269, 8537),
+            'dtype': np.int16,
+            'lon': np.linspace(0, 360, 8537),
+            'lat': np.linspace(-90, 90, 4269),
             'metadata': {
-                'title'   : 'Spherical harmonic models of the shape of Mars (MOLA) — 5 km resolution, corresponding to degree 2133',
-                'units'   : 'm',
+                'title': 'Spherical harmonic models of the shape of Mars (MOLA) — 5 km resolution, corresponding to degree 2133',
+                'units': 'm',
                 'citation': 'Wieczorek, M. (2024). Spherical harmonic models of the shape of Mars (MOLA) [Dataset]. Zenodo. https://doi.org/10.5281/zenodo.10820719',
+                'meters_per_pixel': 5_000 / 2,
             },
         },
         'DEM_463m': {
-            'shape'    : (23041, 46081),
-            'dtype'    : np.int16,
+            'shape': (23041, 46081),
+            'dtype': np.int16,
+            'lon': -179.9960938347692 + 0.007812330461578525 * np.arange(46081),
+            'lat': -89.99376946560506 + 0.00781206004494716  * np.arange(23041),
             'nan_value': -99_999,  ## data is stored as int16 which doesn't support `np.nan`, so we use this sentinel value.
-            'lon'      : -179.9960938347692 + 0.007812330461578525 * np.arange(46081),
-            'lat'      : -89.99376946560506 + 0.00781206004494716  * np.arange(23041),
             'metadata': {
-                'title'   : 'Mars MGS MOLA DEM 463m',
-                'units'   : 'm',
+                'title': 'Mars MGS MOLA DEM 463m',
+                'units': 'm',
                 'citation': 'Goddard Space Flight Center (2003). Mars MGS MOLA DEM 463m [Dataset]. Astrogeology PDS Annex, U.S. Geological Survey. https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m',
+                'meters_per_pixel': 463,
             },
         },
         'DEM_200m': {
-            'shape'    : (53347, 106694),
-            'dtype'    : np.int16,
+            'shape': (53347, 106694),
+            'dtype': np.int16,
+            'lon': -179.9983129395848 + 0.0033741208306410017 * np.arange(106694),
+            'lat': -89.99753689179012 + 0.0033741208306410004 * np.arange(53347),
             'nan_value': -99_999,  ## data is stored as int16 which doesn't support `np.nan`, so we use this sentinel value.
-            'lon'      : -179.9983129395848 + 0.0033741208306410017 * np.arange(106694),
-            'lat'      : -89.99753689179012 + 0.0033741208306410004 * np.arange(53347),
             'metadata': {
-                'title'   : 'Mars MGS MOLA - MEX HRSC Blended DEM Global 200m',
-                'units'   : 'm',
+                'title': 'Mars MGS MOLA - MEX HRSC Blended DEM Global 200m',
+                'units': 'm',
                 'citation': 'Fergason, R. L., Hare, T. M., & Laura, J. (2018). Mars MGS MOLA - MEX HRSC Blended DEM Global 200m v2 [Dataset]. Astrogeology PDS Annex, U.S. Geological Survey. https://astrogeology.usgs.gov/search/map/mars_mgs_mola_mex_hrsc_blended_dem_global_200m',
+                'meters_per_pixel': 200,
             },
         },
     }
@@ -128,6 +134,7 @@ def load(model: str = None) -> None:
 
     metadata = info[model]['metadata']
     metadata['fpath'] = fpath
+    metadata['short_name'] = model
 
     is_slon = info[model]['lon'][0] < 0
 
