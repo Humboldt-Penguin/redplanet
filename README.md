@@ -1,6 +1,6 @@
-RedPlanet is an open-source Python library for working with various Mars geophysical datasets. We aim to streamline data analysis/visualization workflows for beginners and experts alike, so you spend less time hunting/wrangling data and more time doing cool science! :)
+**Start with our documentation: https://humboldt-penguin.github.io/redplanet/**
 
-Start with our documentation: https://humboldt-penguin.github.io/redplanet/
+RedPlanet is an open-source Python library for working with various Mars geophysical datasets. We aim to streamline data analysis/visualization workflows for beginners and experts alike, so you spend less time hunting/wrangling data and more time doing cool science! :)
 
 Huge thanks to my incredible advisor [Prof. Lujendra Ojha](https://www.lujendraojha.com/) for all his support, guidance, patience, and kindness over the past four years.
 

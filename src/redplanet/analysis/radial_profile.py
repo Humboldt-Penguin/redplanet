@@ -101,7 +101,7 @@ def get_concentric_ring_coords(
 
 def get_profile(
     ring_coords__per_ring : tuple[np.ndarray],
-    accessor              : Callable,
+    accessor              : Callable[[float, float], float],
     return_stats          : bool = False,
 ) -> np.ndarray | tuple[ np.ndarray, np.ndarray, tuple[np.ndarray] ]:
     """
@@ -114,8 +114,8 @@ def get_profile(
     ----------
     ring_coords__per_ring : tuple[np.ndarray]
         A tuple where each element is a numpy array containing (longitude, latitude) coordinate pairs for a ring. This corresponds to the second output of `get_concentric_ring_coords`.
-    accessor : Callable
-        A function that accepts two arguments (longitude and latitude) and returns a numerical value corresponding to a data point at that location.
+    accessor : Callable[[float, float], float]
+        A function that accepts two arguments (longitude and latitude), then returns a numerical value corresponding to a data point at those coordinates. See Notes for more information.
     return_stats : bool, optional
         If True, the function returns additional statistical data (standard deviation and raw values for each ring) along with the averaged values. Default is False.
 
@@ -134,6 +134,15 @@ def get_profile(
         Only returned if `return_stats` is True.
 
         A tuple of 1D numpy arrays, each containing the data values extracted from each ring (shape is `(num_points,)`).
+
+    Notes
+    -----
+    The input for the `accessor` parameter must be a function, which might be confusing. Here are two examples (assume datasets have already been loaded):
+
+    - Example 1: For functions which only take longitude and latitude as arguments (e.g., topography), you can simply pass `accessor = redplanet.Crust.topo.get`.
+    - Example 2: For functions which require additional arguments (e.g., vector components of the magnetic field or custom calculations), you should define a separate function that will only require longitude and latitude as arguments. There are two ways to do this:
+        - Directly supply a lambda function like `accessor = lambda lon, lat: redplanet.Mag.sh.get(lon, lat, quantity='radial')` — this is ideal for simple one-line accessors.
+        - Define a function separately like `def get_value(lon, lat): return redplanet.Mag.sh.get(lon, lat, quantity='radial')`, and then pass `accessor = get_value` — this is ideal when your implementation of the `get_value` function involves multiple steps, e.g. querying multiple datasets, performing calculations, conditional/loop blocks, etc.
     """
 
     vals__per_ring = []

@@ -66,6 +66,7 @@ exclude_docs: |
 
 extra_css:
   - .assets/css/fonts.css
+  - .assets/css/grid_cards.css
   - .assets/css/spacing.css
   - .assets/css/themes.css
 
@@ -88,6 +89,9 @@ markdown_extensions:
   - attr_list  ## allow HTML attributes in markdown, e.g. open links in new tabs by appending `{target="_blank"}` (https://squidfunk.github.io/mkdocs-material/setup/extensions/python-markdown/#attribute-lists )
   - md_in_html  ## annotations
   - pymdownx.caret  ## underline with `^^` (https://squidfunk.github.io/mkdocs-material/reference/formatting/?h=underline#highlighting-text )
+  - pymdownx.emoji:  ## icons like `:octicons-arrow-right-24:` (https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/ )
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 extra_javascript:
   - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -193,4 +197,9 @@ nav:
 
   - Tutorials & Guides:
     - tutorials/index.md
-    - How to Install/Use Python: tutorials/install_python.md
+    - Getting Started:
+      - How to Install/Use Python: tutorials/getting_started/install_python.md
+      - Online Demo: tutorials/getting_started/online_demo.md
+    # - Datasets:
+    - Analysis:
+      - Radial Profile: tutorials/analysis/radial_profile.md

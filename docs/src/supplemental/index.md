@@ -1,4 +1,4 @@
-# Index of Supplemental Materials:
+# Supplemental Materials
 
 We try to provide full explanations and citations in the documentation for each individual function (see [Usage](../usage/index.md){target="_blank"} section), but some topics need a bit more space to explain. This section is for those topics.
 
