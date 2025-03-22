@@ -12,7 +12,7 @@ This document offers a simplified explanation/overview which a beginner could fo
 
 ---
 
-## [1] Observed Crater Diameter ⟶ Radius of Projectile
+## [1] Observed Crater Diameter :octicons-arrow-right-24: Radius of Projectile
 
 The *Holsapple* [1993] scaling relationship is
 

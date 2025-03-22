@@ -17,16 +17,16 @@ def prefetch() -> None:
     names = [
         'GRS_v2',
         'dichotomy_coords',
-        # 'DEM_200m',
-        'DEM_463m',
-        # 'SH_5km',
-        # 'SH_10km',
         'moho_registry',
         'crater_db',
         'Langlais2019',
         'Genova2016',
         'MOLA_shape_719',
         'Gong & Weiczorek, 2021',
+        # 'DEM_200m',
+        'DEM_463m',
+        # 'SH_5km',
+        # 'SH_10km',
     ]
 
     # ## DEBUG: delete all if they exist

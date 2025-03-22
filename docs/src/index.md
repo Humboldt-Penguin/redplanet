@@ -12,6 +12,10 @@ RedPlanet is an open-source Python library for working with various Mars geophys
 I have intermediate knowledge of search engine techniques, and I like to think I'm not completely incompetent (you can judge for yourself based on my work on this package/website) — but I was still tearing my hair out on what should have been a simple task. <br><br>
 Resources such as [pyshtools](https://github.com/SHTOOLS/SHTOOLS){target="_blank"} (both the software and documentation website) and [Zenodo](https://zenodo.org/search?q=metadata.creators.person_or_org.name%3A%22Wieczorek%2C%20Mark%22&l=list&p=1&s=10&sort=bestmatch){target="_blank"} are shining examples of how we can make our analysis workflows more accessible/reproducible and increase our scientific productivity. I hope RedPlanet can contribute to that ecosystem. <br><br>
 
+&nbsp;
+
+![](https://files.catbox.moe/geubr5.png)
+
 
 
 &nbsp;
@@ -26,26 +30,15 @@ Resources such as [pyshtools](https://github.com/SHTOOLS/SHTOOLS){target="_blank
 - ^^Mohorovičić discontinuity^^ (crust-mantle interface) models and derived ^^crustal thickness^^ maps — models are parameterized by north/south crustal density, reference interior models, and crustal thickness beneath the InSight lander with a total of ~20,000 valid combinations.
 - ^^Magnetic source depth^^ data from spherical harmonic inversions.
 - ^^Heat flow^^ and ^^Curie depth^^ calculations from ^^gamma-ray spectroscopy (GRS)^^ data.
-- MAVEN magnetometer data, filtered for nighttime and low-altitude (COMING SOON).
+- (Planned for future) MAVEN magnetometer data, filtered for nighttime and low-altitude.
 
 
 
 &nbsp;
 
 ---
-## Online Demo (no installation necessary!)
+## Online Demo
 
-TODO: GOOGLE COLAB
+[![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1b66gQ54S5wnjLP9p-wk3X7mMpWHqsA8H?usp=sharing){target="_blank"}
 
-
-
-&nbsp;
-
----
-## Links
-
-- Hosts:
-    - [GitHub](https://github.com/Humboldt-Penguin/redplanet){target="_blank"}
-    - [PyPI](https://pypi.org/project/redplanet/){target="_blank"}
-- Useful resources:
-    - [Mars QuickMap](https://mars.quickmap.io/layers?prjExtent=-16435210.8833828%2C-8021183.5691341%2C12908789.1166172%2C7866816.4308659&showGraticule=true&layers=NrBMBoAYvBGcQGYAsA2AHHGkB0BOcAOwFcAbU8AbwCIAzUgSwGMBrAUwCdqAuWgQ1IBnNgF8AumKrixQA&proj=3&time=2024-11-11T07%3A09%3A37.723Z){target="_blank"} (this is an incredible resource for everyone, from beginners to advanced users — big props to [Applied Coherent Technology (ACT) Corporation](https://www.actgate.com/){target="_blank"} :)
+Whether you're a beginner who's never installed Python before or an advanced user who'd like a demo before installing, *Google Colab* is a great way to try all the features of RedPlanet completely in your browser without installing anything! Just open the link above.

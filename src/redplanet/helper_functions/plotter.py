@@ -124,7 +124,7 @@ def plot(
 
     if isinstance(cbar_units, (tuple, list)):
         cbar_units_name, scale = cbar_units
-        dat = dat / scale
+        dat = dat * scale
     else:
         cbar_units_name = cbar_units
 

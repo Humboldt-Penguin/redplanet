@@ -1,6 +1,6 @@
 [project]
 name = "redplanet"
-version = "0.2.0"
+version = "0.2.1"
 description = "User-friendly accessors/calculations/plotting for various Mars datasets and derived geophysics quantities."
 readme = "README.md"
 authors = [
