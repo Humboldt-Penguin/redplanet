@@ -12,7 +12,7 @@ def get_concentric_ring_coords(
     lon                 : float,
     lat                 : float,
     radius_km           : float,
-    dist_btwn_rings_km  : float = 5,
+    dist_btwn_rings_km  : float = ...,
     num_rings           : int   = None,
     dist_btwn_points_km : float = 5,
 ) -> tuple[ np.ndarray, tuple[np.ndarray] ]:
@@ -30,9 +30,9 @@ def get_concentric_ring_coords(
     radius_km : float
         Radius (in kilometers) of the largest/outermost ring.
     dist_btwn_rings_km : float, optional
-        Distance (in kilometers) between consecutive rings. Must be specified if `num_rings` is not provided. Default is 5 km.
+        Distance (in kilometers) between consecutive rings. You can't provide both this and `num_rings`. Default is 5 km.
     num_rings : int, optional
-        Total number of rings to generate. If this is specified then you must provide `dist_btwn_rings_km=None`.
+        Total number of rings to generate. You can't provide both this and `dist_btwn_rings_km`. Default is None.
     dist_btwn_points_km : float, optional
         Desired spacing (in kilometers) between adjacent points on each ring. Default is 5.
 
@@ -47,10 +47,20 @@ def get_concentric_ring_coords(
     ------
     ValueError
         If either both or neither of `dist_btwn_rings_km` and `num_rings` are specified.
+
+    Notes
+    -----
+    For examples, see ["Tutorials & Guides"](/redplanet/tutorials/){target="_blank"} on the RedPlanet documentation website.
     """
 
-    if not (bool(dist_btwn_rings_km) ^ bool(num_rings)):  # XOR
-        raise ValueError('Must specify either `dist_btwn_rings_km` or `num_rings`, not neither/both.')
+    ## Input validation and defaults — after this, we're guaranteed one of `dist_btwn_rings_km` or `num_rings` will be a float and the other will be None.
+    if (dist_btwn_rings_km is not ...) and (num_rings is not None):
+        raise ValueError('Cannot provide both `dist_btwn_rings_km` and `num_rings` — provide only one or neither.')
+
+    if num_rings:
+        dist_btwn_rings_km = None
+    else:
+        dist_btwn_rings_km = 5
 
     ## Get radii for a series of concentric rings, starting at the center and going up to a distance of `radius_km`.
     if dist_btwn_rings_km:
