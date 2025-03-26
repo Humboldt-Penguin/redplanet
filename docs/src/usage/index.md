@@ -2,7 +2,7 @@
 
 This page gives an overview of all public RedPlanet objects, functions and methods.
 
-All of this information is also accessible with Python's built-in `help` function. For example, try running `help(redplanet.Craters.get)` in your shell/notebook.
+All of this information is also accessible with Python's built-in `help` function — for example, try running `help(redplanet.Craters.get)` in your shell/notebook.
 
 
 ---
@@ -80,6 +80,8 @@ Advanced dataset operations/calculations and other tools.
 
 Miscellaneous functions used internally.
 
+- Plotting:
+    - TODO (function is available, need to write the docstring)
 - Coordinates:
     - [_plon2slon(...)](helper_functions/coordinates/_plon2slon.md)
     - [_slon2plon(...)](helper_functions/coordinates/_slon2plon.md)

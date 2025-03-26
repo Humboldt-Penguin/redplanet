@@ -92,6 +92,8 @@ markdown_extensions:
   - pymdownx.emoji:  ## icons like `:octicons-arrow-right-24:` (https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/ )
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.tasklist:  ## task list (https://squidfunk.github.io/mkdocs-material/reference/lists/#using-task-lists )
+      custom_checkbox: true
 extra_javascript:
   - .assets/javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
@@ -118,6 +120,7 @@ nav:
       - Changelog: home/about/changelog.md
       - Contributing: home/about/contributing.md
       - License: home/about/license.md
+
 
 
   - Usage:
@@ -195,11 +198,13 @@ nav:
     - Plotting: supplemental/plotting.md
     # - Heat Flow: supplemental/heat_flow.md
 
+
+
   - Tutorials & Guides:
     - tutorials/index.md
     - Getting Started:
       - How to Install/Use Python: tutorials/getting_started/install_python.md
       - Online Demo: tutorials/getting_started/online_demo.md
-    # - Datasets:
-    - Analysis:
-      - Radial Profile: tutorials/analysis/radial_profile.md
+    - Basics of RedPlanet:
+      - Radial Profile: tutorials/basics/radial_profile.md
+    # - Advanced Analysis:
