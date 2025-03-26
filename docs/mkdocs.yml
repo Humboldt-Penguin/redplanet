@@ -24,8 +24,10 @@ theme:
         icon: material/weather-sunny
         name: Switch to dark mode
 
+  logo: .assets/logo/transparent_notext.png
+  favicon: .assets/logo/transparent_notext.png
   icon:
-    logo: material/satellite-variant
+    # logo: material/satellite-variant
     repo: fontawesome/brands/github
     annotation: material/plus-circle-outline
 
@@ -34,7 +36,7 @@ theme:
     - content.code.copy  ## code blocks: copy button (https://squidfunk.github.io/mkdocs-material/reference/code-blocks/ )
     - navigation.instant  ## behaves like a single-page application, i.e. extremely fast for free (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#instant-loading )
     - navigation.indexes  ## clicking on a section brings you to an overview page (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#section-index-pages )
-    # - navigation.expand  ## everything is expanded by default (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-expansion-with-expansion ) -- I'm tentatively leaning towards NOT doing this so users get a better sense of nesting / big-picture structure...?
+    # - navigation.expand  ## everything is expanded by default (https://squidfunk.github.io/mkdocs-material/setup/setting-up-navigation/#navigation-expansion-with-expansion ) -- I'm tentatively leaning towards NOT doing this so users are forced to get a better sense of nesting / big-picture structure...?
 
 
 plugins:
