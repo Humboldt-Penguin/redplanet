@@ -1,0 +1,4 @@
+/* For [card grids](https://squidfunk.github.io/mkdocs-material/reference/grids/), force 3 columns (instead of default 2) — NOTE: I got this from ChatGPT, couldn't find it anywhere else online */
+.md-typeset .grid {
+    grid-template-columns: repeat(3, 1fr);
+}
