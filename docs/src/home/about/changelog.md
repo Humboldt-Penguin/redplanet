@@ -52,3 +52,28 @@ self note:
     - [mihon](https://mihon.app/changelogs/) (this is much more comprehensible)
     - [shtools](https://shtools.github.io/SHTOOLS/release-notes-v4.html)
     - [uv (but this is only on github) — but tbh, i don't really love these...? it's always been a bit confusing to parse](https://github.com/astral-sh/uv/blob/main/CHANGELOG.md)
+
+&nbsp;
+
+Bonus: These badges track PyPI downloads, but they're quite misleading since I'm pretty sure my automated tests with GitHub actions, my online Google Colab demo, and/or some other source are wildly inflating the download count. Still fun to see though :)
+
+<div align="center">
+
+  <a href="https://pypi.org/project/redplanet/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/pypi/dm/redplanet.svg"/>
+  </a>
+
+  <a href="https://pypi.org/project/redplanet/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/pypi/dw/redplanet.svg"/>
+  </a>
+
+  <a href="https://pypi.org/project/redplanet/" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.shields.io/pypi/dd/redplanet.svg"/>
+  </a>
+
+  <!-- Template:
+  <a href="" target="_blank" rel="noopener noreferrer">
+    <img src=""/>
+  </a>
+  -->
+</div>

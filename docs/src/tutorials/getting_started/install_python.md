@@ -1,7 +1,9 @@
-Unfortunately, Python is notorious for lacking a simple, out-of-the-box solution for installing and managing your packages and environments *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. I hope this explanation can save you some time and frustration.(1)
+Unfortunately, Python is notorious for lacking a simple, out-of-the-box solution for installing and managing your packages and environments *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. I hope this explanation can help you understand *why* the best practices are what they are, get you up and running within a few minutes, and ultimately save you some time and frustration.(1) Let's get started!
 { .annotate }
 
 1. When I was first learning Python in high school, I messed up my Python installation so badly I had to completely reinstall my operating system. This is the guide I wish I had back then.
+
+If you're not ready to take the plunge *(e.g. you want to experiment first, or you only need to run a few short code snippets)*, I'd highly encourage online tools like Google Colab which run completely in your browser and don't require any installation (see our ["Online Demo"](./online_demo.md){target="_blank"} page for more info).
 
 If you're using Windows, I'd ^^HIGHLY recommend^^ using your built-in [WSL (Windows Subsystem for Linux)](https://learn.microsoft.com/en-us/windows/wsl/about){target="_blank"}. It takes a few minutes to set up and will make every programming-related task exponentially easier, plus you can easily wipe/restore your environment without affecting your Windows installation at all in case anything ever goes wrong.
 
@@ -58,3 +60,7 @@ RedPlanet was fully developed and published with `uv`, it's been a joy to work w
 ---
 ## [4] Editors
 
+TODO: Flesh this section out more. A quick but sufficient explanation is:
+
+- "Jupyter Notebook" and "Jupyter Lab" are two decent editors which require minimal configuration.
+- Personally, I'd highly recommend using [Jupyter within VSCode](https://code.visualstudio.com/docs/datascience/jupyter-notebooks){target="_blank"} (this link provides an amazing overview/explanation/tutorial). Bonus points for using [VSCodium](https://vscodium.com/), which is functionally identical to VSCode but free/open-source and without the telemetry/tracking.
