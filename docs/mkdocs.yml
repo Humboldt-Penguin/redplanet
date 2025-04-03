@@ -207,6 +207,7 @@ nav:
     - Getting Started:
       - How to Install/Use Python: tutorials/getting_started/install_python.md
       - Online Demo: tutorials/getting_started/online_demo.md
+      - 3D Print a Crater: tutorials/getting_started/3d_print.md
     - Basics of RedPlanet:
       - Radial Profile: tutorials/basics/radial_profile.md
     # - Advanced Analysis:
