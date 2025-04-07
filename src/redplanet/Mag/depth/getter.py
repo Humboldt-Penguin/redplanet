@@ -5,6 +5,7 @@ from redplanet.Mag.depth.loader import get_dataset
 
 from redplanet.helper_functions import geodesy
 from redplanet.helper_functions.coordinates import _plon2slon
+from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 
@@ -54,3 +55,47 @@ def get_nearest(
         df_depths = df_depths.to_dict(orient='records')
 
     return df_depths
+
+
+
+@substitute_docstrings
+def get_grid(
+    lon : float | np.ndarray,
+    lat : float | np.ndarray,
+    col : str,
+) -> np.ndarray:
+    """
+    Similar to `get_nearest`, but significantly more optimized for accessing data over large areas by using a pre-computed grid of nearest dipole locations.
+
+    Parameters
+    ----------
+    {param.lon}
+    {param.lat}
+    col : str
+        Name of dataset column to return. See `redplanet.Mag.depth.get_dataset` for options/explanations.
+
+    Returns
+    -------
+    np.ndarray
+        Data values at the input coordinates, with shape `(num_lats, num_lons)`. For columns with three values (e.g. `'depth_km'`), the shape will be `(3, num_lats, num_lons)`.
+
+    Raises
+    ------
+    ValueError
+        If the specified column is not found in the dataset.
+    """
+
+    df_depths, dat_nearest_dipole = get_dataset(_extras=True)
+
+    if col not in df_depths.columns:
+        raise ValueError(f"Column '{col}' not found in dataset. Available columns are: {df_depths.columns.tolist()}")
+
+    col_values = np.stack(df_depths[col])
+    dat_idx = dat_nearest_dipole.get_values(lon, lat, 'dat')
+
+    dat_return = col_values[dat_idx]
+
+    if dat_return.ndim == 3:
+        dat_return = np.moveaxis(dat_return, 2, 0)
+
+    return dat_return

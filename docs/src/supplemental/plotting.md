@@ -1,6 +1,12 @@
-Here's some boilerplate for making/configuring plots with `matplotlib`. We plan to add a plotting feature in the future.
-
 For more info on making publication quality plots, we highly recommend the PySHTools documentation — see the "Plotting maps" section on [this page](https://shtools.github.io/SHTOOLS/python-examples.html) ([direct link](https://nbviewer.org/github/SHTOOLS/SHTOOLS/blob/master/examples/notebooks/plotting-maps.ipynb)).
+
+TODO: documentation for `redplanet.plot` module.
+
+
+---
+
+Here's some boilerplate for making/configuring plots with `matplotlib`.
+
 
 &nbsp;
 

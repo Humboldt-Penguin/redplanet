@@ -93,13 +93,70 @@ test-verbose:
 [group("Website")]
 [doc("Start the live-reloading docs server locally (see: http://localhost:8000/ ).")]
 serve-site:
+    just _download-logos
     uv run -- mkdocs serve --config-file docs/mkdocs.yml
 
 [group("Website")]
 [doc("Deploy to GitHub Pages.")]
 deploy-site:
+    just _download-logos
     uv run -- mkdocs gh-deploy --config-file docs/mkdocs.yml --no-history
     just _clean_site
+
+
+_download-logos:
+    @echo
+    just _download-file "transparent_withtext.png" "https://files.catbox.moe/ueo0kd.png" "c29ac897a5a6cc7c6c9f1dba28bd6d52a57b21a44cc658fbb70909aede7ae97e"
+    just _download-file "transparent_notext.png" "https://files.catbox.moe/ply3x5.png" "3a2cc26089199765ec29ace4d3932038c997ee39ccfa0d14ef7ac7881bb6470e"
+
+_download-file fname url sha256 dir="docs/src/.assets/logo/":
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    ASSETS_DIR={{dir}}
+
+    # check if file exists and matches the expected hash, otherwise download it from the given URL.
+    check_and_download() {
+        local filename="$1"
+        local url="$2"
+        local expected_hash="$3"
+        local filepath="${ASSETS_DIR}/${filename}"
+
+        echo "Processing ${filename}..."
+
+        if [ -f "${filepath}" ]; then
+            echo "File exists. Verifying hash..."
+            local file_hash
+            file_hash=$(sha256sum "${filepath}" | awk '{print $1}')
+            if [ "${file_hash}" = "${expected_hash}" ]; then
+                echo "Hash verified: ${filename} is up to date."
+                return 0
+            else
+                echo "Hash mismatch for ${filename}."
+                echo "Expected: ${expected_hash}"
+                echo "Got:      ${file_hash}"
+                echo "Re-downloading..."
+            fi
+        else
+            echo "File does not exist. Downloading..."
+        fi
+
+        # download the file (the `-L` option follows redirects)
+        curl -L -o "${filepath}" "${url}"
+
+        # verify the hash of the downloaded file
+        local new_hash
+        new_hash=$(sha256sum "${filepath}" | awk '{print $1}')
+        if [ "${new_hash}" = "${expected_hash}" ]; then
+            echo "Downloaded file verified: ${filename}."
+        else
+            echo "ERROR: Downloaded file hash mismatch for ${filename}."
+            exit 1
+        fi
+    }
+
+    check_and_download {{fname}} {{url}} {{sha256}}
+    echo
 
 
 

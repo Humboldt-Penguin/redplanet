@@ -133,6 +133,15 @@ _DATASETS = {
         },
         'size_mib': 0.03770160675048828,
     },
+    'magdepth_nearest_dipoles': {
+        'url'    : 'https://rutgers.box.com/shared/static/8ujpxupiocc3vu15jux6a4qw3csdkkcc',
+        'fname'  : 'magdepth_nearest_dipoles.npy',
+        'dirpath': 'Mag/depth/',
+        'hash'   : {
+            'xxh3_64': '00ea95637e95671d',
+        },
+        'size_mib': 0.4965686798095703,
+    },
 }
 
 

@@ -15,3 +15,19 @@ def test_load_get_valid():
 
     assert np.allclose(near['depth_km'], np.array([4., 2., 4.]))
     assert np.allclose(near['distance_km'], 283.51013951489193)
+
+
+def test_get_grid():
+    ### global mean
+    lons = np.linspace(-180, 360, 100)
+    lats = np.linspace(-90, 90, 100)
+    assert np.allclose( Mag.depth.get_grid(lons, lats, 'depth_km')[0].mean() , 21.8046 )
+
+    ### wraparound
+    lons = np.linspace(-180, 0, 100)
+    lats = np.array([-60, 0, 60])
+    assert np.allclose(
+        Mag.depth.get_grid(lons    , lats, 'depth_km'),
+        Mag.depth.get_grid(lons+360, lats, 'depth_km'),
+        equal_nan=True,
+    )

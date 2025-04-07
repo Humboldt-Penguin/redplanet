@@ -18,7 +18,7 @@ If you're having installation issues or want to request support for earlier vers
 ---
 ## [2] Installation
 
-For beginners, I wrote a [guide](../../tutorials/install_python.md){target="_blank"} which explains the concepts, steps, and suggested tools for installing Python and packages *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. For intermediate/advanced users, I recommend checking out a new tool called [`uv` by Astral](https://docs.astral.sh/uv/){target="_blank"}.
+For beginners, I wrote a [guide](../../tutorials/getting_started/install_python.md){target="_blank"} which explains the concepts, steps, and suggested tools for installing Python and packages *([relevant xkcd](https://www.explainxkcd.com/wiki/index.php/1987:_Python_Environment){target="_blank"})*. For intermediate/advanced users, I recommend checking out a new tool called [`uv` by Astral](https://docs.astral.sh/uv/){target="_blank"}.
 
 &nbsp;
 

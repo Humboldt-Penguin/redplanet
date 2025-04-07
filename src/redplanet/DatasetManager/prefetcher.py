@@ -23,6 +23,7 @@ def prefetch() -> None:
         'Genova2016',
         'MOLA_shape_719',
         'Gong & Weiczorek, 2021',
+        'magdepth_nearest_dipoles',
         # 'DEM_200m',
         'DEM_463m',
         # 'SH_5km',

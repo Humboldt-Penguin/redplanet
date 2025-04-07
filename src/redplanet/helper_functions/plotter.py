@@ -17,8 +17,6 @@ def topo_to_hillshade(
 
     Altitude is the vertical angle between the sun and the horizon, in degrees. For example, 0° means the sun is right on the horizon, while 90° means directly overhead. Default is 70.
 
-    Scale
-
     Return is in range 0-255 (uint8), where higher values are brighter.
     """
     ## scale so horizontal and vertical distances are the same (assuming it's not too intensely rectangular) — otherwise you get this lol: https://files.catbox.moe/8xnca0.png
@@ -57,14 +55,15 @@ def plot(
     lons       : np.ndarray,
     lats       : np.ndarray,
     dat        : np.ndarray,
-    figsize    : tuple[int, int] = (7, 7),
-    xlabel     : None | str = 'Longitude',
-    ylabel     : None | str = 'Latitude',
+    ax         : None | plt.Axes = None,
+    figsize    : float | tuple[float, float] = (7, 7),
+    xlabel     : str = 'Longitude',
+    ylabel     : str = 'Latitude',
     title      : None | str = None,
     cmap       : str = 'RdBu_r',
     cbar       : bool = True,
-    cbar_name  : None | str = None,
-    cbar_units : None | str | tuple[str, float] = None,
+    cbar_label : None | str = None,
+    cbar_units : None | str | tuple[str, float ] = None,
     limits     : tuple[ None|float, None|float ] = [None, None],
     hillshade  : bool = False,
     topo_model : str = 'DEM_463m',
@@ -74,8 +73,69 @@ def plot(
     alpha_dat  : float = 0.6,
     show       : bool = True,
 ) -> tuple[plt.Figure, plt.Axes]:
+    """
+    Plots a 2D dataset with optional hillshade underlay.
 
-    fig, ax = plt.subplots(figsize=figsize)
+    Parameters
+    ----------
+    lons : np.ndarray
+        1D array of longitudes, likely the ones used to create the data array.
+    lats : np.ndarray
+        1D array of latitudes, likely the ones used to create the data array.
+    dat : np.ndarray
+        2D array of data values to be visualized. Shape should be `(len(lats), len(lons))`.
+    ax : None | plt.Axes, optional
+        Existing Matplotlib Axes object on which to plot the data, e.g. if you're using subplots to put multiple plots on the same figure. If None, a new figure and axes are created. Default is None.
+    figsize : float | tuple[float, float], optional
+        Width, height of the figure in inches. If a single number is provided, it is used for both width and height. Default is (7, 7).
+    xlabel : str, optional
+        Label for the x-axis. Default is 'Longitude'.
+    ylabel : str, optional
+        Label for the y-axis. Default is 'Latitude'.
+    title : None | str, optional
+        Title of the plot. If None, no title is set. Default is None.
+    cmap : str, optional
+        Colormap used to display the data. Default is 'RdBu_r'.
+    cbar : None | bool, optional
+        Whether to display a colorbar alongside the plot. Default is True.
+    cbar_label : None | str, optional
+        Label for the colorbar. Default is None.
+    cbar_units : str | tuple[str, float ], optional
+        Units to display on the colorbar. If a tuple is provided, it should be in the form `(unit_name, scale)` where the data is scaled by the given factor before plotting. Default is None.
+    limits : tuple[ None|float, None|float ], optional
+        Tuple specifying the (minimum, maximum) limits for the data colormap scaling. If you only want to set one limit, use None for the other. Default is [None, None].
+    hillshade : bool, optional
+        If True, underlays a hillshade generated from topographic data. Default is False.
+    topo_model : str, optional
+        (For hillshade) Identifier for the topographic model used to generate the hillshade. See `Crust.topo.load(...)` for options. Default is 'DEM_463m'.
+    azimuth : int, optional
+        (For hillshade) Azimuth angle (in degrees) representing the horizontal direction of the light source (measured clockwise from north). Default is 0.
+    altitude : int, optional
+        (For hillshade) Altitude angle (in degrees) representing the vertical angle of the light source above the horizon. Default is 70.
+    alpha_hs : float, optional
+        (For hillshade) Opacity for the hillshade underlay (range 0 to 1). Default is 1.
+    alpha_dat : float, optional
+        (For hillshade) Opacity for the data overlay (range 0 to 1). If hillshade is disabled, this is set to 1. Default is 0.6.
+    show : bool, optional
+        If True and a new figure is created (i.e. `ax` is not provided), displays the plot immediately. Default is True.
+
+    Returns
+    -------
+    tuple[plt.Figure, plt.Axes]
+        A tuple containing the matplotlib Figure and Axes objects for the created plot.
+    """
+
+    if isinstance(figsize, int | float):
+        figsize = (figsize, figsize)
+
+
+    # If no axis is provided, create a new figure and axis.
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+        created_new_fig = True
+    else:
+        fig = ax.figure
+        created_new_fig = False
 
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -147,13 +207,13 @@ def plot(
         cax = divider.append_axes("right", size="3%", pad=0.2)  ## `size` sets colorbar width to X% of main axes; `pad` sets separation between axes and colorbar to X inches
         cbar = fig.colorbar(im_dat, cax=cax)
         label = ''
-        if cbar_name:
-            label += cbar_name
+        if cbar_label:
+            label += cbar_label
         if cbar_units_name:
             label += f' [{cbar_units_name}]'
         cbar.set_label(label)
 
-    if show:
+    if show and created_new_fig:
         plt.show()
 
     return fig, ax
