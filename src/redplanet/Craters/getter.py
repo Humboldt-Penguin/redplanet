@@ -9,14 +9,14 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 @substitute_docstrings
 def get(
-    crater_id : str | list[str]     = None,
-    name      : str | list[str]     = None,
-    lon       : tuple[float, float] = None,
-    lat       : tuple[float, float] = None,
-    diameter  : tuple[float, float] = None,
-    has_age   : bool                = None,
-    as_dict   : bool                = False,
-) -> pd.DataFrame | list[dict]:
+    crater_id : None | str | list[str]     = None,
+    name      : None | str | list[str]     = None,
+    lon       : None | tuple[float, float] = None,
+    lat       : None | tuple[float, float] = None,
+    diameter  : None | tuple[float, float] = None,
+    has_age   : None | bool                = None,
+    as_df     : bool                       = False,
+) -> list[dict] | pd.DataFrame:
     """
     Filter/query a dataset of craters >50km diameter, with ages/names when available. Calling this with no arguments will return the full dataset.
 
@@ -30,27 +30,27 @@ def get(
 
     Parameters
     ----------
-    crater_id : str | list[str], optional
+    crater_id : None | str | list[str], optional
         Unique crater identifier formatted ##-######, where the first two numbers indicate the Mars subquad and the last six number the craters in that subquad from largest to smallest diameter.
-    name : str | list[str], optional
+    name : None | str | list[str], optional
         Crater name according to official IAU nomenclature (as of 2024-11-26).
-    lon : tuple[float, float], optional
+    lon : None | tuple[float, float], optional
         Filter craters whose center falls within this range of longitudes.
 
         The given range must be a subset of either [-180,180] or [0,360] -- e.g. `lon=[-170,350]` is not allowed (it doesn't make sense).
-    lat : tuple[float, float], optional
+    lat : None | tuple[float, float], optional
         Filter craters whose center falls within this range of latitudes.
-    diameter : tuple[float, float], optional
+    diameter : None | tuple[float, float], optional
         Filter craters whose diameter falls within this range, in kilometers.
-    has_age : bool, optional
+    has_age : None | bool, optional
         If True, only return craters with both Hartmann/Neukum isochron ages available. Default is False.
-    as_dict : bool, optional
-        If True, return the crater dataset as a list of dictionaries instead of a pandas DataFrame. Default is False.
+    as_df : bool, optional
+        If True, return a pandas DataFrame. Default is False, which returns a list of dictionaries.
 
     Returns
     -------
-    pd.DataFrame | list[dict]
-        Filtered list of craters with columns:
+    list[dict] | pd.DataFrame
+        Filtered list of craters with keys/columns:
 
         - `id` : str
             - Unique crater identifier formatted ##-######, where the first two numbers indicate the Mars subquad and the last six number the craters in that subquad from largest to smallest diameter.
@@ -82,6 +82,7 @@ def get(
         if isinstance(name, str):
             name = [name]
         df = df[ df['name'].isin(name) ]
+        ## TODO: make names insensitive to case and special characters like apostrophes, e.g. "kovalsky" == "Koval'sky"
 
 
     if lon:
@@ -106,7 +107,7 @@ def get(
             pd.notna(df['Neukum Isochron Age'])
         ]
 
-    if as_dict:
+    if not as_df:
         df = df.to_dict(orient='records')
 
     return df
