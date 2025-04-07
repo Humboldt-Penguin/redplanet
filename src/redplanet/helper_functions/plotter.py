@@ -1,3 +1,5 @@
+from typing import Optional
+
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
@@ -57,6 +59,7 @@ def plot(
     lons       : np.ndarray,
     lats       : np.ndarray,
     dat        : np.ndarray,
+    ax         : Optional[plt.Axes] = None,
     figsize    : float | tuple[float, float] = (7, 7),
     xlabel     : None | str = 'Longitude',
     ylabel     : None | str = 'Latitude',
@@ -78,7 +81,14 @@ def plot(
     if isinstance(figsize, int | float):
         figsize = (figsize, figsize)
 
-    fig, ax = plt.subplots(figsize=figsize)
+
+    # If no axis is provided, create a new figure and axis.
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+        created_new_fig = True
+    else:
+        fig = ax.figure
+        created_new_fig = False
 
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -156,7 +166,7 @@ def plot(
             label += f' [{cbar_units_name}]'
         cbar.set_label(label)
 
-    if show:
+    if show and created_new_fig:
         plt.show()
 
     return fig, ax
