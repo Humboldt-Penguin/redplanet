@@ -119,7 +119,7 @@ I like these card-type templates:
         ){target="_blank"}
     </figure>
 
-    Lightweight and interactive map of Mars with various datasets and basics GIS tools, completely in your browser! This is my go-to for quick visaualizations and data exploration.
+    Lightweight/interactive mapping tool with various datasets, completely in your browser! This is my personal go-to. Tip: use [bit.ly/marsquickmap](https://bit.ly/marsquickmap) for a preconfigured link that disables the default layers.
 
 
 -   [**:octicons-arrow-right-24: PySHTools Tutorials**](https://shtools.github.io/SHTOOLS/python-examples.html){target="_blank"}
