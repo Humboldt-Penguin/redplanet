@@ -57,13 +57,13 @@ def plot(
     lons       : np.ndarray,
     lats       : np.ndarray,
     dat        : np.ndarray,
-    figsize    : tuple[int, int] = (7, 7),
+    figsize    : float | tuple[float, float] = (7, 7),
     xlabel     : None | str = 'Longitude',
     ylabel     : None | str = 'Latitude',
     title      : None | str = None,
     cmap       : str = 'RdBu_r',
     cbar       : bool = True,
-    cbar_name  : None | str = None,
+    cbar_label : None | str = None,
     cbar_units : None | str | tuple[str, float] = None,
     limits     : tuple[ None|float, None|float ] = [None, None],
     hillshade  : bool = False,
@@ -74,6 +74,9 @@ def plot(
     alpha_dat  : float = 0.6,
     show       : bool = True,
 ) -> tuple[plt.Figure, plt.Axes]:
+
+    if isinstance(figsize, int | float):
+        figsize = (figsize, figsize)
 
     fig, ax = plt.subplots(figsize=figsize)
 
@@ -147,8 +150,8 @@ def plot(
         cax = divider.append_axes("right", size="3%", pad=0.2)  ## `size` sets colorbar width to X% of main axes; `pad` sets separation between axes and colorbar to X inches
         cbar = fig.colorbar(im_dat, cax=cax)
         label = ''
-        if cbar_name:
-            label += cbar_name
+        if cbar_label:
+            label += cbar_label
         if cbar_units_name:
             label += f' [{cbar_units_name}]'
         cbar.set_label(label)
