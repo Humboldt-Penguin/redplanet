@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 
 from redplanet.DatasetManager.main import _get_fpath_dataset
+from redplanet.helper_functions.GriddedData import GriddedData
 from redplanet.helper_functions.coordinates import _plon2slon
 from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
@@ -13,9 +14,13 @@ from redplanet.helper_functions.docstrings.main import substitute_docstrings
 
 
 _dat_depths: pd.DataFrame | None = None
+_dat_nearest_dipole: np.ndarray | None = None
 
 @substitute_docstrings
-def get_dataset(as_dict: bool = False) -> pd.DataFrame:
+def get_dataset(
+    as_dict: bool = False,
+    _extras: bool = False,
+) -> pd.DataFrame | list[dict]:
     """
     Get the full magnetic source depth dataset.
 
@@ -26,6 +31,8 @@ def get_dataset(as_dict: bool = False) -> pd.DataFrame:
     ----------
     as_dict : bool, optional
         If True, return the data as a list of dictionaries. Default is False.
+    _extras : bool, optional
+        Please ignore this, it is used for internal purposes only.
 
 
     Returns
@@ -52,6 +59,8 @@ def get_dataset(as_dict: bool = False) -> pd.DataFrame:
         _load()
     if as_dict:
         return _dat_depths.to_dict(orient='records')
+    if _extras:
+        return (_dat_depths, _dat_nearest_dipole)
     return _dat_depths
 
 
@@ -115,5 +124,19 @@ def _load() -> None:
 
         # _dat_depths[col] = np.column_stack(list_arrays).tolist()
         _dat_depths[col] = list( np.column_stack(list_arrays) )
+
+    ## load pre-computed nearest dipole values
+    global _dat_nearest_dipole
+    _dat_nearest_dipole = GriddedData(
+        lon = np.arange(-180, 180.1, 0.5),
+        lat = np.arange(-90, 90.1, 0.5),
+        is_slon = True,
+        data_dict = {'dat':
+            np.load(
+                _get_fpath_dataset('magdepth_nearest_dipoles')
+            )
+        },
+        metadata = {},
+    )
 
     return

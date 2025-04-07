@@ -170,6 +170,7 @@ nav:
         - Magnetic Source Depths:
           - get_dataset(...): usage/datasets/Mag/depth/get_dataset.md
           - get_nearest(...): usage/datasets/Mag/depth/get_nearest.md
+          - get_grid(...): usage/datasets/Mag/depth/get_grid.md
     - Analysis:
       - Radial Profile:
         - get_concentric_ring_coords(...): usage/analysis/radial_profile/get_concentric_ring_coords.md

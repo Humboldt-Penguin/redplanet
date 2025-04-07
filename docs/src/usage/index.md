@@ -58,6 +58,7 @@ Loading/accessing datasets in a standardized way.
     - Magnetic Source Depths:
         - [get_dataset(...)](datasets/Mag/depth/get_dataset.md)
         - [get_nearest(...)](datasets/Mag/depth/get_nearest.md)
+        - [get_grid(...)](datasets/Mag/depth/get_grid.md)
 
 
 All `load(...)` functions will check if a dataset file already exists in your cache directory. If found, it verifies the hash to ensure it wasn't modified; if not found, it will download and verify the file. For convenience, we provide [`prefetch()`](helper_functions/misc/prefetch.md) to download a few key datasets all at once.
